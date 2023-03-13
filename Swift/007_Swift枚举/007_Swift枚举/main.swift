@@ -16,7 +16,7 @@ print("Hello, World!")
 //}
 
 enum TestEnum {
-    case A, B, C
+    case A, B, C , Other
     
     func playT(e:TestEnum) {
         print(e)
@@ -45,7 +45,8 @@ func test(e:TestEnum) {
         
     case .C:
         print("C")
-    default: break
+    default:
+        break
         
     }
 }

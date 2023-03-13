@@ -78,11 +78,7 @@ func getObject(param:Bool) -> A {
     return param ? B(name: "B") : C(name: "C")
 }
 
-//泛型
-func toString<T>(param:T) {
-    print(param)
-//    return param
-}
+
 
 //对象类型判断
 var a = getObject(param: false)
