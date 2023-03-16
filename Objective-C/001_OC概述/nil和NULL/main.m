@@ -45,18 +45,25 @@ int main(int argc, const char * argv[]) {
             NSLog(@"一样");
         }
         
-        Perspon *p = [Perspon new];
-//        [p say];//方法没有响应
-//        p.name = @"张三";//不会报错
-//        p->_score = @"12112";//报错
-        @try {//并不是万能的
-            [p say];//方法没有响应
+//        Perspon *p = [Perspon new];
+//        p = nil;
+////        [p say];//方法没有响应
+////        p.name = @"张三";//不会报错
+////        p->_score = @"12112";//报错
+//        @try {//并不是万能的
+//            [p say];//方法没有响应
 //            p->_score = @"12112";//报错
-        } @catch (NSException *exception) {
-            NSLog(@"：exception%@",exception);
-        }
+//        } @catch (NSException *exception) {
+//            NSLog(@"：exception%@",exception);
+//        }
+//
         
-        
+//        Perspon *p = nil;
+//        @try {
+//            p->_score = @"";
+//        } @catch (NSException *exception) {
+//            NSLog(@"：exception%@",exception);
+//        }
         
         
         

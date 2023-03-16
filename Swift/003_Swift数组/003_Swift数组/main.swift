@@ -10,7 +10,11 @@ import Foundation
 print("Hello, World!")
 
 var arr = [1,3,5,6,2,4,7,6,2]
-print(arr)
+var arr1 = arr
+print(arr[0])
+arr[0] = 100
+print(arr[0])
+print(arr1[0])
 
 //排序
 //arr.sort { a, b in
@@ -28,12 +32,12 @@ print(arr)
 //let arr2 = arr.max { a, b in
 //    return a < b
 //}
-let arr2 = arr.max { return $0 < $1}
-print(arr2 ?? 0)
-
-//arr.map { a in  a * 2 }
-let arr3 = arr.map { $0 * 2 }
-print(arr3)
+//let arr2 = arr.max { return $0 < $1}
+//print(arr2 ?? 0)
+//
+////arr.map { a in  a * 2 }
+//let arr3 = arr.map { $0 * 2 }
+//print(arr3)
 
 
 
