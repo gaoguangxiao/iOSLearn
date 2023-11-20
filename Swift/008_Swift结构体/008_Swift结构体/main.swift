@@ -10,6 +10,7 @@ import Foundation
 print("Hello, World!")
 
 struct Student {
+    
     var name = "unknow"
     var age = 0
     var score = 0
@@ -26,7 +27,7 @@ struct Student {
     
     private var value = ""
     var school: String {
-//        计算属性 set get private
+        //        计算属性 set get private
         set(param){
             print("param:\(param)")
             value = param
@@ -47,28 +48,47 @@ struct Area {
         didSet(b){
             print(b)
         }
-//        get {
-//            return value
-//        }
-//        set {
-//            value = newValue
-//        }
+        //        get {
+        //            return value
+        //        }
+        //        set {
+        //            value = newValue
+        //        }
     }
 }
+
+//
+struct GBPerson<T> {
+    var name : T
+    init(name: T) {
+        self.name = name
+    }
+}
+
+extension GBPerson {
+    func pringInfo()  {
+        print("姓名是\(name)")
+    }
+}
+
+var bperson = GBPerson(name: 100)
+bperson.pringInfo()
+//bperson.name = 10
+//print(bperson.name)
+
 //
 //var stu = Student()
 //stu.school = "科大"
 //print(stu.school)
 
-var a = Area()
-a.area = "河南"
-print(a.area)
-//Student()
-//var stu = Student()
-//stu.name = "张三"
-//stu.age  = 10
-//
-//stu.printDes()
+//var a = Area()
+//a.area = "河南"
+//print(a.area)
 
-//Student(name: <#T##String#>, age: <#T##Int#>, score: <#T##Int#>)
+var stu = Student()
+stu.name = "张三"
+stu.age  = 10
+stu.printDes()
+
+//Student(name: T##String, age: <#T##Int#>, score: <#T##Int#>)
 //print(stu.name)

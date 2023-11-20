@@ -22,12 +22,12 @@ class ViewController: UIViewController {
         //2、() ?? 类型转换 可选类型
         
         //3、有些类型不能设置为nil
-        /*
+    
          var c:Int = 18
-         c = nil
-         无法编译通过
-         */
+//         c = nil
+//         无法编译通过
         
+//        int1
         /*
          var d:Int
          print(d)

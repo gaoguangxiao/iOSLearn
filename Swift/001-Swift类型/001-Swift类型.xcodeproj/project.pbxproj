@@ -49,6 +49,8 @@
 		1E1B0665299F296A005F9966 /* 001-Swift类型UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "001-Swift类型UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E1B0669299F296A005F9966 /* _01_Swift__UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _01_Swift__UITests.swift; sourceTree = "<group>"; };
 		1E1B066B299F296A005F9966 /* _01_Swift__UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _01_Swift__UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1E8E9C042B05ED3A00293356 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1E8E9C052B05ED7800293356 /* TestGGX.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestGGX.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		1E1B063C299F2962005F9966 = {
 			isa = PBXGroup;
 			children = (
+				1E8E9C042B05ED3A00293356 /* MyPlayground.playground */,
 				1E1B0647299F2962005F9966 /* 001-Swift类型 */,
 				1E1B065E299F296A005F9966 /* 001-Swift类型Tests */,
 				1E1B0668299F296A005F9966 /* 001-Swift类型UITests */,
@@ -106,6 +109,7 @@
 				1E1B0651299F2969005F9966 /* Assets.xcassets */,
 				1E1B0653299F2969005F9966 /* LaunchScreen.storyboard */,
 				1E1B0656299F2969005F9966 /* Info.plist */,
+				1E8E9C052B05ED7800293356 /* TestGGX.playground */,
 			);
 			path = "001-Swift类型";
 			sourceTree = "<group>";

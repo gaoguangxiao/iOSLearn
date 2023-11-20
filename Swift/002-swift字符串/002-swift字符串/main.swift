@@ -35,7 +35,8 @@ print(value)
 
 //print(str.contains("A"))
 
-//print(str.contains(where: String.contains("AL")))
+//str
+print(str.contains(where: String.contains("AL")))
 
 //print(str.hasPrefix("A"))
 

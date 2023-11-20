@@ -25,6 +25,7 @@ class Data:protocal1 {
         
     }
     
+
 }
 
 var d = Data()
@@ -103,6 +104,6 @@ var s2:A = B(name: "李四")
 //var s3:B = B(name: "李四")
 //print(s3.hy)
 
-toString(param: "123")
-
-toString(param: [1221,1212])
+//toString(param: "123")
+//
+//toString(param: [1221,1212])
