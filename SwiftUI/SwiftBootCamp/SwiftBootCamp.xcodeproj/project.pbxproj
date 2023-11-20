@@ -20,6 +20,11 @@
 		1EF452E92B0B4C6300D3CABC /* PIckerBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452E82B0B4C6300D3CABC /* PIckerBootcamp.swift */; };
 		1EF452ED2B0B556200D3CABC /* StepperBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452EC2B0B556200D3CABC /* StepperBootcamp.swift */; };
 		1EF452EF2B0B583800D3CABC /* SliderBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452EE2B0B583800D3CABC /* SliderBootcamp.swift */; };
+		1EF452F12B0B5D4800D3CABC /* TimerBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452F02B0B5D4800D3CABC /* TimerBootcamp.swift */; };
+		1EF452F32B0B620000D3CABC /* StateWrapperBoomcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452F22B0B620000D3CABC /* StateWrapperBoomcamp.swift */; };
+		1EF452F52B0B62E500D3CABC /* onAppearBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452F42B0B62E500D3CABC /* onAppearBootcamp.swift */; };
+		1EF452F72B0B67C600D3CABC /* TapGestureBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452F62B0B67C600D3CABC /* TapGestureBootcamp.swift */; };
+		1EF452F92B0B764800D3CABC /* ModelBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF452F82B0B764800D3CABC /* ModelBootcamp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +61,11 @@
 		1EF452E82B0B4C6300D3CABC /* PIckerBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIckerBootcamp.swift; sourceTree = "<group>"; };
 		1EF452EC2B0B556200D3CABC /* StepperBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperBootcamp.swift; sourceTree = "<group>"; };
 		1EF452EE2B0B583800D3CABC /* SliderBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderBootcamp.swift; sourceTree = "<group>"; };
+		1EF452F02B0B5D4800D3CABC /* TimerBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBootcamp.swift; sourceTree = "<group>"; };
+		1EF452F22B0B620000D3CABC /* StateWrapperBoomcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateWrapperBoomcamp.swift; sourceTree = "<group>"; };
+		1EF452F42B0B62E500D3CABC /* onAppearBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onAppearBootcamp.swift; sourceTree = "<group>"; };
+		1EF452F62B0B67C600D3CABC /* TapGestureBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureBootcamp.swift; sourceTree = "<group>"; };
+		1EF452F82B0B764800D3CABC /* ModelBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBootcamp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +118,17 @@
 			children = (
 				1E5529FD2B0AEFC7007949E3 /* SwiftBootCampApp.swift */,
 				1E5529FF2B0AEFC7007949E3 /* ContentView.swift */,
+				1EF452F22B0B620000D3CABC /* StateWrapperBoomcamp.swift */,
 				1EF452E22B0B302100D3CABC /* TextfiledBootcamp.swift */,
 				1EF452E42B0B3EA200D3CABC /* TextEditorBootcamp.swift */,
 				1EF452E62B0B431600D3CABC /* ToggleBoomcamp.swift */,
 				1EF452E82B0B4C6300D3CABC /* PIckerBootcamp.swift */,
 				1EF452EC2B0B556200D3CABC /* StepperBootcamp.swift */,
 				1EF452EE2B0B583800D3CABC /* SliderBootcamp.swift */,
+				1EF452F02B0B5D4800D3CABC /* TimerBootcamp.swift */,
+				1EF452F42B0B62E500D3CABC /* onAppearBootcamp.swift */,
+				1EF452F62B0B67C600D3CABC /* TapGestureBootcamp.swift */,
+				1EF452F82B0B764800D3CABC /* ModelBootcamp.swift */,
 				1E552A012B0AEFC9007949E3 /* Assets.xcassets */,
 				1E552A032B0AEFC9007949E3 /* Preview Content */,
 			);
@@ -275,14 +290,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EF452F92B0B764800D3CABC /* ModelBootcamp.swift in Sources */,
 				1EF452E52B0B3EA200D3CABC /* TextEditorBootcamp.swift in Sources */,
+				1EF452F52B0B62E500D3CABC /* onAppearBootcamp.swift in Sources */,
 				1E552A002B0AEFC7007949E3 /* ContentView.swift in Sources */,
 				1EF452ED2B0B556200D3CABC /* StepperBootcamp.swift in Sources */,
+				1EF452F32B0B620000D3CABC /* StateWrapperBoomcamp.swift in Sources */,
 				1E5529FE2B0AEFC7007949E3 /* SwiftBootCampApp.swift in Sources */,
 				1EF452E72B0B431600D3CABC /* ToggleBoomcamp.swift in Sources */,
 				1EF452E92B0B4C6300D3CABC /* PIckerBootcamp.swift in Sources */,
+				1EF452F72B0B67C600D3CABC /* TapGestureBootcamp.swift in Sources */,
 				1EF452E32B0B302100D3CABC /* TextfiledBootcamp.swift in Sources */,
 				1EF452EF2B0B583800D3CABC /* SliderBootcamp.swift in Sources */,
+				1EF452F12B0B5D4800D3CABC /* TimerBootcamp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
