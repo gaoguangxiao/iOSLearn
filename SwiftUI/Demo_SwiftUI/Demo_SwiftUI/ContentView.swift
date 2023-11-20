@@ -44,10 +44,6 @@ struct ContentView: View {
             }
             .navigationBarTitle("名胜古迹")
         }
-        
-//        func tap {
-            
-//        }
     }
 }
 
