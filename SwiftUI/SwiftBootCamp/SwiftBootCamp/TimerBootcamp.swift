@@ -9,8 +9,9 @@ import SwiftUI
 
 struct TimerBootcamp: View {
     
-    @State var timeRemaining: Int = 60
+    @State var timeRemaining: Int = 0
     
+    //autoconnect() 标记立即运行
     @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -35,14 +36,35 @@ struct TimerBootcamp: View {
                     Text("reset")
                 })
             }
-                    
-            Text("Time Remaining：\(timeRemaining)")
-                .onReceive(timer, perform: { _ in
-                    timeRemaining -= 1
-                })
-                .onAppear(perform: { //修饰视图加载启动计时器
-                    timeRemaining = 60
-                })
+              
+            //使用Timer的情况下，我们需要使用名为`onReceive`手动捕获公告
+            Button(action: {
+                
+                startTimer()
+                
+            }, label: {
+                Text(timeRemaining > 0 ? "\(timeRemaining)S":"发送验证码")
+                    .padding(EdgeInsets(top: 10, leading: 01, bottom: 10, trailing: 5))
+                    .background(Color.red)
+                    .onReceive(timer, perform: { time in
+                        if timeRemaining >= 0 {
+                            timeRemaining -= 1
+                        } else {
+//                            time.
+                            timeRemaining = 60
+                        }
+                    })
+            })
+            .frame(minWidth: 80)
+            
+            
+//            Text("Time Remaining：\(timeRemaining)")
+//                .onReceive(timer, perform: { _ in
+//                    timeRemaining -= 1
+//                })
+//                .onAppear(perform: { //修饰视图加载启动计时器
+//                    timeRemaining = 60
+//                })
         }
         
     }
