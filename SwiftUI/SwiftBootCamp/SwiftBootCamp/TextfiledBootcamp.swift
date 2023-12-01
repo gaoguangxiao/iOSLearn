@@ -5,6 +5,7 @@
 //  Created by 高广校 on 2023/11/20.
 //
 
+//@FocusState
 import SwiftUI
 
 struct TextfiledBootcamp : View {
@@ -12,6 +13,8 @@ struct TextfiledBootcamp : View {
     @State var textfiledText: String = ""
     
     @State var dataArray :[String] = []
+    
+    @FocusState var textInFocus: Bool
     
     var body: some View {
         NavigationView {
@@ -21,6 +24,7 @@ struct TextfiledBootcamp : View {
                     .background(Color.gray.opacity(0.3).cornerRadius(10))
                     .foregroundColor(.red)
                 .font(.headline)
+                .focused($textInFocus)
                 
                 Button(action: {
                     if textIsApproprose() {
@@ -46,6 +50,9 @@ struct TextfiledBootcamp : View {
             }
             .padding()
             .navigationTitle("Textfield Bootcamp!")
+            .onAppear(perform: {
+                textInFocus = true
+            })
         }
     }
     

@@ -1,0 +1,20 @@
+PODS:
+  - GGXSwiftExtension (0.2.5)
+  - KeychainAccess (4.2.2)
+
+DEPENDENCIES:
+  - GGXSwiftExtension
+  - KeychainAccess
+
+SPEC REPOS:
+  trunk:
+    - GGXSwiftExtension
+    - KeychainAccess
+
+SPEC CHECKSUMS:
+  GGXSwiftExtension: b728d05e9f66fa8c2399f16268ad53e0b16de57f
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+
+PODFILE CHECKSUM: 43ee2412f4cfce5e4f89429f83e4978a61db3e96
+
+COCOAPODS: 1.14.2

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "96D64F6D-D7B2-4584-B625-349A7DEE6E1F"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79C1A7E0-387C-4960-8A88-36EE9C3AD4A1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AudioToolbox00/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "HandleOutputBuffer(aqData:inAQ:bufferToFill:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "79C1A7E0-387C-4960-8A88-36EE9C3AD4A1 - 606b3cdf363d61f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AudioToolbox00.HandleOutputBuffer(userData: Swift.Optional&lt;Swift.UnsafeMutableRawPointer&gt;, queue: Swift.OpaquePointer, bufferToFill: Swift.UnsafeMutablePointer&lt;__C.AudioQueueBuffer&gt;) -&gt; ()"
+                  moduleName = "AudioToolbox00"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguangxiao/Documents/GitHub/iOSLearn/%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/12%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91/AudioToolbox00/AudioToolbox00/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "79C1A7E0-387C-4960-8A88-36EE9C3AD4A1 - a106ab796ddeedb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AudioToolbox00.HandleOutputBuffer(aqData: Swift.Optional&lt;Swift.UnsafeMutableRawPointer&gt;, inAQ: Swift.OpaquePointer, bufferToFill: Swift.UnsafeMutablePointer&lt;__C.AudioQueueBuffer&gt;) -&gt; ()"
+                  moduleName = "AudioToolbox00"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguangxiao/Documents/GitHub/iOSLearn/%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/12%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91/AudioToolbox00/AudioToolbox00/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "257D92BB-055D-4996-94FE-ECFD81F75D06"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AudioToolbox00/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "257D92BB-055D-4996-94FE-ECFD81F75D06 - 63c28095eac1f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AudioToolbox00.ViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "AudioToolbox00"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguangxiao/Documents/GitHub/iOSLearn/%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/12%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91/AudioToolbox00/AudioToolbox00/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "2136">
+               </Location>
+               <Location
+                  uuid = "257D92BB-055D-4996-94FE-ECFD81F75D06 - 63c28095eac1f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AudioToolbox00.ViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "AudioToolbox00"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguangxiao/Documents/GitHub/iOSLearn/%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/12%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91/AudioToolbox00/AudioToolbox00/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1844">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B0839062-43DB-4ABA-A3AC-9BB2E6718F75"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AudioToolbox00/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B0839062-43DB-4ABA-A3AC-9BB2E6718F75 - 63c28095eac151"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AudioToolbox00.ViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "AudioToolbox00"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguangxiao/Documents/GitHub/iOSLearn/%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/12%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91/AudioToolbox00/AudioToolbox00/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "1812">
+               </Location>
+               <Location
+                  uuid = "B0839062-43DB-4ABA-A3AC-9BB2E6718F75 - 63c28095eac170"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AudioToolbox00.ViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "AudioToolbox00"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguangxiao/Documents/GitHub/iOSLearn/%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/12%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91/AudioToolbox00/AudioToolbox00/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1756">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

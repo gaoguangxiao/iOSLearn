@@ -1,0 +1,6 @@
+framework module Pods_SwiftUiCreate {
+  umbrella header "Pods-SwiftUiCreate-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -76,3 +76,10 @@ func test02() {
 //test01()
 //test02()
 
+//let size = MemoryLayout.size(ofValue: Int)     //实际占用的内存空间
+//let stride = MemoryLayout.stride(ofValue: Double) //分配的内存空间
+//let alignment = MemoryLayout.alignment(ofValue: psw)
+////pswSize: 33
+//print("size:",size)
+//print("stride:",stride)
+//print("alignment:",alignment)
