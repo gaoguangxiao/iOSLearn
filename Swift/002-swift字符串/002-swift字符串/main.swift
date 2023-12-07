@@ -32,6 +32,13 @@ print(value)
 //    print(s)
 //}
 
+//字符串格式化
+let value122 = 2.012
+
+//CVarArg 是Swift对C相关api的封装
+let strValue = String(format: "第%.2f次", value122)
+
+print(strValue)
 
 //print(str.contains("A"))
 
@@ -76,4 +83,3 @@ print(str)
 //print(str[index])
 
 //print(str[str.index(after: str.startIndex)])
-

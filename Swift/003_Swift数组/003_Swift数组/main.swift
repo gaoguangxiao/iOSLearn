@@ -11,7 +11,11 @@ print("Hello, World!")
 
 //https://www.jianshu.com/p/984102e89eba
 
-var arr = [1,3,5,6,2,4,7,6,2]
+var arr1 = [7]
+
+var arr = [1,3,5,6,2,4,7,2]
+
+
 //var arr1 = arr
 //print(arr[0])
 //arr[0] = 100
@@ -29,6 +33,10 @@ var arr = [1,3,5,6,2,4,7,6,2]
 //    return a != 2
 //}
 //print(arr1)
+
+//得到两数组重复元素
+let arr2 = arr1.filter { arr.contains($0)}
+print(arr2)
 
 //找最大和最小
 //let arr2 = arr.max { a, b in
