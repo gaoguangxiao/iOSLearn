@@ -42,14 +42,13 @@ extension String {
 
 
 var str = "ABCDEF12"
+//print(str.isAlphanumeric(ignoreDiacritics: false))
 
-
-print(str.isAlphanumeric(ignoreDiacritics: false))
-
-
+var strAll = ""
 for i in 0..<str.count {
     let s = str.charAt(i: i)
-    print(s)
+    strAll.append("123")
+    strAll.append(s)
 }
-
+print(strAll)
 
