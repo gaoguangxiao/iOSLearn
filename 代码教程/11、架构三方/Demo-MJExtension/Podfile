@@ -1,0 +1,19 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Demo-MJExtension' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Demo-MJExtension
+pod 'MJExtension'
+  target 'Demo-MJExtensionTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Demo-MJExtensionUITests' do
+    # Pods for testing
+  end
+
+end

@@ -1,0 +1,6 @@
+framework module Pods_Demo_MJExtensionTests {
+  umbrella header "Pods-Demo-MJExtensionTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
