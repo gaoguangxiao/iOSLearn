@@ -12,7 +12,9 @@ struct TimerBootcamp: View {
     @State var timeRemaining: Int = 0
     
     //autoconnect() 标记立即运行
-    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var timer = Timer.publish(every: 1, 
+                                     on: .main,
+                                     in:.common).autoconnect()
     
     var body: some View {
         
@@ -72,6 +74,7 @@ struct TimerBootcamp: View {
     func startTimer() {
         //        timer.upstream.s
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        
     }
     
     func stopTimer() {
@@ -80,7 +83,7 @@ struct TimerBootcamp: View {
     
     func resetTimer() {
         timeRemaining = 60
-        timer.upstream.connect().cancel()
+        timer.upstream.connect()
     }
 }
 

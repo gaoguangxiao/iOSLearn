@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftBootCampApp: App {
     var body: some Scene {
         WindowGroup {
-            AppStoregeBootcamp()
+            TimerBootcamp()
         }
     }
 }

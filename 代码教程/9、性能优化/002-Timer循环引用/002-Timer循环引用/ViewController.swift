@@ -23,5 +23,11 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(Vc, animated: true)
 //        self.present(Vc, animated: true)
     }
+    
+    @IBAction func 定时器奇特特性(_ sender: Any) {
+        let Vc = CViewController()
+        self.navigationController?.pushViewController(Vc, animated: true)
+    }
+    
 }
 

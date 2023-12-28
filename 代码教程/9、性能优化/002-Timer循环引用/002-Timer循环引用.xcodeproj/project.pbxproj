@@ -16,6 +16,7 @@
 		1E75E64D2B33CE880044B19E /* BViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E75E64C2B33CE880044B19E /* BViewController.swift */; };
 		1E75E64F2B33D2720044B19E /* SwiftWeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E75E64E2B33D2720044B19E /* SwiftWeakProxy.swift */; };
 		1E8DA3162B3418ED005F677F /* Extension+Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DA3152B3418ED005F677F /* Extension+Timer.swift */; };
+		1E8DA3182B34267D005F677F /* CViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DA3172B34267D005F677F /* CViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		1E75E64C2B33CE880044B19E /* BViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BViewController.swift; sourceTree = "<group>"; };
 		1E75E64E2B33D2720044B19E /* SwiftWeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeakProxy.swift; sourceTree = "<group>"; };
 		1E8DA3152B3418ED005F677F /* Extension+Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Timer.swift"; sourceTree = "<group>"; };
+		1E8DA3172B34267D005F677F /* CViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				1E75E63A2B33CE550044B19E /* SceneDelegate.swift */,
 				1E75E63C2B33CE550044B19E /* ViewController.swift */,
 				1E75E64C2B33CE880044B19E /* BViewController.swift */,
+				1E8DA3172B34267D005F677F /* CViewController.swift */,
 				1E75E64E2B33D2720044B19E /* SwiftWeakProxy.swift */,
 				1E8DA3152B3418ED005F677F /* Extension+Timer.swift */,
 				1E75E63E2B33CE550044B19E /* Main.storyboard */,
@@ -149,6 +152,7 @@
 			files = (
 				1E75E64F2B33D2720044B19E /* SwiftWeakProxy.swift in Sources */,
 				1E8DA3162B3418ED005F677F /* Extension+Timer.swift in Sources */,
+				1E8DA3182B34267D005F677F /* CViewController.swift in Sources */,
 				1E75E63D2B33CE550044B19E /* ViewController.swift in Sources */,
 				1E75E64D2B33CE880044B19E /* BViewController.swift in Sources */,
 				1E75E6392B33CE550044B19E /* AppDelegate.swift in Sources */,

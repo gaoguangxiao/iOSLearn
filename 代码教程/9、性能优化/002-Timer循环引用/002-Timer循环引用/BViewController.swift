@@ -67,6 +67,10 @@ class BViewController: UIViewController {
     
     @objc func updateLineTime()  {
         print("定时器--调用")
+        
+        let timerInterval = lineTimer?.timeInterval
+        print("lineTimer?.timeInterval:\(timerInterval)")
+//        lineTimer?.timeInterval
     }
     
     deinit {

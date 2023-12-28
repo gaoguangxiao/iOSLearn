@@ -33,12 +33,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7n-KJ-Xs8">
-                                <rect key="frame" x="159" y="370" width="75" height="35"/>
+                                <rect key="frame" x="150" y="370" width="94" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="循环引用"/>
                                 <connections>
                                     <action selector="打开定时器界面:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vfM-tq-fc8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vj0-YM-jfO">
+                                <rect key="frame" x="149" y="430" width="94" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="其他特性"/>
+                                <connections>
+                                    <action selector="定时器奇特特性:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n8p-nT-YUH"/>
                                 </connections>
                             </button>
                         </subviews>
