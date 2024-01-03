@@ -3,7 +3,7 @@
 //  Swift的Async和Await
 //
 //  Created by 高广校 on 2023/11/15.
-//
+// https://juejin.cn/post/6844903937032601614
 
 import UIKit
 
@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         //        let d = await fetchWeatherHistory()
         
         if #available(iOS 13.0, *) {
+
             Task.init {
                 //await：告诉程序等待返回结果，只有结果达到之后才能继续
                 let d = await fetchWeatherHistory()

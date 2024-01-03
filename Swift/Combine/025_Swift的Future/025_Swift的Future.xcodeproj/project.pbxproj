@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1EB572D32B3C557B00C14C4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB572D22B3C557B00C14C4C /* AppDelegate.swift */; };
-		1EB572D52B3C557B00C14C4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB572D42B3C557B00C14C4C /* SceneDelegate.swift */; };
-		1EB572D72B3C557B00C14C4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB572D62B3C557B00C14C4C /* ViewController.swift */; };
-		1EB572DA2B3C557B00C14C4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB572D82B3C557B00C14C4C /* Main.storyboard */; };
-		1EB572DC2B3C557D00C14C4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB572DB2B3C557D00C14C4C /* Assets.xcassets */; };
-		1EB572DF2B3C557D00C14C4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB572DD2B3C557D00C14C4C /* LaunchScreen.storyboard */; };
+		1E6510132B3D276800BF115D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6510122B3D276800BF115D /* AppDelegate.swift */; };
+		1E6510152B3D276800BF115D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6510142B3D276800BF115D /* SceneDelegate.swift */; };
+		1E6510172B3D276800BF115D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6510162B3D276800BF115D /* ViewController.swift */; };
+		1E65101A2B3D276800BF115D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E6510182B3D276800BF115D /* Main.storyboard */; };
+		1E65101C2B3D276A00BF115D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E65101B2B3D276A00BF115D /* Assets.xcassets */; };
+		1E65101F2B3D276A00BF115D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E65101D2B3D276A00BF115D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1EB572CF2B3C557B00C14C4C /* 024_Swift的Future.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "024_Swift的Future.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1EB572D22B3C557B00C14C4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1EB572D42B3C557B00C14C4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1EB572D62B3C557B00C14C4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1EB572D92B3C557B00C14C4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1EB572DB2B3C557D00C14C4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1EB572DE2B3C557D00C14C4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		1EB572E02B3C557D00C14C4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E65100F2B3D276800BF115D /* 025_Swift的Future.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "025_Swift的Future.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E6510122B3D276800BF115D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1E6510142B3D276800BF115D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1E6510162B3D276800BF115D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1E6510192B3D276800BF115D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1E65101B2B3D276A00BF115D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1E65101E2B3D276A00BF115D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1E6510202B3D276A00BF115D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1EB572CC2B3C557B00C14C4C /* Frameworks */ = {
+		1E65100C2B3D276800BF115D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,72 +37,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1EB572C62B3C557B00C14C4C = {
+		1E6510062B3D276800BF115D = {
 			isa = PBXGroup;
 			children = (
-				1EB572D12B3C557B00C14C4C /* 024_Swift的Future */,
-				1EB572D02B3C557B00C14C4C /* Products */,
+				1E6510112B3D276800BF115D /* 025_Swift的Future */,
+				1E6510102B3D276800BF115D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1EB572D02B3C557B00C14C4C /* Products */ = {
+		1E6510102B3D276800BF115D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EB572CF2B3C557B00C14C4C /* 024_Swift的Future.app */,
+				1E65100F2B3D276800BF115D /* 025_Swift的Future.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1EB572D12B3C557B00C14C4C /* 024_Swift的Future */ = {
+		1E6510112B3D276800BF115D /* 025_Swift的Future */ = {
 			isa = PBXGroup;
 			children = (
-				1EB572D22B3C557B00C14C4C /* AppDelegate.swift */,
-				1EB572D42B3C557B00C14C4C /* SceneDelegate.swift */,
-				1EB572D62B3C557B00C14C4C /* ViewController.swift */,
-				1EB572D82B3C557B00C14C4C /* Main.storyboard */,
-				1EB572DB2B3C557D00C14C4C /* Assets.xcassets */,
-				1EB572DD2B3C557D00C14C4C /* LaunchScreen.storyboard */,
-				1EB572E02B3C557D00C14C4C /* Info.plist */,
+				1E6510122B3D276800BF115D /* AppDelegate.swift */,
+				1E6510142B3D276800BF115D /* SceneDelegate.swift */,
+				1E6510162B3D276800BF115D /* ViewController.swift */,
+				1E6510182B3D276800BF115D /* Main.storyboard */,
+				1E65101B2B3D276A00BF115D /* Assets.xcassets */,
+				1E65101D2B3D276A00BF115D /* LaunchScreen.storyboard */,
+				1E6510202B3D276A00BF115D /* Info.plist */,
 			);
-			path = "024_Swift的Future";
+			path = "025_Swift的Future";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1EB572CE2B3C557B00C14C4C /* 024_Swift的Future */ = {
+		1E65100E2B3D276800BF115D /* 025_Swift的Future */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1EB572E32B3C557D00C14C4C /* Build configuration list for PBXNativeTarget "024_Swift的Future" */;
+			buildConfigurationList = 1E6510232B3D276A00BF115D /* Build configuration list for PBXNativeTarget "025_Swift的Future" */;
 			buildPhases = (
-				1EB572CB2B3C557B00C14C4C /* Sources */,
-				1EB572CC2B3C557B00C14C4C /* Frameworks */,
-				1EB572CD2B3C557B00C14C4C /* Resources */,
+				1E65100B2B3D276800BF115D /* Sources */,
+				1E65100C2B3D276800BF115D /* Frameworks */,
+				1E65100D2B3D276800BF115D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "024_Swift的Future";
-			productName = "024_Swift的Future";
-			productReference = 1EB572CF2B3C557B00C14C4C /* 024_Swift的Future.app */;
+			name = "025_Swift的Future";
+			productName = "025_Swift的Future";
+			productReference = 1E65100F2B3D276800BF115D /* 025_Swift的Future.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1EB572C72B3C557B00C14C4C /* Project object */ = {
+		1E6510072B3D276800BF115D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
-					1EB572CE2B3C557B00C14C4C = {
+					1E65100E2B3D276800BF115D = {
 						CreatedOnToolsVersion = 15.1;
 					};
 				};
 			};
-			buildConfigurationList = 1EB572CA2B3C557B00C14C4C /* Build configuration list for PBXProject "024_Swift的Future" */;
+			buildConfigurationList = 1E65100A2B3D276800BF115D /* Build configuration list for PBXProject "025_Swift的Future" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +110,55 @@
 				en,
 				Base,
 			);
-			mainGroup = 1EB572C62B3C557B00C14C4C;
-			productRefGroup = 1EB572D02B3C557B00C14C4C /* Products */;
+			mainGroup = 1E6510062B3D276800BF115D;
+			productRefGroup = 1E6510102B3D276800BF115D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1EB572CE2B3C557B00C14C4C /* 024_Swift的Future */,
+				1E65100E2B3D276800BF115D /* 025_Swift的Future */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1EB572CD2B3C557B00C14C4C /* Resources */ = {
+		1E65100D2B3D276800BF115D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EB572DF2B3C557D00C14C4C /* LaunchScreen.storyboard in Resources */,
-				1EB572DC2B3C557D00C14C4C /* Assets.xcassets in Resources */,
-				1EB572DA2B3C557B00C14C4C /* Main.storyboard in Resources */,
+				1E65101F2B3D276A00BF115D /* LaunchScreen.storyboard in Resources */,
+				1E65101C2B3D276A00BF115D /* Assets.xcassets in Resources */,
+				1E65101A2B3D276800BF115D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1EB572CB2B3C557B00C14C4C /* Sources */ = {
+		1E65100B2B3D276800BF115D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EB572D72B3C557B00C14C4C /* ViewController.swift in Sources */,
-				1EB572D32B3C557B00C14C4C /* AppDelegate.swift in Sources */,
-				1EB572D52B3C557B00C14C4C /* SceneDelegate.swift in Sources */,
+				1E6510172B3D276800BF115D /* ViewController.swift in Sources */,
+				1E6510132B3D276800BF115D /* AppDelegate.swift in Sources */,
+				1E6510152B3D276800BF115D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1EB572D82B3C557B00C14C4C /* Main.storyboard */ = {
+		1E6510182B3D276800BF115D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1EB572D92B3C557B00C14C4C /* Base */,
+				1E6510192B3D276800BF115D /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		1EB572DD2B3C557D00C14C4C /* LaunchScreen.storyboard */ = {
+		1E65101D2B3D276A00BF115D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1EB572DE2B3C557D00C14C4C /* Base */,
+				1E65101E2B3D276A00BF115D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1EB572E12B3C557D00C14C4C /* Debug */ = {
+		1E6510212B3D276A00BF115D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -229,7 +229,7 @@
 			};
 			name = Debug;
 		};
-		1EB572E22B3C557D00C14C4C /* Release */ = {
+		1E6510222B3D276A00BF115D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -285,7 +285,7 @@
 			};
 			name = Release;
 		};
-		1EB572E42B3C557D00C14C4C /* Debug */ = {
+		1E6510242B3D276A00BF115D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -294,7 +294,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MC9Q66TLXQ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "024_Swift的Future/Info.plist";
+				INFOPLIST_FILE = "025_Swift的Future/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -305,7 +305,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gaoguangxiao.-24-Swift-Future";
+				PRODUCT_BUNDLE_IDENTIFIER = "gaoguangxiao.-25-Swift-Future";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -313,7 +313,7 @@
 			};
 			name = Debug;
 		};
-		1EB572E52B3C557D00C14C4C /* Release */ = {
+		1E6510252B3D276A00BF115D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -322,7 +322,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MC9Q66TLXQ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "024_Swift的Future/Info.plist";
+				INFOPLIST_FILE = "025_Swift的Future/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -333,7 +333,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gaoguangxiao.-24-Swift-Future";
+				PRODUCT_BUNDLE_IDENTIFIER = "gaoguangxiao.-25-Swift-Future";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -344,25 +344,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1EB572CA2B3C557B00C14C4C /* Build configuration list for PBXProject "024_Swift的Future" */ = {
+		1E65100A2B3D276800BF115D /* Build configuration list for PBXProject "025_Swift的Future" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1EB572E12B3C557D00C14C4C /* Debug */,
-				1EB572E22B3C557D00C14C4C /* Release */,
+				1E6510212B3D276A00BF115D /* Debug */,
+				1E6510222B3D276A00BF115D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1EB572E32B3C557D00C14C4C /* Build configuration list for PBXNativeTarget "024_Swift的Future" */ = {
+		1E6510232B3D276A00BF115D /* Build configuration list for PBXNativeTarget "025_Swift的Future" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1EB572E42B3C557D00C14C4C /* Debug */,
-				1EB572E52B3C557D00C14C4C /* Release */,
+				1E6510242B3D276A00BF115D /* Debug */,
+				1E6510252B3D276A00BF115D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1EB572C72B3C557B00C14C4C /* Project object */;
+	rootObject = 1E6510072B3D276800BF115D /* Project object */;
 }
