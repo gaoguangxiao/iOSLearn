@@ -15,6 +15,7 @@ var arr1 = [7]
 
 var arr = [1,3,5,6,2,4,7,2]
 
+
 //获取集合最后一个元素
 let index = arr.index(before: arr.endIndex)
 let item =  arr[index]
@@ -96,4 +97,6 @@ let arr3 = arr.map { $0 * 2 }
 //print(f)
 
 
-
+//MARK：使用一个数组对另一个数组初始化
+let arr2 = Array(arrayLiteral: arr)
+print(arr2)

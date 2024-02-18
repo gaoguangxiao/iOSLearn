@@ -37,13 +37,17 @@ class ViewController: UIViewController {
                 //await：告诉程序等待返回结果，只有结果达到之后才能继续
                 let d = await fetchWeatherHistory()
                 print("步骤2")
-                calculateAverageTemperature(for: d) { d1 in
+//                calculateAverageTemperature(for: d) { d1 in
                     
-                }
+//                }
 //                let d1 = calculateAverageTemperature(for: d)
 //                print("步骤3")
 //                print(d1)
             }
+//            let d1 = calculateAverage(for: [1])
+//            let d1 = calculateAverageTemperature(for: [0])
+            //                print("步骤3")
+            //                print(d1)
         } else {
             // Fallback on earlier versions
         }
