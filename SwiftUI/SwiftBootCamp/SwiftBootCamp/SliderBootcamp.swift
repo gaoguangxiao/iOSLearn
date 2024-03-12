@@ -20,9 +20,18 @@ struct SliderBootcamp: View {
                 String(format: "%.2f", sliderValue)
             )
             .foregroundColor(sliderColor)
-            //            Slider(value:$sliderValue).accentColor(.red)
+            //     Slider(value:$sliderValue).accentColor(.red)
             //            Slider(value: $sliderValue, in: 0...100).accentColor(.red)
             //            Slider(value: $sliderValue, in: 0...100, step: 10).accentColor(.red)
+            
+            Slider(value: $sliderValue,
+                   in: 8...120,
+                   minimumValueLabel: Text("A").font(.system(size: 8)), maximumValueLabel: Text("A").font(.system(size: 16))) {
+                Text("Font size (\(Int(sliderValue))")
+            }
+            
+//            Text("滑块渐变")
+            
             Slider(value: $sliderValue,
                    in: 1...5,
                    step: 1.0,
