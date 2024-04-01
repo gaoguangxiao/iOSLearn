@@ -7,20 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E713D622BA2E30B0090CCC8 /* AsyncSequenceBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E713D612BA2E30B0090CCC8 /* AsyncSequenceBootCamp.swift */; };
+		1E8C11AD2BA149DB00563B6B /* ClockBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8C11AC2BA149DB00563B6B /* ClockBootCamp.swift */; };
+		1E8C11B02BA1583200563B6B /* TaskBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8C11AF2BA1583200563B6B /* TaskBootCamp.swift */; };
+		1E8C11B22BA15B3D00563B6B /* TaskLoadBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8C11B12BA15B3D00563B6B /* TaskLoadBootCamp.swift */; };
+		1E8C11B42BA15E6500563B6B /* TaskLoadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8C11B32BA15E6500563B6B /* TaskLoadViewModel.swift */; };
+		1E8C11B62BA1810C00563B6B /* ActorBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8C11B52BA1810C00563B6B /* ActorBootCamp.swift */; };
+		1E8C11B82BA1A21D00563B6B /* ObservationBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8C11B72BA1A21D00563B6B /* ObservationBootCamp.swift */; };
 		1E8D9F652B9FEC220089910D /* SwiftLibBootCampApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F642B9FEC220089910D /* SwiftLibBootCampApp.swift */; };
 		1E8D9F672B9FEC220089910D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F662B9FEC220089910D /* ContentView.swift */; };
 		1E8D9F692B9FEC240089910D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E8D9F682B9FEC240089910D /* Assets.xcassets */; };
 		1E8D9F6C2B9FEC240089910D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E8D9F6B2B9FEC240089910D /* Preview Assets.xcassets */; };
 		1E8D9F732B9FEC5D0089910D /* AnyHashableBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F722B9FEC5D0089910D /* AnyHashableBootCamp.swift */; };
+		1E8D9F752B9FF7FF0089910D /* EquatableBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F742B9FF7FF0089910D /* EquatableBootCamp.swift */; };
+		1E8D9F772BA001750089910D /* HashableBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F762BA001750089910D /* HashableBootCamp.swift */; };
+		1E8D9F792BA02D170089910D /* MirrorBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F782BA02D170089910D /* MirrorBootCamp.swift */; };
+		1E8D9F7F2BA05D560089910D /* ArrayBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F7E2BA05D560089910D /* ArrayBootCamp.swift */; };
+		1E8D9F812BA060980089910D /* BoolBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F802BA060980089910D /* BoolBootCamp.swift */; };
+		1E8D9F832BA063AB0089910D /* IntBootCamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8D9F822BA063AB0089910D /* IntBootCamp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E713D612BA2E30B0090CCC8 /* AsyncSequenceBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSequenceBootCamp.swift; sourceTree = "<group>"; };
+		1E8C11AC2BA149DB00563B6B /* ClockBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockBootCamp.swift; sourceTree = "<group>"; };
+		1E8C11AF2BA1583200563B6B /* TaskBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBootCamp.swift; sourceTree = "<group>"; };
+		1E8C11B12BA15B3D00563B6B /* TaskLoadBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLoadBootCamp.swift; sourceTree = "<group>"; };
+		1E8C11B32BA15E6500563B6B /* TaskLoadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLoadViewModel.swift; sourceTree = "<group>"; };
+		1E8C11B52BA1810C00563B6B /* ActorBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorBootCamp.swift; sourceTree = "<group>"; };
+		1E8C11B72BA1A21D00563B6B /* ObservationBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationBootCamp.swift; sourceTree = "<group>"; };
 		1E8D9F612B9FEC220089910D /* SwiftLibBootCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLibBootCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E8D9F642B9FEC220089910D /* SwiftLibBootCampApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLibBootCampApp.swift; sourceTree = "<group>"; };
 		1E8D9F662B9FEC220089910D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1E8D9F682B9FEC240089910D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E8D9F6B2B9FEC240089910D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1E8D9F722B9FEC5D0089910D /* AnyHashableBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyHashableBootCamp.swift; sourceTree = "<group>"; };
+		1E8D9F742B9FF7FF0089910D /* EquatableBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableBootCamp.swift; sourceTree = "<group>"; };
+		1E8D9F762BA001750089910D /* HashableBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableBootCamp.swift; sourceTree = "<group>"; };
+		1E8D9F782BA02D170089910D /* MirrorBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorBootCamp.swift; sourceTree = "<group>"; };
+		1E8D9F7E2BA05D560089910D /* ArrayBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayBootCamp.swift; sourceTree = "<group>"; };
+		1E8D9F802BA060980089910D /* BoolBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolBootCamp.swift; sourceTree = "<group>"; };
+		1E8D9F822BA063AB0089910D /* IntBootCamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntBootCamp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +60,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E8C11AE2BA1580700563B6B /* Concurrency */ = {
+			isa = PBXGroup;
+			children = (
+				1E8C11AF2BA1583200563B6B /* TaskBootCamp.swift */,
+				1E8C11B12BA15B3D00563B6B /* TaskLoadBootCamp.swift */,
+				1E8C11B32BA15E6500563B6B /* TaskLoadViewModel.swift */,
+				1E8C11B52BA1810C00563B6B /* ActorBootCamp.swift */,
+				1E713D612BA2E30B0090CCC8 /* AsyncSequenceBootCamp.swift */,
+			);
+			path = Concurrency;
+			sourceTree = "<group>";
+		};
 		1E8D9F582B9FEC220089910D = {
 			isa = PBXGroup;
 			children = (
@@ -53,9 +91,18 @@
 		1E8D9F632B9FEC220089910D /* SwiftLibBootCamp */ = {
 			isa = PBXGroup;
 			children = (
+				1E8C11AE2BA1580700563B6B /* Concurrency */,
 				1E8D9F642B9FEC220089910D /* SwiftLibBootCampApp.swift */,
 				1E8D9F662B9FEC220089910D /* ContentView.swift */,
+				1E8D9F762BA001750089910D /* HashableBootCamp.swift */,
+				1E8D9F782BA02D170089910D /* MirrorBootCamp.swift */,
 				1E8D9F722B9FEC5D0089910D /* AnyHashableBootCamp.swift */,
+				1E8D9F742B9FF7FF0089910D /* EquatableBootCamp.swift */,
+				1E8D9F7E2BA05D560089910D /* ArrayBootCamp.swift */,
+				1E8D9F802BA060980089910D /* BoolBootCamp.swift */,
+				1E8D9F822BA063AB0089910D /* IntBootCamp.swift */,
+				1E8C11AC2BA149DB00563B6B /* ClockBootCamp.swift */,
+				1E8C11B72BA1A21D00563B6B /* ObservationBootCamp.swift */,
 				1E8D9F682B9FEC240089910D /* Assets.xcassets */,
 				1E8D9F6A2B9FEC240089910D /* Preview Content */,
 			);
@@ -140,8 +187,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E8D9F772BA001750089910D /* HashableBootCamp.swift in Sources */,
+				1E8C11AD2BA149DB00563B6B /* ClockBootCamp.swift in Sources */,
+				1E713D622BA2E30B0090CCC8 /* AsyncSequenceBootCamp.swift in Sources */,
+				1E8D9F792BA02D170089910D /* MirrorBootCamp.swift in Sources */,
 				1E8D9F672B9FEC220089910D /* ContentView.swift in Sources */,
+				1E8C11B82BA1A21D00563B6B /* ObservationBootCamp.swift in Sources */,
+				1E8C11B62BA1810C00563B6B /* ActorBootCamp.swift in Sources */,
+				1E8C11B02BA1583200563B6B /* TaskBootCamp.swift in Sources */,
+				1E8C11B42BA15E6500563B6B /* TaskLoadViewModel.swift in Sources */,
 				1E8D9F652B9FEC220089910D /* SwiftLibBootCampApp.swift in Sources */,
+				1E8D9F752B9FF7FF0089910D /* EquatableBootCamp.swift in Sources */,
+				1E8D9F7F2BA05D560089910D /* ArrayBootCamp.swift in Sources */,
+				1E8D9F812BA060980089910D /* BoolBootCamp.swift in Sources */,
+				1E8C11B22BA15B3D00563B6B /* TaskLoadBootCamp.swift in Sources */,
+				1E8D9F832BA063AB0089910D /* IntBootCamp.swift in Sources */,
 				1E8D9F732B9FEC5D0089910D /* AnyHashableBootCamp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

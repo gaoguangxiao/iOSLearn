@@ -29,34 +29,9 @@ struct AnyHashableBootCamp: View {
         Button(action: {
             debugPrintInfo()
         }, label: {
-            Text("debugPrint")
+            Text("点击")
         })
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .onAppear(perform: {
-                
-//                let meetings = Person(age: 24, name: "herschel", job: "iOS")
-//                print(meetings.debugDescription)
-//                debugPrint(meetings.description)
-                
-//                print(meetings.description)
-                
-//                print(meetings.age.description)
-//                print("print info")
-                
-//                let anyHashable = AnyHashable("Any")
-
-//                print(anyHashable.base)
-                
-//                let descri: [AnyHashable: Any] = ["a":"Apple"]
-                
-//                print(descri["a"]!)
-                
-//                print("\(descri.description)")
-//                print("\(descri.debugDescription)")
-//                descri.description
-//                descri.keys
-            })
+    
     }
     
     func debugPrintInfo() {
@@ -64,17 +39,21 @@ struct AnyHashableBootCamp: View {
 //        print(meetings.debugDescription)
         
         // Release 模式打印 "description herschel age is 24"
-        print("print is \(meetings)")
+//        print("print is \(meetings)")
         // debug :debugDescription herschel age is 24
+        let s1 = String(describing: meetings)
+        print("describing: \(s1)")
+        
+        let s = String(reflecting: meetings)
+        print("reflecting: \(s)")
         
         // 针对，结构体或者类 遵循`CustomDebugStringConvertible`协议，实现了`debugDescription`方法，可通过此打印
-        debugPrint("debugPrint is \(meetings)")
+//        debugPrint("debugPrint is \(meetings)")
         
 //        debug
 //        print is description herschel age is 24
 //        "debugPrint is description herschel age is 24"
-        
-        
+
     }
     
 }
