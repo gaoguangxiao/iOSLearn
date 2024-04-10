@@ -100,3 +100,4 @@ let arr3 = arr.map { $0 * 2 }
 //MARK：使用一个数组对另一个数组初始化
 let arr2 = Array(arrayLiteral: arr)
 print(arr2)
+
