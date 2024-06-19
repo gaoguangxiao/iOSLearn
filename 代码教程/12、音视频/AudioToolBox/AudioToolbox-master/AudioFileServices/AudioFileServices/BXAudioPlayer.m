@@ -42,7 +42,7 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,
 
 
 //缓存数据读取方法的实现
--(void) audioQueueOutputWithQueue:(AudioQueueRef)audioQueue queueBuffer:(AudioQueueBufferRef)audioQueueBuffer{
+-(void)audioQueueOutputWithQueue:(AudioQueueRef)audioQueue queueBuffer:(AudioQueueBufferRef)audioQueueBuffer{
     //读取包数据
     UInt32 ioNumBytes = outBufferSize;
     UInt32 ioNumPackets = numPacketsToRead;

@@ -284,9 +284,9 @@ class ViewController: UIViewController {
         AudioQueueStart(mQueue, nil)
         
         // and wait
-//        repeat{
-//            CFRunLoopRunInMode(CFRunLoopMode.defaultMode, 0.25, false)
-//        } while !aqData.mIsRunning
+        repeat{
+            CFRunLoopRunInMode(CFRunLoopMode.defaultMode, 0.25, false)
+        } while !aqData.mIsRunning
         
         // isDone represents the state of the Audio File enqueuing. This does not mean the
         // Audio Queue is actually done playing yet. Since we have 3 half-second buffers in-flight
