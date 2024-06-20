@@ -1,0 +1,20 @@
+PODS:
+  - GGXSwiftExtension (0.5.8)
+  - PTDebugView (0.1.6):
+    - GGXSwiftExtension
+
+DEPENDENCIES:
+  - PTDebugView
+
+SPEC REPOS:
+  trunk:
+    - GGXSwiftExtension
+    - PTDebugView
+
+SPEC CHECKSUMS:
+  GGXSwiftExtension: 23fc72e1c2b4bafc4380fd493fe128b9fc9f6bcd
+  PTDebugView: e916e2df5f0d12de195e7891c0a44e48845390ae
+
+PODFILE CHECKSUM: dfa5ed7dafea96267bf60c664c811cb2f216be6b
+
+COCOAPODS: 1.15.0
