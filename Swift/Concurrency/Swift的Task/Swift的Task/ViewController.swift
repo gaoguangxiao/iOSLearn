@@ -24,6 +24,11 @@ class ViewController: UIViewController {
         Task {
             print(await basicTask.value)
         }
+        
+        ///`detached`方法创建一个独立的一部任务
+        Task.detached {
+            print(await basicTask.value)
+        }
     }
 }
 
