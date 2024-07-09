@@ -14,7 +14,21 @@ print("Hello, World!")
 var arr1 = [7]
 
 var arr = [1,3,5,6,2,4,7,2]
+//arr.map { $0 * 2 }
+//print(arr3)
 
+let opS: String = "1"
+var arr2 = ["A","B","C",opS]
+//let arr4 = arr2.flatMap { str in
+//    return Int(str)
+//}
+
+//compactMap 转换然后解包
+let arr5 = arr2.compactMap { str in
+    return Int(str)
+}
+//["A1", "B1", "C1"]
+print("arr5: \(arr5)")
 
 //获取集合最后一个元素
 let index = arr.index(before: arr.endIndex)
@@ -54,8 +68,8 @@ print(item)
 //print(arr2 ?? 0)
 //
 ////arr.map { a in  a * 2 }
-let arr3 = arr.map { $0 * 2 }
-//print(arr3)
+
+//var arr = [1,3,5,6,2,4,7,2]
 
 
 
@@ -98,6 +112,6 @@ let arr3 = arr.map { $0 * 2 }
 
 
 //MARK：使用一个数组对另一个数组初始化
-let arr2 = Array(arrayLiteral: arr)
-print(arr2)
+//let arr2 = Array(arrayLiteral: arr)
+//print(arr2)
 

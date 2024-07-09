@@ -199,6 +199,7 @@ class ViewController: UIViewController {
     func calculateAverage(for records: [Double]) async -> Double {
         //        // 对数组求和然后求平均值
         if #available(iOS 13.0, *) {
+            // 将block回调 转化为 async方法 `withCheckedContinuation`
             return await withCheckedContinuation { continuation in
                 DispatchQueue.global().async {
                     let total = records.reduce(0, +)

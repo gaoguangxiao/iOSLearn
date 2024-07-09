@@ -52,11 +52,7 @@ class ViewController: UIViewController {
 //        } else {
             // Fallback on earlier versions
 //        }
-        //        } else {
-        //            // Fallback on earlier versions
-        //        }
-        //
-    }
+}
     
     
 }
