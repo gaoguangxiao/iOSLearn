@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E7FD8F12AFDC378000A767D /* frozen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FD8F02AFDC378000A767D /* frozen.swift */; };
+		1E78D5112C3CCEC5002444AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E78D5102C3CCEC5002444AB /* main.swift */; };
 		1E7FD8F92AFDC7AF000A767D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FD8F82AFDC7AF000A767D /* AppDelegate.swift */; };
 		1E7FD8FB2AFDC7AF000A767D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FD8FA2AFDC7AF000A767D /* SceneDelegate.swift */; };
 		1E7FD8FD2AFDC7AF000A767D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FD8FC2AFDC7AF000A767D /* ViewController.swift */; };
@@ -38,6 +38,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		1E78D50C2C3CCEC5002444AB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		1EA8DAD729BCA6CF001741D2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,7 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E7FD8F02AFDC378000A767D /* frozen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = frozen.swift; sourceTree = "<group>"; };
+		1E78D50E2C3CCEC5002444AB /* UnknownDefault */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UnknownDefault; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E78D5102C3CCEC5002444AB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1E7FD8F62AFDC7AF000A767D /* Demo_Frozen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_Frozen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7FD8F82AFDC7AF000A767D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E7FD8FA2AFDC7AF000A767D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +79,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1E78D50B2C3CCEC5002444AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1E7FD8F32AFDC7AF000A767D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E78D50F2C3CCEC5002444AB /* UnknownDefault */ = {
+			isa = PBXGroup;
+			children = (
+				1E78D5102C3CCEC5002444AB /* main.swift */,
+			);
+			path = UnknownDefault;
+			sourceTree = "<group>";
+		};
 		1E7FD8F72AFDC7AF000A767D /* Demo_Frozen */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +163,7 @@
 				1E7FD8F72AFDC7AF000A767D /* Demo_Frozen */,
 				1E7FD90E2AFDC7B1000A767D /* Demo_FrozenTests */,
 				1E7FD9182AFDC7B1000A767D /* Demo_FrozenUITests */,
+				1E78D50F2C3CCEC5002444AB /* UnknownDefault */,
 				1EA8DADA29BCA6CF001741D2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -149,6 +175,7 @@
 				1E7FD8F62AFDC7AF000A767D /* Demo_Frozen.app */,
 				1E7FD90B2AFDC7B1000A767D /* Demo_FrozenTests.xctest */,
 				1E7FD9152AFDC7B1000A767D /* Demo_FrozenUITests.xctest */,
+				1E78D50E2C3CCEC5002444AB /* UnknownDefault */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				1EA8DADC29BCA6CF001741D2 /* main.swift */,
-				1E7FD8F02AFDC378000A767D /* frozen.swift */,
 			);
 			path = "007_Swift枚举";
 			sourceTree = "<group>";
@@ -165,6 +191,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1E78D50D2C3CCEC5002444AB /* UnknownDefault */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E78D5122C3CCEC5002444AB /* Build configuration list for PBXNativeTarget "UnknownDefault" */;
+			buildPhases = (
+				1E78D50A2C3CCEC5002444AB /* Sources */,
+				1E78D50B2C3CCEC5002444AB /* Frameworks */,
+				1E78D50C2C3CCEC5002444AB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnknownDefault;
+			productName = UnknownDefault;
+			productReference = 1E78D50E2C3CCEC5002444AB /* UnknownDefault */;
+			productType = "com.apple.product-type.tool";
+		};
 		1E7FD8F52AFDC7AF000A767D /* Demo_Frozen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E7FD91D2AFDC7B1000A767D /* Build configuration list for PBXNativeTarget "Demo_Frozen" */;
@@ -242,9 +285,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					1E78D50D2C3CCEC5002444AB = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					1E7FD8F52AFDC7AF000A767D = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -278,6 +324,7 @@
 				1E7FD8F52AFDC7AF000A767D /* Demo_Frozen */,
 				1E7FD90A2AFDC7B1000A767D /* Demo_FrozenTests */,
 				1E7FD9142AFDC7B1000A767D /* Demo_FrozenUITests */,
+				1E78D50D2C3CCEC5002444AB /* UnknownDefault */,
 			);
 		};
 /* End PBXProject section */
@@ -310,6 +357,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1E78D50A2C3CCEC5002444AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E78D5112C3CCEC5002444AB /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1E7FD8F22AFDC7AF000A767D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,7 +397,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EA8DADD29BCA6CF001741D2 /* main.swift in Sources */,
-				1E7FD8F12AFDC378000A767D /* frozen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +435,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1E78D5132C3CCEC5002444AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MC9Q66TLXQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1E78D5142C3CCEC5002444AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MC9Q66TLXQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		1E7FD91E2AFDC7B1000A767D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -691,6 +778,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E78D5122C3CCEC5002444AB /* Build configuration list for PBXNativeTarget "UnknownDefault" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E78D5132C3CCEC5002444AB /* Debug */,
+				1E78D5142C3CCEC5002444AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1E7FD91D2AFDC7B1000A767D /* Build configuration list for PBXNativeTarget "Demo_Frozen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

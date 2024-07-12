@@ -21,6 +21,14 @@ ABCDEFG
 value =  #""ABCDE""#
 print(value)
 
+//##`startIndex`
+/*
+ 字符或代码单元在字符串中的位置。
+ @frozen public struct Index : Sendable {
+ }
+ **/
+//let oIndex = str.index(str.startIndex, offsetBy: 2)
+
 
 //字符串遍历
 //for s in  str {
@@ -37,21 +45,20 @@ let value122 = 2.012
 
 //CVarArg 是Swift对C相关api的封装
 let strValue = String(format: "第%.2f次", value122)
-
-print(strValue)
+//print(strValue)
 
 //print(str.contains("A"))
 
 //str
-print(str.contains(where: String.contains("AL")))
+//print(str.contains(where: String.contains("AL")))
 
 //print(str.hasPrefix("A"))
 
 //字符串替换
-let si = str.index(str.startIndex, offsetBy: 2)
-let se = str.index(str.startIndex, offsetBy: 3)
-str.replaceSubrange(si...se, with: "RR")
-print(str)
+//let si = str.index(str.startIndex, offsetBy: 2)
+//let se = str.index(str.startIndex, offsetBy: 3)
+//str.replaceSubrange(si...se, with: "RR")
+//print(str)
 
 //将某字符替换
 //str.replacingOccurrences(of: <#T##StringProtocol#>, with: <#T##StringProtocol#>)
@@ -70,10 +77,10 @@ print(str)
 //print(str[eIndex])
 
 //4、打印指定偏移
-//let oIndex = str.index(str.startIndex, offsetBy: 2)
-//let o1Index = str.index(str.startIndex, offsetBy: 4)
+let oIndex = str.index(str.startIndex, offsetBy: 2)
+let o1Index = str.index(str.startIndex, offsetBy: 4)
 ////0..2 区间语法
-//print(str[oIndex..<o1Index])
+print(str[oIndex..<o1Index])
 
 //5、
 //print(str.prefix(4))
