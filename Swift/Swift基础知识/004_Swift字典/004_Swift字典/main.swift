@@ -17,12 +17,8 @@ var dict = ["A":1,"B":2,"C":3]
 
 //print(dict["A"] ?? "unknowm")
 
-var dict3 = dict.filter { (k,v) in
-    return v != 2
+var dict3 = dict.filter { (k, v) in
+    return v == 2
 }
-
-//dict.map { <#(key: String, value: Int)#> in
-//    <#code#>
-//}
 
 print(dict3)
