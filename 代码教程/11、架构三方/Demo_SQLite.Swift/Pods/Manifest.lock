@@ -1,0 +1,22 @@
+PODS:
+  - GGXSwiftExtension (0.7.0)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
+
+DEPENDENCIES:
+  - GGXSwiftExtension
+  - SQLite.swift
+
+SPEC REPOS:
+  trunk:
+    - GGXSwiftExtension
+    - SQLite.swift
+
+SPEC CHECKSUMS:
+  GGXSwiftExtension: 51b7c93060ffefc6feb5e22894e373b076dd0313
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+
+PODFILE CHECKSUM: 394930a744aca789245b3e641339b13b6ef657e5
+
+COCOAPODS: 1.16.1
