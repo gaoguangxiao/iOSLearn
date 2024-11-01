@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JWo-RP-8Mm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gsm-49-ymM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8C-ZX-r7C" customClass="HitView">
+                                <rect key="frame" x="0.0" y="253" width="375" height="161"/>
+                                <subviews>
+                                    <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIx-Su-Xjb" customClass="HitView">
+                                        <rect key="frame" x="67" y="-108" width="240" height="252"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.66526485940000002" green="0.91764705879999997" blue="0.33590422939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="hbx-uh-meY"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="T2w-t2-Zu0" appends="YES" id="PuU-0v-LXt"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="D8C-ZX-r7C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="i5e-FE-2zp"/>
+                            <constraint firstItem="D8C-ZX-r7C" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="kMY-Mq-V8O"/>
+                            <constraint firstAttribute="trailing" secondItem="D8C-ZX-r7C" secondAttribute="trailing" id="p4g-9B-OIE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="blueView" destination="VIx-Su-Xjb" id="Nj9-0f-56y"/>
+                        <outlet property="redView" destination="D8C-ZX-r7C" id="2y9-JA-Ob9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="T2w-t2-Zu0">
+                    <connections>
+                        <action selector="tap:" destination="BYZ-38-t0r" id="b6f-n3-7KQ"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="117.39130434782609"/>
+        </scene>
+    </scenes>
+</document>
