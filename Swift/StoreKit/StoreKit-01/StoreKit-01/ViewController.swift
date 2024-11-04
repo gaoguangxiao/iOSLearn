@@ -8,8 +8,10 @@
 import UIKit
 import StoreKit
 
+
 class ViewController: UIViewController {
 
+//    var product
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,6 +22,15 @@ class ViewController: UIViewController {
             
         }
 
+    }
+    
+    func requestProducts() async {
+        
+        do {
+//            let storeProducts = Product.products(for: <#T##Collection#>))
+        } catch  {
+            
+        }
     }
 
 
