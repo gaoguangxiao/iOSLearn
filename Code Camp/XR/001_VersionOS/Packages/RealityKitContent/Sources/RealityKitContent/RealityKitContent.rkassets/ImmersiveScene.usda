@@ -1,0 +1,212 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 1.0 (409.100.15)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "drummertoy" (
+        active = true
+        prepend references = @drummertoy.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (-0.5049782, 2, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (9.722796, 13.61873, 8.442151)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (-0.93194056, 6.809365, 0)
+                }
+            }
+        }
+    }
+
+    def "drummertoy_1" (
+        active = true
+        prepend references = @drummertoy.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (0.5, 2, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Looks"
+        {
+            over "rig_skin_toy_drummer_realistic1"
+            {
+                token outputs:surface.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_toy_drummer_realistic_mat1.outputs:surface>
+
+                over "rig_skin_toy_drummer_realistic_mat1"
+                {
+                    color3f inputs:diffuseColor.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_file97.outputs:rgb>
+                    float inputs:metallic.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_file98.outputs:r>
+                    normal3f inputs:normal.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_file101.outputs:rgb>
+                    float inputs:occlusion.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_file99.outputs:r>
+                    float inputs:roughness.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_file100.outputs:r>
+                }
+
+                over "rig_skin_file97"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_place2dTexture123.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture123"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1.inputs:rig:skin:file97:varname>
+                }
+
+                over "rig_skin_file98"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_place2dTexture124.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture124"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1.inputs:rig:skin:file98:varname>
+                }
+
+                over "rig_skin_file99"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_place2dTexture125.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture125"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1.inputs:rig:skin:file99:varname>
+                }
+
+                over "rig_skin_file100"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_place2dTexture126.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture126"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1.inputs:rig:skin:file100:varname>
+                }
+
+                over "rig_skin_file101"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1/rig_skin_place2dTexture127.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture127"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_realistic1.inputs:rig:skin:file101:varname>
+                }
+            }
+
+            over "rig_skin_toy_drummer_accessories_realistic1"
+            {
+                token outputs:surface.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_toy_drummer_accessories_realistic_mat1.outputs:surface>
+
+                over "rig_skin_toy_drummer_accessories_realistic_mat1"
+                {
+                    color3f inputs:diffuseColor.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_file102.outputs:rgb>
+                    float inputs:metallic.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_file103.outputs:r>
+                    normal3f inputs:normal.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_file106.outputs:rgb>
+                    float inputs:occlusion.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_file104.outputs:r>
+                    float inputs:roughness.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_file105.outputs:r>
+                }
+
+                over "rig_skin_file102"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_place2dTexture128.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture128"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1.inputs:rig:skin:file102:varname>
+                }
+
+                over "rig_skin_file103"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_place2dTexture129.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture129"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1.inputs:rig:skin:file103:varname>
+                }
+
+                over "rig_skin_file104"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_place2dTexture130.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture130"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1.inputs:rig:skin:file104:varname>
+                }
+
+                over "rig_skin_file105"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_place2dTexture131.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture131"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1.inputs:rig:skin:file105:varname>
+                }
+
+                over "rig_skin_file106"
+                {
+                    float2 inputs:st.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1/rig_skin_place2dTexture132.outputs:result>
+                }
+
+                over "rig_skin_place2dTexture132"
+                {
+                    string inputs:varname.connect = </Root/drummertoy_1/Looks/rig_skin_toy_drummer_accessories_realistic1.inputs:rig:skin:file106:varname>
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (9.722796, 13.61873, 8.442151)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (-0.93194056, 6.809365, 0)
+                }
+            }
+        }
+    }
+}
+

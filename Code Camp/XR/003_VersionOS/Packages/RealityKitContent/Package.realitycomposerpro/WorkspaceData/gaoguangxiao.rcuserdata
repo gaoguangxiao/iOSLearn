@@ -1,0 +1,83 @@
+{
+  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "openSceneRelativePaths" : [
+    "Scene.usda",
+    "toy_biplane_idleScene.usda"
+  ],
+  "recentIdentifiers" : {
+
+  },
+  "sceneCameraHistory" : {
+    "4F09FC2F-A030-4FD5-A8CF-4FE424F26E86" : [
+      {
+        "date" : 744687307.198589,
+        "title" : "Untitled",
+        "transform" : [
+          0.99999994,
+          0,
+          -0,
+          0,
+          -0,
+          0.8660254,
+          -0.49999988,
+          0,
+          0,
+          0.49999988,
+          0.8660254,
+          0,
+          0,
+          0.22019973,
+          0.3813972,
+          1
+        ]
+      }
+    ],
+    "90C576A0-F90A-43B8-9998-14918A66F863" : [
+      {
+        "date" : 744687267.146357,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.86602557,
+          -0.4999996,
+          0,
+          0,
+          0.4999996,
+          0.86602557,
+          0,
+          2.5352035e-06,
+          0.3504082,
+          0.6975968,
+          1
+        ]
+      },
+      {
+        "date" : 744687243.658746,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          -0,
+          0,
+          -0,
+          0.86602557,
+          -0.4999996,
+          0,
+          0,
+          0.4999996,
+          0.86602557,
+          0,
+          0,
+          11.3776865,
+          19.706734,
+          1
+        ]
+      }
+    ]
+  },
+  "selectedSceneRelativePath" : "toy_biplane_idleScene.usda"
+}
