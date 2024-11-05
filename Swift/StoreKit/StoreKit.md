@@ -1,5 +1,11 @@
 StoreKit2
 
+## 2019
+
+[App内购买和使用服务器对服务器通知](https://developer.apple.com/videos/play/wwdc2019/302)
+
+
+通知类型
 
 ## 2020
 [app内购买项目的新内容](https://developer.apple.com/videos/play/wwdc2020/10661)
@@ -7,6 +13,7 @@ StoreKit2
 
 处理退款：
 咨询苹果支持发起退款、苹果服务器退款申请通知开发者服务器。【退款通知】
+
 
 
 ## 认识StoreKit 2

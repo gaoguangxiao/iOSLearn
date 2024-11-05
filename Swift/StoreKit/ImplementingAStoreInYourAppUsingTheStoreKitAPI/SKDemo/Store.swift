@@ -103,7 +103,7 @@ class Store: ObservableObject {
         return data
     }
 
-    func listenForTransactions() -> Task<Void, Error> {
+    func  listenForTransactions() -> Task<Void, Error> {
         return Task.detached {
             // Iterate through any transactions that don't come from a direct call to `purchase()`.
             for await result in Transaction.updates {
@@ -141,9 +141,9 @@ class Store: ObservableObject {
                     newFuel.append(product)
                 case .nonConsumable: //非消耗品
                     newCars.append(product)
-                case .autoRenewable:
+                case .autoRenewable: //自动订阅
                     newSubscriptions.append(product)
-                case .nonRenewable:
+                case .nonRenewable: //非自动
                     newNonRenewables.append(product)
                 default:
                     // Ignore this product.
@@ -249,7 +249,7 @@ class Store: ObservableObject {
                     if let subscription = subscriptions.first(where: { $0.id == transaction.productID }) {
                         purchasedSubscriptions.append(subscription)
                     }
-                default:
+                default: 
                     break
                 }
             } catch {
