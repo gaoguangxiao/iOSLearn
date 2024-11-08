@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E80387E2CDCAAEA00C62B4B /* FetchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E80387D2CDCAAEA00C62B4B /* FetchImage.swift */; };
 		1E974E442C22920300CAFE64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E974E432C22920300CAFE64 /* AppDelegate.swift */; };
 		1E974E462C22920300CAFE64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E974E452C22920300CAFE64 /* SceneDelegate.swift */; };
 		1E974E482C22920300CAFE64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E974E472C22920300CAFE64 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E80387D2CDCAAEA00C62B4B /* FetchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImage.swift; sourceTree = "<group>"; };
 		1E974E402C22920300CAFE64 /* Swift的Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift的Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E974E432C22920300CAFE64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E974E452C22920300CAFE64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				1E974E432C22920300CAFE64 /* AppDelegate.swift */,
 				1E974E452C22920300CAFE64 /* SceneDelegate.swift */,
 				1E974E472C22920300CAFE64 /* ViewController.swift */,
+				1E80387D2CDCAAEA00C62B4B /* FetchImage.swift */,
 				1E974E492C22920300CAFE64 /* Main.storyboard */,
 				1E974E4C2C22920400CAFE64 /* Assets.xcassets */,
 				1E974E4E2C22920400CAFE64 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E80387E2CDCAAEA00C62B4B /* FetchImage.swift in Sources */,
 				1E974E482C22920300CAFE64 /* ViewController.swift in Sources */,
 				1E974E442C22920300CAFE64 /* AppDelegate.swift in Sources */,
 				1E974E462C22920300CAFE64 /* SceneDelegate.swift in Sources */,

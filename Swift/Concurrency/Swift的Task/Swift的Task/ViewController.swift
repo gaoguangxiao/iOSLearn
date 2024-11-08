@@ -30,5 +30,11 @@ class ViewController: UIViewController {
             print(await basicTask.value)
         }
     }
+    
+    func TestAsyncTask() async {
+        
+        async let result = URLSession.shared.data(from: URL(string: "")!)
+        
+    }
 }
 

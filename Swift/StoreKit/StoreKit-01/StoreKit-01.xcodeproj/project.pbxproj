@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7CC5CA2CDB08830088BC78 /* BirdFoodShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7CC5C92CDB08830088BC78 /* BirdFoodShop.swift */; };
 		1EBA9F082C22DF0900BC46C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA9F072C22DF0900BC46C5 /* AppDelegate.swift */; };
 		1EBA9F0A2C22DF0900BC46C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA9F092C22DF0900BC46C5 /* SceneDelegate.swift */; };
 		1EBA9F0C2C22DF0900BC46C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA9F0B2C22DF0900BC46C5 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E7CC5C92CDB08830088BC78 /* BirdFoodShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdFoodShop.swift; sourceTree = "<group>"; };
 		1EBA9F042C22DF0900BC46C5 /* StoreKit-01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StoreKit-01.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EBA9F072C22DF0900BC46C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EBA9F092C22DF0900BC46C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				1EBA9F072C22DF0900BC46C5 /* AppDelegate.swift */,
 				1EBA9F092C22DF0900BC46C5 /* SceneDelegate.swift */,
 				1EBA9F0B2C22DF0900BC46C5 /* ViewController.swift */,
+				1E7CC5C92CDB08830088BC78 /* BirdFoodShop.swift */,
 				1EBA9F0D2C22DF0900BC46C5 /* Main.storyboard */,
 				1EBA9F102C22DF0A00BC46C5 /* Assets.xcassets */,
 				1EBA9F122C22DF0A00BC46C5 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7CC5CA2CDB08830088BC78 /* BirdFoodShop.swift in Sources */,
 				1EBA9F0C2C22DF0900BC46C5 /* ViewController.swift in Sources */,
 				1EBA9F082C22DF0900BC46C5 /* AppDelegate.swift in Sources */,
 				1EBA9F0A2C22DF0900BC46C5 /* SceneDelegate.swift in Sources */,

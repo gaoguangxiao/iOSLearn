@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E8038782CDC984D00C62B4B /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8038772CDC984D00C62B4B /* ImageDownloader.swift */; };
+		1E80387C2CDC9CD800C62B4B /* LibraryAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E80387B2CDC9CD800C62B4B /* LibraryAccount.swift */; };
 		1E81C9492C29288200C375FA /* Swift_ActorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C9482C29288200C375FA /* Swift_ActorApp.swift */; };
 		1E81C94B2C29288200C375FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C94A2C29288200C375FA /* ContentView.swift */; };
 		1E81C94D2C29288300C375FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E81C94C2C29288300C375FA /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E8038772CDC984D00C62B4B /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		1E80387B2CDC9CD800C62B4B /* LibraryAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAccount.swift; sourceTree = "<group>"; };
 		1E81C9452C29288200C375FA /* Swift的Actor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift的Actor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E81C9482C29288200C375FA /* Swift_ActorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_ActorApp.swift; sourceTree = "<group>"; };
 		1E81C94A2C29288200C375FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 			children = (
 				1E81C9482C29288200C375FA /* Swift_ActorApp.swift */,
 				1E81C94A2C29288200C375FA /* ContentView.swift */,
+				1E8038772CDC984D00C62B4B /* ImageDownloader.swift */,
+				1E80387B2CDC9CD800C62B4B /* LibraryAccount.swift */,
 				1E81C94C2C29288300C375FA /* Assets.xcassets */,
 				1E81C94E2C29288300C375FA /* Preview Content */,
 			);
@@ -138,6 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E81C94B2C29288200C375FA /* ContentView.swift in Sources */,
+				1E80387C2CDC9CD800C62B4B /* LibraryAccount.swift in Sources */,
+				1E8038782CDC984D00C62B4B /* ImageDownloader.swift in Sources */,
 				1E81C9492C29288200C375FA /* Swift_ActorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
