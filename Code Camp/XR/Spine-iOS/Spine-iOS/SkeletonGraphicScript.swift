@@ -42,6 +42,8 @@ public class SkeletonGraphicScript: ObservableObject {
     // 速度
 //    public var timeScale: Float = 1.0;
     
+    var scaleX: Float?
+    
     //spine数据体
     private var skeletonDrawable: SkeletonDrawableWrapper?
     //皮肤
@@ -114,9 +116,9 @@ public class SkeletonGraphicScript: ObservableObject {
     // Configure bone animation data
     func configSkeletonData(_ skeletonData: SkeletonData) {
         
-        skeletonData.skins.forEach {
-            if let name = $0.name { print("skin.name: \(name)") }
-        }
+//        skeletonData.skins.forEach {
+//            if let name = $0.name { print("skin.name: \(name)") }
+//        }
         
 //        skeletonData.animations.forEach {
 //            if let name = $0.name { print("skin.animation: \(name)") }
@@ -136,8 +138,8 @@ extension SkeletonGraphicScript {
     }
     
     public func setSkeletonFromFile(datum: Datum) async throws {
-        guard let atlas = Bundle.main.path(forResource: datum.atlas, ofType: nil)?.toFileUrl,
-              let json = Bundle.main.path(forResource: datum.json, ofType: nil)?.toFileUrl else {
+        guard let atlas = Bundle.main.path(forResource: datum.atlas, ofType: nil)?.fileUrl,
+              let json = Bundle.main.path(forResource: datum.json, ofType: nil)?.fileUrl else {
             throw SkeletonGraphicError.DataError
         }
         let drawable = try await SkeletonDrawableWrapper.fromFile(atlasFile: atlas, skeletonFile: json)
@@ -152,6 +154,11 @@ extension SkeletonGraphicScript {
         let trackEntry = animationState?.setAnimationByName(trackIndex: 0, animationName: animationName, loop: loop)
         trackEntry?.reverse = reverse
         trackEntry?.timeScale = timeScale
+    }
+    
+    /// 控制朝向 默认
+    public func scaleX(faceLeft: Float) {
+        skeleton?.scaleX = faceLeft
     }
 }
 
