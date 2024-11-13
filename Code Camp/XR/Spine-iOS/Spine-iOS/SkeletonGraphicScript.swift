@@ -3,11 +3,13 @@
 //  Spine-iOS
 //
 //  Created by 高广校 on 2024/11/12.
-//
+// SkeletonGraphicScript：
+// 1、对`Datum`封装，可以根据bundle、file、http初始化spine视图
 
 import Foundation
 import Spine
 import SwiftUICore
+import SmartCodable
 
 enum SkeletonGraphicError: Error {
     case DataError
@@ -66,17 +68,8 @@ public class SkeletonGraphicScript: ObservableObject {
 //        }
     }
     
-    
-    func updateAssetFromBundle(datum: Datum) async throws {
-        guard let atlas = datum.atlas ,let json = datum.json else {
-            throw SkeletonGraphicError.DataError
-        }
-        try await updateAsset(atlasFileName: atlas, jsonPathName: json)
-    }
-    
-    func updateAsset(atlasFileName: String, jsonPathName: String) async throws {
-        let drawable = try await SkeletonDrawableWrapper.fromBundle(atlasFileName: atlasFileName, skeletonFileName: jsonPathName)
-
+    func configSkeletonDrawableWrapper(drawable: SkeletonDrawableWrapper) async throws {
+        
         self.skeletonDrawable = drawable
         
         configSkeletonData(drawable.skeletonData)
@@ -140,6 +133,27 @@ public class SkeletonGraphicScript: ObservableObject {
     }
 }
 
+//MARK: - init SkeletonDrawableWrapper
+extension SkeletonGraphicScript {
+    
+    public func setSkeletonFromBundle(datum: Datum) async throws {
+        guard let atlas = datum.atlas ,let json = datum.json else {
+            throw SkeletonGraphicError.DataError
+        }
+        let drawable = try await SkeletonDrawableWrapper.fromBundle(atlasFileName: atlas, skeletonFileName: json)
+        try await configSkeletonDrawableWrapper(drawable: drawable)
+    }
+    
+    public func setSkeletonFromFile(datum: Datum) async throws {
+        guard let atlas = Bundle.main.path(forResource: datum.atlas, ofType: nil)?.toFileUrl,
+              let json = Bundle.main.path(forResource: datum.json, ofType: nil)?.toFileUrl else {
+            throw SkeletonGraphicError.DataError
+        }
+        let drawable = try await SkeletonDrawableWrapper.fromFile(atlasFile: atlas, skeletonFile: json)
+        try await configSkeletonDrawableWrapper(drawable: drawable)
+    }
+}
+
 extension SkeletonGraphicScript {
     
     var skeleton: Skeleton? {
@@ -148,5 +162,25 @@ extension SkeletonGraphicScript {
     
     var skeletonData: SkeletonData? {
         self.skeletonDrawable?.skeletonData
+    }
+}
+
+public struct Datum: Identifiable, SmartCodable {
+    public var id: Int?
+    public var name: String?
+    public var json, atlas: String?
+    public var atlasURL, jsonURL: String?
+    
+    public init(){
+        
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case json = "JSON"
+        case atlas = "Atlas"
+        case atlasURL = "AtlasURL"
+        case jsonURL = "JSONURL"
     }
 }

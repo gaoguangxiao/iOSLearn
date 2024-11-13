@@ -29,19 +29,3 @@ class SkeletonSource: ObservableObject {
 struct RSResponse: SmartCodable {
     var data: [Datum]?
 }
-
-struct Datum: SmartCodable, Identifiable {
-    
-    var id: Int?
-    var name: String?
-    var json, atlas: String?
-    var atlasURL, jsonURL: String?
-    enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case name = "Name"
-        case json = "JSON"
-        case atlas = "Atlas"
-        case atlasURL = "AtlasURL"
-        case jsonURL = "JSONURL"
-    }
-}

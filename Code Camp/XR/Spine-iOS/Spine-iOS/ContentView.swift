@@ -20,14 +20,7 @@ struct ContentView: View {
     var body: some View {
         
         HStack {
-//            SpineView(from: .bundle(atlasFileName: "spineboy-pma.atlas", skeletonFileName: "spineboy-pro.skel"))
-            
-//            if let drawable = skeletonScript.drawable {
-//                SpineView(from: .drawable(drawable),
-//                          controller: skeletonScript.controller,
-//                          isRendering: $skeletonScript.isRendering)
-//            }
-                   
+  
             if let spineView = skeletonScript.spineView {
                 spineView
             }
@@ -40,7 +33,7 @@ struct ContentView: View {
                                 Button {
                                     Task.detached {
                                         do {
-                                            try await skeletonScript.updateAssetFromBundle(datum: datum)
+                                            try await skeletonScript.setSkeletonFromFile(datum: datum)
                                         } catch {
                                             print("error: \(error)")
                                         }

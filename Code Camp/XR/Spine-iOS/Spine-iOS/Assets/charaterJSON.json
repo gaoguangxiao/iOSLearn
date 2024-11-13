@@ -40,8 +40,8 @@
         {
             "Id": 6,
             "Name": "巴布吃单词",
-            "JSON": "babu_v1.json",
-            "Atlas":"babu_v1.atlas"
+            "JSON": "babu_v1.1.json",
+            "Atlas":"babu_v1.1.atlas"
         },{
             "Id": 7,
             "Name": "新巴布吃单词",

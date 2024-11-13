@@ -8,7 +8,7 @@
 import SwiftUI
 import Spine
 
-struct CharaterUIView: View {
+struct SpineListUIView: View {
     
     @StateObject
     var source = SkeletonSource()
@@ -18,23 +18,15 @@ struct CharaterUIView: View {
             if let datas = source.datas {
                 ForEach(datas) { datum in
                     HStack {
+                        
                         if let name = datum.name {
                             Text("\(name)")
                         }
-                        if let atlas = datum.atlas ,let json = datum.json {
-                            
-                            SkeletonUIView(datum: datum)
-                            
-                            VStack {
-                                Text("From-File")
-                                if let atlasPath = Bundle.main.path(forResource: atlas, ofType: nil),
-                                   let jsonPath = Bundle.main.path(forResource: json, ofType: nil) {
-                                    SpineView(from: .file(atlasFile: URL(fileURLWithPath: atlasPath),
-                                                          skeletonFile: URL(fileURLWithPath: jsonPath)))
-                                    .frame(height: 100)
-                                }
-                            }
-                        }
+                        
+                        SkeletonUIView(datum: datum)
+                        
+                        SkeletonUIView(datum: datum, sourceType: .file)
+                        
                         //网络spine资源为4.1.23-本地4.2。
 //                        if let atlasURL = datum.atlasURL,
 //                           let atlasHTTPURL = URL(string: atlasURL),
@@ -58,5 +50,5 @@ struct CharaterUIView: View {
 }
 
 #Preview {
-    CharaterUIView()
+    SpineListUIView()
 }

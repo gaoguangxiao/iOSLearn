@@ -8,6 +8,12 @@
 import SwiftUI
 import Spine
 
+enum AssetFileSourceType {
+    case bundle
+    case file
+    case http
+}
+
 struct SkeletonUIView: View {
     
     @StateObject
@@ -15,41 +21,37 @@ struct SkeletonUIView: View {
     
     var datum: Datum?
     
+    var sourceType: AssetFileSourceType = .bundle
+    
     @State
     var isRendering: Bool?
     
     var body: some View {
        
         VStack {
-            Text("From-Bundle")
-
-            if let drawable = skeletonGraphic.drawable {
-                SpineView(from: .drawable(drawable),
-                          isRendering: $isRendering)
+            Text(sourceType == .bundle ? "From-Bundle" : "Form-file")
+            if let spineView = skeletonGraphic.spineView {
+                spineView
                     .frame(height: 100)
             } else {
                 Text("load error drawable")
             }
         }
         .task {
-            if let atlas = datum?.atlas ,let json = datum?.json {
-                Task.detached {
-                    do {
-                        try await skeletonGraphic.updateAsset(atlasFileName: atlas, jsonPathName: json)
-//                        await skeletonGraphic.drawable?.skeleton.setSkinByName(skinName: "moren")
-//                        await skeletonGraphic.drawable?.skeleton.setToSetupPose()
-                    } catch  {
-                        
-                    }
+            if let datum {
+                if sourceType == .bundle {
+                    try? await skeletonGraphic.setSkeletonFromBundle(datum: datum)
+                } else {
+                    try? await skeletonGraphic.setSkeletonFromFile(datum: datum)
                 }
             }
         }
         .onAppear {
-//            isRendering = true
+            isRendering = true
             
         }
         .onDisappear {
-//            isRendering = false
+            isRendering = false
         }
     }
 }
