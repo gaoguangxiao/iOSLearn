@@ -13,14 +13,17 @@ class SkeletonSource: ObservableObject {
     @Published
     var datas: [Datum]?
     
-    func loadCharaterJSON() {
-        
+    func refresh() {
+        Task {
+            await loadCharaterJSON()
+        }
+    }
+    
+    func loadCharaterJSON() async {
         let data = Bundle.jsonfileTojson("charaterJSON") as? [String: Any]
         if let response = RSResponse.deserialize(from: data) {
-            Task.detached { [self] in
-                await MainActor.run {
-                    datas = response.data
-                }
+            await MainActor.run {
+                datas = response.data
             }
         }
     }

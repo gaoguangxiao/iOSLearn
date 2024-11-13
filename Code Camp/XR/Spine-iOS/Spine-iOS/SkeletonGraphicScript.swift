@@ -11,6 +11,9 @@ import Spine
 import SwiftUICore
 import SmartCodable
 
+//前缀Spine-iOS缩写
+typealias SIAnimationState = Spine.AnimationState
+
 enum SkeletonGraphicError: Error {
     case DataError
 }
@@ -33,6 +36,12 @@ public class SkeletonGraphicScript: ObservableObject {
     @State
     var isRendering: Bool?
     
+    //动作方向
+//    public var reverse: Bool = true
+    
+    // 速度
+//    public var timeScale: Float = 1.0;
+    
     //spine数据体
     private var skeletonDrawable: SkeletonDrawableWrapper?
     //皮肤
@@ -48,24 +57,6 @@ public class SkeletonGraphicScript: ObservableObject {
 //                )
             }
         )
-        
-//        guard let atlasFileName, let skeletonFileName else {
-//            return
-//        }
-        
-//        Task.detached {
-//            do {
-//                let drawable = try await SkeletonDrawableWrapper.fromBundle(
-//                    atlasFileName: atlasFileName,
-//                    skeletonFileName: skeletonFileName
-//                )
-//                await MainActor.run {
-//                    self.drawable = drawable
-//                }
-//            } catch  {
-//                print("\(error)")
-//            }
-//        }
     }
     
     func configSkeletonDrawableWrapper(drawable: SkeletonDrawableWrapper) async throws {
@@ -154,6 +145,16 @@ extension SkeletonGraphicScript {
     }
 }
 
+//MARK: 动作
+extension SkeletonGraphicScript {
+    
+    public func playAnimationName(animationName: String, loop: Bool = false, reverse: Bool = false, timeScale: Float = 1.0) {
+        let trackEntry = animationState?.setAnimationByName(trackIndex: 0, animationName: animationName, loop: loop)
+        trackEntry?.reverse = reverse
+        trackEntry?.timeScale = timeScale
+    }
+}
+
 extension SkeletonGraphicScript {
     
     var skeleton: Skeleton? {
@@ -162,6 +163,10 @@ extension SkeletonGraphicScript {
     
     var skeletonData: SkeletonData? {
         self.skeletonDrawable?.skeletonData
+    }
+    
+    var animationState: SIAnimationState? {
+        self.skeletonDrawable?.animationState
     }
 }
 

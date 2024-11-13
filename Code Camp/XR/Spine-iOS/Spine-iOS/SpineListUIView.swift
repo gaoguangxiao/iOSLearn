@@ -43,8 +43,8 @@ struct SpineListUIView: View {
             }
         }
         .listStyle(.plain)
-        .onAppear {
-            source.loadCharaterJSON()
+        .task {
+            await source.loadCharaterJSON()
         }
     }
 }
