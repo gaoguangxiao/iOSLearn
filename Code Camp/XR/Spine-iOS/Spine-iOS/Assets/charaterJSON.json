@@ -1,0 +1,143 @@
+{
+    "data": [
+        {
+            "Id": 1,
+            "Name": "NPC",
+            "JSON": "character_v1.6.json",
+            "Atlas": "character_v1.6.atlas",
+            "AtlasURL":"https://file.risekid.cn/web/adventure_alpha/spine/character/character_v1.6.atlas",
+            "JSONURL":"https://file.risekid.cn/web/adventure_alpha/spine/character/character_v1.6.json"
+        },
+        {
+            "Id": 2,
+            "Name": "巴布",
+            "JSON": "lanlongbabu_v1.3.json",
+            "Atlas": "lanlongbabu_v1.3.atlas",
+            "AtlasURL":"https://file.risekid.cn/web/adventure_alpha/spine/babu/lanlongbabu_v1.3.atlas",
+            "JSONURL":"https://file.risekid.cn/web/adventure_alpha/spine/babu/lanlongbabu_v1.3.json"
+        },
+        {
+            "Id": 3,
+            "Name": "新巴布",
+            "JSON": "babu_v1.1.json",
+            "Atlas": "babu_v1.1.atlas",
+            "AtlasURL":"https://file.risekid.cn/web/adventure_alpha/spine/babu/babu_v1.1.atlas",
+            "JSONURL":"https://file.risekid.cn/web/adventure_alpha/spine/babu//babu_v1.1.json"
+        },{
+            "Id": 4,
+            "Name": "纳威",
+            "JSON": "nawei_v1.8.json",
+            "Atlas":"nawei_v1.8.atlas"
+        },
+        {
+            "Id": 5,
+            "Name": "哥布林4",
+            "JSON": "gebulin_v1.1.json",
+            "Atlas":"gebulin_v1.1.atlas",
+            "AtlasURL":"https://file.risekid.cn/web/adventure_alpha/spine/gebulin/gebulin_v1.1.atlas",
+            "JSONURL":"https://file.risekid.cn/web/adventure_alpha/spine/gebulin/gebulin_v1.1.json"
+        },
+        {
+            "Id": 6,
+            "Name": "巴布吃单词",
+            "JSON": "babu_v1.json",
+            "Atlas":"babu_v1.atlas"
+        },{
+            "Id": 7,
+            "Name": "新巴布吃单词",
+            "Atlas":"babuchidongxi_v1.0.atlas",
+            "JSON": "babuchidongxi_v1.0.json",
+        },
+        {
+            "Id": 8,
+            "Name": "生气机",
+            "Atlas":"shengqiji.atlas",
+            "JSON": "shengqiji.json"
+        },
+        {
+            "Id": 9,
+            "Name": "茶壶",
+            "Atlas":"chahu.atlas",
+            "JSON": "chahu.json"
+        },
+        {
+            "Id": 10,
+            "Name": "TheEnd",
+            "Atlas":"sahua.atlas",
+            "JSON": "sahua.json",
+            "Path": "/rolePlay/sahua_SkeletonData"
+        },
+        {
+            "Id": 11,
+            "Name": "家-宝剑",
+            "Atlas":"baojian.atlas",
+            "JSON": "baojian.json",
+            "Path":"/buddy/baojian_SkeletonData",
+            "AtlasURL":"https://file.risekid.cn/web/adventure_alpha/spine/buddy/baojian.atlas",
+            "JSONURL":"https://file.risekid.cn/web/adventure_alpha/spine/buddy/baojian.json"
+        },
+        {
+            "Id": 12,
+            "Name": "家-壁炉",
+            "Atlas":"bilu.atlas",
+            "JSON": "bilu.json",
+            "Path": "/buddy/bilu_SkeletonData",
+            "AtlasURL":"https://file.risekid.cn/web/adventure_alpha/spine/buddy/bilu.atlas",
+            "JSONURL":"https://file.risekid.cn/web/adventure_alpha/spine/buddy/bilu.json"
+        },{
+            "Id": 13,
+            "Name": "家-窗户",
+            "Atlas":"chuanghu.atlas",
+            "JSON": "chuanghu.json",
+            "Path":"/buddy/chuanghu_SkeletonData"
+        },
+        {
+            "Id": 14,
+            "Name": "家-法杖",
+            "Atlas":"fazhang.atlas",
+            "JSON": "fazhang.json",
+            "Path":"/buddy/fazhang_SkeletonData"
+        },
+        {
+            "Id": 15,
+            "Name": "家-罐子",
+            "Atlas":"guanzi.atlas",
+            "JSON": "guanzi.json",
+            "Path":"/buddy/guanzi_SkeletonData"
+        },{
+            "Id": 16,
+            "Name": "家-魔法球",
+            "Atlas":"mofaqiu.atlas",
+            "JSON": "mofaqiu.json",
+            "Path":"/buddy/mofaqiu_SkeletonData"
+        },
+        {
+            "Id": 17,
+            "Name": "家-魔法书",
+            "Atlas":"mofashu.atlas",
+            "JSON": "mofashu.json",
+            "Path":"/buddy/mofashu_SkeletonData"
+        },
+        {
+            "Id": 18,
+            "Name": "家-魔镜",
+            "Atlas":"mojing.atlas",
+            "JSON": "mojing.json",
+            "Path":"/buddy/mojing_SkeletonData"
+        },
+        {
+            "Id": 19,
+            "Name": "家-拳击柱",
+            "Atlas":"quanjizhu.atlas",
+            "JSON": "quanjizhu.json",
+            "Path":"/buddy/quanjizhu_SkeletonData"
+        },
+        {
+            "Id": 20,
+            "Name": "家-蜘蛛",
+            "Atlas":"zhizhu.atlas",
+            "JSON": "zhizhu.json",
+            "Path":"/buddy/zhizhu_SkeletonData"
+        }
+    ]
+}

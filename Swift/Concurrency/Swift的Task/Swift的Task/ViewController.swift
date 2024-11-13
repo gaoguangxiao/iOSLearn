@@ -15,7 +15,10 @@ class ViewController: UIViewController {
         
 //        任务可以在创建后立即开始运行;你没有明确地开始或安排它们,创建任务后，使用实例与之交互——例如，等待任务完成或取消任务
         let basicTask = Task {
-            return "This is the result of the task"
+            defer{
+                print("defer")
+            }
+            "This is the result of the task"
         }
         
         basicTask.cancel()
@@ -25,10 +28,12 @@ class ViewController: UIViewController {
             print(await basicTask.value)
         }
         
+        
+        
         ///`detached`方法创建一个独立的一部任务
-        Task.detached {
-            print(await basicTask.value)
-        }
+//        Task.detached {
+//            print(await basicTask.value)
+//        }
     }
     
     func TestAsyncTask() async {

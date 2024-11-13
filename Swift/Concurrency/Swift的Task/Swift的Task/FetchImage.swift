@@ -31,8 +31,28 @@ struct FetchImage {
         try await withThrowingTaskGroup(of: Void.self) { group in
             for id in ids {
                 group.async {
+                    //出现多任务修改id数据竞争问题，请看V3
                     thumbnails[id] = try await fetchOneThumbnail(withID: id)
                 }
+            }
+        }
+        return thumbnails
+    }
+    
+    func fetchThumbnailsV3(for ids: [String]) async throws -> [String: UIImage] {
+        
+        var thumbnails: [String: UIImage] = [:]
+        
+        //指定子任务包含字符串ID和缩略图的元祖
+        try await withThrowingTaskGroup(of: (String,UIImage).self) { group in
+            for id in ids {
+                group.async {
+                    return (id,try await fetchOneThumbnail(withID: id))
+                }
+            }
+            //付任务使用新的for-awat循环从子任务遍历结果
+            for try await(id,thumbnail) in group {
+                thumbnails[id] = thumbnail
             }
         }
         return thumbnails

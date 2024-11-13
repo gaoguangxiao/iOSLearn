@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-Spine-iOS/Pods-Spine-iOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/GGXSwiftExtension/GGXSwiftExtension.framework
+${BUILT_PRODUCTS_DIR}/SmartCodable/SmartCodable.framework
+${BUILT_PRODUCTS_DIR}/Spine/Spine.framework
+${BUILT_PRODUCTS_DIR}/SpineCppLite/SpineCppLite.framework
+${BUILT_PRODUCTS_DIR}/SpineShadersStructs/SpineShadersStructs.framework
