@@ -11,7 +11,7 @@ import SwiftUI
 struct Spine_iOSApp: App {
     var body: some Scene {
         WindowGroup {
-            CharaterUIView()
+            ContentView()
         }
     }
 }

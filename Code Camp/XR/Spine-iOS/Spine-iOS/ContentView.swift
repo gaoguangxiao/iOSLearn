@@ -20,14 +20,18 @@ struct ContentView: View {
     var body: some View {
         
         HStack {
-            SpineView(from: .bundle(atlasFileName: "spineboy-pma.atlas", skeletonFileName: "spineboy-pro.skel"))
+//            SpineView(from: .bundle(atlasFileName: "spineboy-pma.atlas", skeletonFileName: "spineboy-pro.skel"))
             
-            if let drawable = skeletonScript.drawable {
-                SpineView(from: .drawable(drawable),
-                          controller: skeletonScript.controller,
-                          isRendering: $skeletonScript.isRendering)
+//            if let drawable = skeletonScript.drawable {
+//                SpineView(from: .drawable(drawable),
+//                          controller: skeletonScript.controller,
+//                          isRendering: $skeletonScript.isRendering)
+//            }
+                   
+            if let spineView = skeletonScript.spineView {
+                spineView
             }
-                        
+            
             VStack {
                 if let datas = source.datas {
                     List {
@@ -35,12 +39,15 @@ struct ContentView: View {
                             if let name = datum.name {
                                 Button {
                                     Task.detached {
-                                        try await skeletonScript.updateAssetFromBundle(datum: datum)
+                                        do {
+                                            try await skeletonScript.updateAssetFromBundle(datum: datum)
+                                        } catch {
+                                            print("error: \(error)")
+                                        }
                                     }
                                 } label: {
                                     Text(name)
                                 }
-                                
                             }
                         }
                     }
