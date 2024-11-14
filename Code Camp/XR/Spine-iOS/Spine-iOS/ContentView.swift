@@ -109,7 +109,6 @@ struct SKinListView: View {
     
     var body: some View {
         if let skins = skeletonScript.partSkins {
-            Text("皮肤数据:\(skins.count)")
             VStack {
                     ScrollView(.vertical) {
                         LazyVGrid(columns: columns, spacing: 10) {

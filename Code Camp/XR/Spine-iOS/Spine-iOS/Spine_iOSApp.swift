@@ -11,12 +11,14 @@ import SwiftUI
 struct Spine_iOSApp: App {
     var body: some Scene {
         WindowGroup {
+            //启动所有demo页
+            
+            LaunchView()
             //初始化列表spine
-//           SpineListUIView()
+            //SpineListUIView()
             
             //2、触发动作
-            ContentView()
-
+            //ContentView()
         }
     }
 }
