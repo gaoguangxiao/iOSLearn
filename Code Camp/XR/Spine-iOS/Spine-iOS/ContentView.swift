@@ -25,89 +25,45 @@ struct ContentView: View {
         GridItem(.fixed(40))
     ]
     
-    @State
-    var isLoop = false
     
     @State
-    var isReverse = false
-    
-    @State
-    var isMultiplierSpeed = false
-    
-    @State
-    var isFaceRight = false
+    var isAnimationView = false
     
     var body: some View {
         
         VStack {
             if let spineView = skeletonScript.spineView {
                 spineView
-                    .frame(height: 200)
+                    .frame(height: 300)
                     .background(Color.gray)
+                    .padding()
             }
             
             if let datas = source.datas {
                 ItemCharacterView(skeletonScript: skeletonScript, datas: datas)
-                // background(Color.red)
             }
             
             Divider()
             //动作列表、皮肤列表
             HStack {
                 ButtonView(action: {
-                    isLoop.toggle()
+                    isAnimationView.toggle()
                 }, title: "动作列表")
                 
                 ButtonView(action: {
-                    isLoop.toggle()
+                    isAnimationView.toggle()
                 }, title: "皮肤列表")
             }
             Divider()
-            //控制速度、反向、循环
-            HStack {
-                ButtonView(action: {
-                    isLoop.toggle()
-                }, title: "循环\(isLoop ? "开启" : "关闭")")
-                
-                ButtonView(action: {
-                    isReverse.toggle()
-                }, title: "反向\(isReverse ? "开启" : "关闭")")
-                
-                ButtonView(action: {
-                    isMultiplierSpeed.toggle()
-                }, title: "倍速\(isMultiplierSpeed ? "开启" : "关闭")")
-                ButtonView(action: {
-                    isFaceRight.toggle()
-                    skeletonScript.scaleX(faceLeft: isFaceRight ? -1 : 1)
-                }, title: "默认\(isFaceRight ? "开启" : "关闭")")
-                
-            }
-            Divider()
-            //                Spacer()
-            //渲染datum动作
-            if let animations = skeletonScript.skeletonData?.animations {
-                HStack {
-                    ScrollView(.horizontal) {
-                        LazyHGrid(rows: rows, spacing: 10) {
-                            ForEach(animations, id: \.self) { animation in
-                                if let name = animation.name {
-                                    Button {
-                                        skeletonScript.playAnimationName(animationName: name,loop: isLoop,reverse: isReverse,timeScale: isMultiplierSpeed ? 2.0: 1.0)
-                                    } label: {
-                                        Text(name)
-                                            .frame(width: 100, height: 30, alignment: .center)
-                                            .background(Color.blue)
-                                            .foregroundColor(.white)
-                                            .clipShape(.capsule)
-                                    }
-                                }
-                                
-                            }
-                        }
-                    }
-                }
+            
+            if isAnimationView {
+                ControllView(skeletonScript: skeletonScript)
+            } else {
+                SKinListView(skeletonScript: skeletonScript)
             }
             
+            Spacer()
+
         }
         .task {
             await source.loadCharaterJSON()
@@ -127,6 +83,132 @@ struct ContentView: View {
     ContentView()
 }
 
+//MARK: 皮肤控制
+struct SKinListView: View {
+    
+    @ObservedObject
+    var skeletonScript: SkeletonGraphicScript
+    
+    let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
+    
+    var body: some View {
+        if let skins = skeletonScript.skeletonData?.skins {
+            HStack {
+                ScrollView(.vertical) {
+//                            LazyVGrid(columns: columns, content: <#T##() -> Content#>)
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(skins, id: \.self) { skin in
+                            if let name = skin.name {
+                                Button {
+                                    skeletonScript.initCharaterSkin(name)
+                                } label: {
+                                    Text(name)
+                                        .frame(width: 100, height: 30, alignment: .center)
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .clipShape(.capsule)
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//MARK: - 动作控制
+class AnimationConrollModel: ObservableObject {
+    
+    @Published
+    var isLoop = false
+    
+    @Published
+    var isReverse = false
+    
+    @Published
+    var isMultiplierSpeed = false
+    
+    @Published
+    var isFaceRight = false
+}
+
+struct ControllView: View {
+    
+    @StateObject
+    var conrollModel = AnimationConrollModel()
+    
+//    @ObservedObject
+//    var conrollModel: AnimationConrollModel
+    
+    @ObservedObject
+    var skeletonScript: SkeletonGraphicScript
+    
+    let rows: [GridItem] = [
+        GridItem(.fixed(40)),
+        GridItem(.fixed(40)),
+        GridItem(.fixed(40)),
+        GridItem(.fixed(40))
+    ]
+    
+    var body: some View {
+        //控制速度、反向、循环
+        HStack {
+            ButtonView(action: {
+                conrollModel.isLoop.toggle()
+            }, title: "循环\(conrollModel.isLoop ? "开启" : "关闭")")
+            
+            ButtonView(action: {
+                conrollModel.isReverse.toggle()
+            }, title: "反向\(conrollModel.isReverse ? "开启" : "关闭")")
+            
+            ButtonView(action: {
+                conrollModel.isMultiplierSpeed.toggle()
+            }, title: "倍速\(conrollModel.isMultiplierSpeed ? "开启" : "关闭")")
+            ButtonView(action: {
+                conrollModel.isFaceRight.toggle()
+                skeletonScript.scaleX(faceLeft: conrollModel.isFaceRight ? -1 : 1)
+            }, title: "默认\(conrollModel.isFaceRight ? "开启" : "关闭")")
+        }
+        
+        Divider()
+        
+        //渲染datum动作
+        if let animations = skeletonScript.skeletonData?.animations {
+            HStack {
+                ScrollView(.horizontal) {
+                    LazyHGrid(rows: rows, spacing: 10) {
+                        ForEach(animations, id: \.self) { animation in
+                            if let name = animation.name {
+                                Button {
+                                    skeletonScript.playAnimationName(animationName: name,
+                                                                     loop: conrollModel.isLoop,
+                                                                     reverse: conrollModel.isReverse,
+                                                                     timeScale: conrollModel.isMultiplierSpeed ? 2.0: 1.0)
+                                } label: {
+                                    Text(name)
+                                        .frame(width: 100, height: 30, alignment: .center)
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .clipShape(.capsule)
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 struct ButtonView: View {
     
     var action: (() -> Void)
@@ -145,13 +227,14 @@ struct ButtonView: View {
     }
 }
 
+//MARK: - 角色
 struct ItemCharacterView: View {
     let rows: [GridItem] = [
-        GridItem(.fixed(40)),
-        GridItem(.fixed(40)),
-        GridItem(.fixed(40)),
-        GridItem(.fixed(40)),
-        GridItem(.fixed(40))
+        GridItem(.fixed(31)),
+        GridItem(.fixed(31)),
+//        GridItem(.fixed(40)),
+        GridItem(.fixed(31)),
+        GridItem(.fixed(31))
     ]
     
     @ObservedObject
@@ -185,7 +268,6 @@ struct ItemCharacterView: View {
                     }
                 }
             }
-            //                        .padding()
         }
     }
 }

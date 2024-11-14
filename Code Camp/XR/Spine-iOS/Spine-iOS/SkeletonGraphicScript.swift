@@ -71,7 +71,7 @@ public class SkeletonGraphicScript: ObservableObject {
         for skin in drawable.skeletonData.skins {
             if let name = skin.name  {
                 if name == "default" { continue }
-                initCharaterSkin(skinName: name)
+                initCharaterSkin(name)
                 if name == "moren" {  break }
             }
         }
@@ -93,25 +93,7 @@ public class SkeletonGraphicScript: ObservableObject {
         }
     }
     
-    // Initialize skin
-    func initCharaterSkin(skinName: String) {
-        
-        customSkin?.dispose()
-        customSkin = Skin.create(name: "character-base")
-        if let skin = skeletonData?.findSkin(name: skinName) {
-            customSkin?.addSkin(other: skin)
-        }
-        
-        if let customSkin {
-            updateCombinedSkin(resultCombinedSkin: customSkin)
-        }
-    }
     
-    //更新皮肤
-    func updateCombinedSkin(resultCombinedSkin: Skin) {
-        skeleton?.skin = resultCombinedSkin
-        skeleton?.setToSetupPose()
-    }
     
     // Configure bone animation data
     func configSkeletonData(_ skeletonData: SkeletonData) {
@@ -162,6 +144,34 @@ extension SkeletonGraphicScript {
     }
 }
 
+//MARK: 皮肤
+extension SkeletonGraphicScript {
+    
+    /// 指定spine皮肤，会移除之前所有皮肤效果
+//    public func updateSpineSKin(skinName: String) {
+//        initCharaterSkin(skinName);
+//    }
+    
+    // Initialize skin
+    public func initCharaterSkin(_ skinName: String) {
+        
+        customSkin?.dispose()
+        customSkin = Skin.create(name: "character-base")
+        if let skin = skeletonData?.findSkin(name: skinName) {
+            customSkin?.addSkin(other: skin)
+        }
+        
+        if let customSkin {
+            updateCombinedSkin(resultCombinedSkin: customSkin)
+        }
+    }
+    
+    //更新皮肤
+    func updateCombinedSkin(resultCombinedSkin: Skin) {
+        skeleton?.skin = resultCombinedSkin
+        skeleton?.setToSetupPose()
+    }
+}
 extension SkeletonGraphicScript {
     
     var skeleton: Skeleton? {
