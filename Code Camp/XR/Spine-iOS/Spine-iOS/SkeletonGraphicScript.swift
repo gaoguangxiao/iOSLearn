@@ -27,6 +27,10 @@ public class SkeletonGraphicScript: ObservableObject {
     @Published
     var spineView: SpineView?
     
+    ///Corresponding to SpineView is skin data
+    @Published
+    var skins: [Skin]?
+    
 //    @Published
     var controller: SpineController
     
@@ -49,6 +53,13 @@ public class SkeletonGraphicScript: ObservableObject {
     //皮肤
     private var customSkin: Skin?
     
+    //皮肤数据
+    @Published
+    var partSkins: [SkinViewModel]?
+    
+    @Published
+    var partAfterSkins: [SkinViewModel]?
+    
     init() {
         controller = SpineController(
             onInitialized: { controller in
@@ -67,15 +78,6 @@ public class SkeletonGraphicScript: ObservableObject {
         
         configSkeletonData(drawable.skeletonData)
 
-        //设置默认皮肤
-        for skin in drawable.skeletonData.skins {
-            if let name = skin.name  {
-                if name == "default" { continue }
-                initCharaterSkin(name)
-                if name == "moren" {  break }
-            }
-        }
-        
         self.controller = SpineController()
         
         await MainActor.run {
@@ -93,19 +95,20 @@ public class SkeletonGraphicScript: ObservableObject {
         }
     }
     
-    
-    
     // Configure bone animation data
     func configSkeletonData(_ skeletonData: SkeletonData) {
         
-//        skeletonData.skins.forEach {
-//            if let name = $0.name { print("skin.name: \(name)") }
-//        }
+        //config skin data
+        configSkins(skins: skeletonData.skins)
         
 //        skeletonData.animations.forEach {
 //            if let name = $0.name { print("skin.animation: \(name)") }
 //        }
     }
+    
+    
+    @Published
+    var selectedItem: String = ""
 }
 
 //MARK: - init SkeletonDrawableWrapper
@@ -147,14 +150,8 @@ extension SkeletonGraphicScript {
 //MARK: 皮肤
 extension SkeletonGraphicScript {
     
-    /// 指定spine皮肤，会移除之前所有皮肤效果
-//    public func updateSpineSKin(skinName: String) {
-//        initCharaterSkin(skinName);
-//    }
-    
     // Initialize skin
     public func initCharaterSkin(_ skinName: String) {
-        
         customSkin?.dispose()
         customSkin = Skin.create(name: "character-base")
         if let skin = skeletonData?.findSkin(name: skinName) {
@@ -166,12 +163,101 @@ extension SkeletonGraphicScript {
         }
     }
     
+    /// combination skin
+    public func combinedCharaterSkin(_ skinName: String) {
+        let resultCombinedSkin = Skin.create(name: "character-combined")
+        //Adds a new skin to the previous skin
+        resultCombinedSkin.addSkin(other: resultCombinedSkin);
+
+        if let skin = skeletonData?.findSkin(name: skinName) {
+            customSkin?.addSkin(other: skin)
+        }
+        if let customSkin {
+            updateCombinedSkin(resultCombinedSkin: customSkin)
+        }
+    }
+    
+    public func updateSkin(skinModel: SkinViewModel) -> Bool {
+        guard skinModel.name == skinModel.all else {
+            configPartSkins(skinModel: skinModel)
+            return true
+        }
+        
+        initCharaterSkin(skinModel.name)
+        return false
+    }
+    
     //更新皮肤
     func updateCombinedSkin(resultCombinedSkin: Skin) {
         skeleton?.skin = resultCombinedSkin
         skeleton?.setToSetupPose()
     }
+    
+    //对皮肤数据进行拆分
+    private func configSkins(skins: [Skin]) {
+        
+        //        skeletonData.skins.forEach {
+        //            if let name = $0.name { print("skin.name: \(name)") }
+        //        }
+                
+        //抛出皮肤数据
+        Task {
+            await MainActor.run {
+                self.skins = skins
+            }
+        }
+        
+        //设置默认皮肤
+        for skin in skins {
+            if let name = skin.name  {
+                if name == "default" { continue }
+                initCharaterSkin(name)
+                if name == "moren" {  break }
+            }
+        }
+        
+        //分离皮肤
+        partSkins = skins.compactMap {
+            guard let skinsplits = $0.name?.split("/"),
+                  let skinSplitsFirst = skinsplits.first ,
+                  let name = $0.name else {
+                return nil
+            }
+            let skinModel = SkinViewModel(name: skinSplitsFirst, all: name)
+            return skinModel
+        }
+        
+        partSkins = partSkins?.reduce(into: [SkinViewModel]()) { partialResult, skinModel in
+            if !partialResult.contains(where: { $0.name == skinModel.name }) {
+                partialResult.append(skinModel)
+            }
+        }
+    }
+    
+    //查看子部件
+    private func configPartSkins(skinModel: SkinViewModel) {
+        partAfterSkins = skins?.compactMap {
+            guard let skinsplits = $0.name?.split("/"),
+                  let name = $0.name ,
+                  let skinSplitsLast = skinsplits.last,
+                  name.contains(skinModel.name) else {
+                //                print("-------nil")
+                return nil
+            }
+            let skinModel = SkinViewModel(name: skinSplitsLast, all: name)
+            return skinModel
+        }
+        
+        partAfterSkins = partAfterSkins?.reduce(into: [SkinViewModel]()) { partialResult, skinModel in
+            if !partialResult.contains(where: { $0.name == skinModel.name }) {
+                partialResult.append(skinModel)
+            }
+        }
+        
+        selectedItem = skinModel.all
+    }
 }
+
 extension SkeletonGraphicScript {
     
     var skeleton: Skeleton? {
@@ -187,15 +273,14 @@ extension SkeletonGraphicScript {
     }
 }
 
+//#MARK: - 模型数据
 public struct Datum: Identifiable, SmartCodable {
     public var id: Int?
     public var name: String?
     public var json, atlas: String?
     public var atlasURL, jsonURL: String?
     
-    public init(){
-        
-    }
+    public init() {}
     
     enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -204,5 +289,22 @@ public struct Datum: Identifiable, SmartCodable {
         case atlas = "Atlas"
         case atlasURL = "AtlasURL"
         case jsonURL = "JSONURL"
+    }
+}
+
+//业务展示的model
+public class SkinViewModel: Identifiable, ObservableObject {
+    public var id = UUID()
+    
+    @Published
+    var name: String
+    
+    @Published
+    var all: String
+    
+    init(id: UUID = UUID(), name: String, all: String) {
+        self.id = id
+        self.name = name
+        self.all = all
     }
 }

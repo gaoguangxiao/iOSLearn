@@ -8,7 +8,7 @@ PODS:
   - SpineShadersStructs (4.2.0)
 
 DEPENDENCIES:
-  - GGXSwiftExtension (from `~/Documents/GitHub/ggxswiftexten`)
+  - GGXSwiftExtension
   - SmartCodable
   - Spine (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec`)
   - SpineCppLite (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineCppLite.podspec`)
@@ -16,11 +16,10 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - GGXSwiftExtension
     - SmartCodable
 
 EXTERNAL SOURCES:
-  GGXSwiftExtension:
-    :path: "~/Documents/GitHub/ggxswiftexten"
   Spine:
     :podspec: https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec
   SpineCppLite:
@@ -46,6 +45,6 @@ SPEC CHECKSUMS:
   SpineCppLite: 0c05549dc08fff40da8853e079606e559f6036ce
   SpineShadersStructs: 51ae786df4f4ea9ca52d7d5ff365d2018b561346
 
-PODFILE CHECKSUM: 793fe1093cd364f506cd1cf40192ad977ef44d11
+PODFILE CHECKSUM: 5124e5b61e7ea20fabf59c5d8888dc5d8361fb83
 
 COCOAPODS: 1.16.1

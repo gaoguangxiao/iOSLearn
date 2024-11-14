@@ -11,6 +11,8 @@ import GGXSwiftExtension
 
 struct ContentView: View {
     
+    var defaultAnimationView = false
+    ///
     @StateObject
     var skeletonScript = SkeletonGraphicScript()
     
@@ -25,9 +27,11 @@ struct ContentView: View {
         GridItem(.fixed(40))
     ]
     
-    
     @State
     var isAnimationView = false
+    
+    @State
+    var isRefresh = true
     
     var body: some View {
         
@@ -40,19 +44,24 @@ struct ContentView: View {
             }
             
             if let datas = source.datas {
-                ItemCharacterView(skeletonScript: skeletonScript, datas: datas)
+                ItemCharacterView(action: { datum in
+                    Task.detached {
+                        do {
+                            try await skeletonScript.setSkeletonFromFile(datum: datum)
+                        } catch {
+                            print("error: \(error)")
+                        }
+                    }                    
+                }, skeletonScript: skeletonScript, datas: datas)
             }
             
             Divider()
             //动作列表、皮肤列表
             HStack {
-                ButtonView(action: {
-                    isAnimationView.toggle()
-                }, title: "动作列表")
-                
-                ButtonView(action: {
-                    isAnimationView.toggle()
-                }, title: "皮肤列表")
+                ButtonView(action: { isAnimationView = true },
+                           title: "动作列表")
+                ButtonView(action: { isAnimationView = false },
+                           title: "皮肤列表")
             }
             Divider()
             
@@ -63,7 +72,6 @@ struct ContentView: View {
             }
             
             Spacer()
-
         }
         .task {
             await source.loadCharaterJSON()
@@ -72,9 +80,6 @@ struct ContentView: View {
                let datum = datas.first {
                 try? await skeletonScript.setSkeletonFromFile(datum: datum)
             }
-        }
-        .onAppear {
-            //            source.loadCharaterJSON()
         }
     }
 }
@@ -89,6 +94,9 @@ struct SKinListView: View {
     @ObservedObject
     var skeletonScript: SkeletonGraphicScript
     
+    @State
+    var isOpenPart: Bool = false
+    
     let columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -96,27 +104,43 @@ struct SKinListView: View {
         GridItem(.flexible())
     ]
     
+    //部分皮肤改变
+    @State var selectedItem: String = "A"
     
     var body: some View {
-        if let skins = skeletonScript.skeletonData?.skins {
-            HStack {
-                ScrollView(.vertical) {
-//                            LazyVGrid(columns: columns, content: <#T##() -> Content#>)
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(skins, id: \.self) { skin in
-                            if let name = skin.name {
+        if let skins = skeletonScript.partSkins {
+            Text("皮肤数据:\(skins.count)")
+            VStack {
+                    ScrollView(.vertical) {
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(skins) { skin in
                                 Button {
-                                    skeletonScript.initCharaterSkin(name)
+                                    //业务参数
+                                    isOpenPart = skeletonScript.updateSkin(skinModel: skin)
                                 } label: {
-                                    Text(name)
+                                    Text(skin.name)
                                         .frame(width: 100, height: 30, alignment: .center)
                                         .background(Color.blue)
                                         .foregroundColor(.white)
                                         .clipShape(.capsule)
                                 }
                             }
-                            
                         }
+                    }
+                
+                if isOpenPart,
+                   let partSkins = skeletonScript.partAfterSkins {
+                    HStack {
+                        //Text(skinDataModel.selectedItem)
+                        Picker("部位", selection: $selectedItem, content: {
+                            ForEach(partSkins) { data in
+                                Text("\(data.name)")
+                                    .tag(data.all)
+                            }
+                        })
+                        .onChange(of: selectedItem, perform: { newValue in
+                            skeletonScript.combinedCharaterSkin(newValue)
+                        })
                     }
                 }
             }
@@ -145,9 +169,6 @@ struct ControllView: View {
     
     @StateObject
     var conrollModel = AnimationConrollModel()
-    
-//    @ObservedObject
-//    var conrollModel: AnimationConrollModel
     
     @ObservedObject
     var skeletonScript: SkeletonGraphicScript
@@ -232,10 +253,12 @@ struct ItemCharacterView: View {
     let rows: [GridItem] = [
         GridItem(.fixed(31)),
         GridItem(.fixed(31)),
-//        GridItem(.fixed(40)),
+        //        GridItem(.fixed(40)),
         GridItem(.fixed(31)),
         GridItem(.fixed(31))
     ]
+    
+    var action: ((Datum) -> Void)
     
     @ObservedObject
     var skeletonScript: SkeletonGraphicScript
@@ -250,13 +273,7 @@ struct ItemCharacterView: View {
                 ForEach(datas) { datum in
                     if let name = datum.name {
                         Button {
-                            Task.detached {
-                                do {
-                                    try await skeletonScript.setSkeletonFromFile(datum: datum)
-                                } catch {
-                                    print("error: \(error)")
-                                }
-                            }
+                            action(datum)
                         } label: {
                             Text(name)
                                 .frame(width: 100, height: 30, alignment: .center)
