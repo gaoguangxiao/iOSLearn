@@ -1,0 +1,39 @@
+{
+  "name": "Spine",
+  "version": "4.2.0",
+  "summary": "Spine runtimes for iOS.",
+  "description": "Spine runtimes for iOS.",
+  "homepage": "https://esotericsoftware.com",
+  "authors": {
+    "Esoteric Software LLC  ": "https://esotericsoftware.com"
+  },
+  "license": {
+    "file": "LICENSE"
+  },
+  "source": {
+    "git": "https://github.com/esotericsoftware/spine-runtimes.git",
+    "branch": "4.2"
+  },
+  "source_files": "spine-ios/Sources/Spine/**/*.{swift}",
+  "platforms": {
+    "ios": "13.0"
+  },
+  "xcconfig": {
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/SpineCppLite/spine-cpp/spine-cpp/include\" \"$(PODS_ROOT)/SpineCppLite/spine-cpp/spine-cpp-lite\""
+  },
+  "resource_bundles": {
+    "SpineBundle": [
+      "spine-ios/Sources/Spine/**/*.{metal}"
+    ]
+  },
+  "swift_versions": "5.0",
+  "dependencies": {
+    "SpineCppLite": [
+
+    ],
+    "SpineShadersStructs": [
+
+    ]
+  },
+  "swift_version": "5.0"
+}

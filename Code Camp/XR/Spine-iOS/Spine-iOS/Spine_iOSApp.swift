@@ -13,7 +13,7 @@ struct Spine_iOSApp: App {
         WindowGroup {
             //启动所有demo页
             
-            LaunchView()
+            ContentView()
             //初始化列表spine
             //SpineListUIView()
             

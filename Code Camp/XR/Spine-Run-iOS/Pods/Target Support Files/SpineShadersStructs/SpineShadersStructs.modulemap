@@ -1,0 +1,6 @@
+framework module SpineShadersStructs {
+  umbrella header "SpineShadersStructs-umbrella.h"
+
+  export *
+  module * { export * }
+}
