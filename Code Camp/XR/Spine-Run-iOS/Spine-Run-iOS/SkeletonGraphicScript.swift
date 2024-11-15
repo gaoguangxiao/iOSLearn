@@ -10,6 +10,7 @@ import Foundation
 import Spine
 import SwiftUICore
 import SmartCodable
+import GGXSwiftExtension
 
 //前缀Spine-iOS缩写
 typealias SIAnimationState = Spine.AnimationState
@@ -278,6 +279,15 @@ extension SkeletonGraphicScript {
         self.skeletonDrawable?.animationState
     }
 }
+
+//extension SpineUIView {
+//    
+//    //转换某个坐标
+//    public func translate(_ translation: CGPoint) {
+//        //朝向移动
+//        self.center += translation
+//    }
+//}
 
 //#MARK: - 模型数据
 public struct Datum: Identifiable, SmartCodable {

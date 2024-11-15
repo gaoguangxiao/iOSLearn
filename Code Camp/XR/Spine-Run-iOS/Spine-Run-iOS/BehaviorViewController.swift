@@ -9,20 +9,22 @@ import UIKit
 
 class BehaviorViewController: UIViewController, DisplayTimerProtocal {
     
-    var display: CADisplayLink?
+    var displayLink: CADisplayLink?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        startTimer()
     }
     
     func startTimer() {
-        display = CADisplayLink(target: self, selector: #selector(updateObjc))
+        print("startTimer")
+        displayLink = CADisplayLink(target: self, selector: #selector(updateObjc))
+        displayLink?.add(to: .current, forMode: .common)
     }
     
     func stopTimer() {
-        display = nil
+        displayLink = nil
     }
     
     @objc func updateObjc(){
@@ -30,8 +32,7 @@ class BehaviorViewController: UIViewController, DisplayTimerProtocal {
     }
     
     func update() {
-        
-        print("QQQQ")
+//        print("QQQQ")
     }
     
     /*
