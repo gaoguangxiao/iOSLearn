@@ -30,6 +30,12 @@ class SkeletonSource: ObservableObject {
     }
 }
 
+extension SkeletonSource {
+    var npcDatum : Datum? {
+        datas?.first
+    }
+}
+
 struct RSResponse: SmartCodable {
     var data: [Datum]?
 }

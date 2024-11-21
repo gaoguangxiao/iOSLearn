@@ -113,6 +113,16 @@ class ViewController: BehaviorViewController {
         guard let spineUIView = skeletonScript.spineUIView  else { return  }
         if let touch = touches.first {
             let point = touch.location(in: view)
+            
+            if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
+                let view = UIView()
+                view.frame = rect
+                view.backgroundColor = .red
+                spineUIView.addSubview(view)
+            }
+            //添加视图
+            
+            
             // print("\(point.x)")
             // targeDistance = Float(point.x - spineUIView.x)
             moveDistance = .zero

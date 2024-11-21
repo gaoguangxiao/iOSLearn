@@ -35,6 +35,9 @@ public class SkeletonGraphicScript: ObservableObject {
     @Published
     var skins: [Skin]?
     
+    @Published
+    var bonesRect: [CGRect] = []
+    
 //    @Published
     var controller: SpineController
     
@@ -82,7 +85,15 @@ public class SkeletonGraphicScript: ObservableObject {
         
         configSkeletonData(drawable.skeletonData)
 
-        self.controller = SpineController()
+        if let bones = skeleton?.bones {
+            configBones(bones: bones)
+        }
+        
+        self.controller = SpineController(
+            onInitialized: { controller in
+//                self.configSkeletonData(controller.drawable.skeletonData)
+            }
+        )
         
         await MainActor.run {
 //            self.isRendering = true
@@ -277,6 +288,52 @@ extension SkeletonGraphicScript {
     }
 }
 
+//MARK: - 骨骼
+extension SkeletonGraphicScript {
+
+    private func configBones(bones: [Bone]) {
+//        bones.forEach { bone in
+//            if let name = bone.data.name { print("bone.name: \(name)") }
+//        }
+
+//        bonesRect = bones.map({ bone in
+//            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
+//            let position = controller.fromSkeletonCoordinates(
+//                position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
+//            )
+//            let rect = CGRect(x: position.x,
+//                              y: position.y,
+//                              width: 5,
+//                              height: 5)
+//            print("position: \(position.x)、x.y: \(position.y)")
+//            return rect
+//        })
+//
+//        //骨骼的世界坐标转换屏幕需要等待controller中scaleY赋值完成才能获取
+//        if let boneFirst = bonesRect.first {
+//            LogInfo("bone.first:\(String(describing: bonesRect.first))")
+//        } else {
+//            LogInfo("bone.first is nil")
+//        }
+    }
+    
+    func getBoneRectBy(boneName: String) -> CGRect? {
+        if let bone = skeleton?.findBone(boneName: "root") {
+            print("world: \(bone.worldX)、x.y: \(bone.worldY)")
+            let position = controller.fromSkeletonCoordinates(
+                position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
+            )
+            let rect = CGRect(x: position.x,
+                              y: position.y,
+                              width: 5,
+                              height: 5)
+            print("position: \(position.x)、x.y: \(position.y)")
+            return rect
+        }
+        return nil
+    }
+}
+
 extension SkeletonGraphicScript {
     
     var skeleton: Skeleton? {
@@ -285,6 +342,7 @@ extension SkeletonGraphicScript {
     
     var skeletonData: SkeletonData? {
         self.skeletonDrawable?.skeletonData
+//        self.controller.drawable.skeletonData
     }
     
     var animationState: SIAnimationState? {
