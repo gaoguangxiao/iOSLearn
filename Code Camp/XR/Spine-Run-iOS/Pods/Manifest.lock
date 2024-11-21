@@ -1,26 +1,55 @@
 PODS:
   - GGXSwiftExtension (0.7.2)
+  - KeychainAccess (4.2.2)
+  - PKHUD (5.3.0)
+  - PTDebugView (0.1.9):
+    - GGXSwiftExtension
+  - ReachabilitySwift (5.2.4)
+  - RxCocoa (6.8.0):
+    - RxRelay (= 6.8.0)
+    - RxSwift (= 6.8.0)
+  - RxRelay (6.8.0):
+    - RxSwift (= 6.8.0)
+  - RxSwift (6.8.0)
   - SmartCodable (4.2.6)
+  - SnapKit (5.7.1)
   - Spine (4.2.0):
     - SpineCppLite
     - SpineShadersStructs
   - SpineCppLite (4.2.0)
   - SpineShadersStructs (4.2.0)
+  - ZKBaseSwiftProject (1.0.9):
+    - GGXSwiftExtension
+    - KeychainAccess
+    - PKHUD
+    - PTDebugView
+    - ReachabilitySwift
+    - RxCocoa
+    - RxSwift
+    - SnapKit
 
 DEPENDENCIES:
-  - GGXSwiftExtension (from `~/Documents/GitHub/ggxswiftexten`)
   - SmartCodable
   - Spine (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec`)
   - SpineCppLite (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineCppLite.podspec`)
   - SpineShadersStructs (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineShadersStructs.podspec`)
+  - ZKBaseSwiftProject
 
 SPEC REPOS:
   trunk:
+    - GGXSwiftExtension
+    - KeychainAccess
+    - PKHUD
+    - PTDebugView
+    - ReachabilitySwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SmartCodable
+    - SnapKit
+    - ZKBaseSwiftProject
 
 EXTERNAL SOURCES:
-  GGXSwiftExtension:
-    :path: "~/Documents/GitHub/ggxswiftexten"
   Spine:
     :podspec: https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec
   SpineCppLite:
@@ -41,11 +70,20 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   GGXSwiftExtension: ef35cfe3275df105db6d0f320ee413423833ff4c
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
+  PTDebugView: c719fbcf92bbcad675a9fba8a6206e863d8d021c
+  ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
+  RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
+  RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
+  RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
   SmartCodable: 09bc8e160ecb5fd0a7500cca792eb03e75a06477
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Spine: fab8ea7427af5f7c4ffa42259989b404759389b0
   SpineCppLite: 0c05549dc08fff40da8853e079606e559f6036ce
   SpineShadersStructs: 51ae786df4f4ea9ca52d7d5ff365d2018b561346
+  ZKBaseSwiftProject: 04cb3fb43a971c6bf0eb4ae718210b114c03daf9
 
-PODFILE CHECKSUM: 7df22a2788a905450a9ce619a127dbc93fefa25a
+PODFILE CHECKSUM: 0bccafc913c4cc2fa2b8e49623e4f5c16d1113af
 
 COCOAPODS: 1.16.1

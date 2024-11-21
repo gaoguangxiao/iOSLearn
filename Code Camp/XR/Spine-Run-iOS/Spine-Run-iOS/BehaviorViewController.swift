@@ -18,7 +18,7 @@ class BehaviorViewController: UIViewController, DisplayTimerProtocal {
     }
     
     func startTimer() {
-        print("startTimer")
+//        print("startTimer")
         displayLink = CADisplayLink(target: self, selector: #selector(updateObjc))
         displayLink?.add(to: .current, forMode: .common)
     }

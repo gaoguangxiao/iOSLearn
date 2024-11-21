@@ -111,6 +111,18 @@ public class SkeletonGraphicScript: ObservableObject {
 //        skeletonData.animations.forEach {
 //            if let name = $0.name { print("skin.animation: \(name)") }
 //        }
+        
+//        skeletonData.bones.forEach { bone in
+////            if let name = bone.name { print("bone.animation: \(name)") }
+//            let color = bone.color  print("bone.color: \(color)")
+//        }
+        
+//        skeletonData.events.forEach { event in
+//            print("event.description: \(event.description)")
+//        }
+        //一个带有定点的附件
+//        BoundingBoxAttachment
+//        SkeletonBounds
     }
     
     

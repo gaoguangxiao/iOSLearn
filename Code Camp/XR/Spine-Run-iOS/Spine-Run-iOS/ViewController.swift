@@ -8,6 +8,7 @@
 import UIKit
 import Spine
 import GGXSwiftExtension
+import SnapKit
 
 class ViewController: BehaviorViewController {
     
@@ -25,8 +26,22 @@ class ViewController: BehaviorViewController {
         let imageView = UIImageView(image: .bgHuban)
         imageView.backgroundColor = .yellow
         imageView.isUserInteractionEnabled = true
-        imageView.contentMode = .scaleToFill
+//        imageView.contentMode = .scaleToFill
         return imageView
+    }()
+    
+    //放置窗户
+    lazy var demoBtn: UIButton = {
+        let btn = UIButton(type: .custom)
+        return btn
+    }()
+    
+    lazy var updateBtn: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setTitle("升级", for: .normal)
+//        btn.backgroundColor = .red
+        btn.addTarget(self, action: #selector(didUpdateSpine), for: .touchUpInside)
+        return btn
     }()
     
     //距离左边20停止
@@ -46,6 +61,9 @@ class ViewController: BehaviorViewController {
     // 目标状态
     public var state: CharaterBodyState = .animation;
     
+    //障碍物 绘制任务触发
+    
+//    public
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -173,7 +191,7 @@ extension ViewController {
     }
     
     func moveBgObj(_ distance: CGPoint) {
-        print("distance: \(distance)")
+//        print("distance: \(distance)")
         //move right
         if distance.x > 0 && moveDistance.x <= targeDistance.x {
             stopMove()
@@ -208,6 +226,20 @@ extension ViewController {
             rE = CGPoint(x: image.width - 20, y: 0)
         }
         
+        view.addSubview(updateBtn)
+        updateBtn.snp.makeConstraints { make in
+            make.top.equalTo(10)
+            make.right.equalTo(-10)
+            make.size.equalTo(CGSize(width: 100, height: 100))
+        }
+    }
+}
+
+//MARK: 点击事件
+extension ViewController {
+    @objc func didUpdateSpine() {
+        let nv = UpdateSpinViewController()
+        push(nv)
     }
 }
 
