@@ -19,6 +19,17 @@ enum SkeletonGraphicError: Error {
     case DataError
 }
 
+// 骨骼
+struct BoneRect: Hashable {
+    let name: String
+    let id: UUID
+    let rect: CGRect
+//    let x: CGFloat
+//    let y: CGFloat
+//    let width: CGFloat
+//    let height: CGFloat
+}
+
 public class SkeletonGraphicScript: ObservableObject {
     
     //    var atlasFileName: String?
@@ -36,7 +47,7 @@ public class SkeletonGraphicScript: ObservableObject {
     var skins: [Skin]?
     
     @Published
-    var bonesRect: [CGRect] = []
+    var bonesRect: [BoneRect] = []
     
     //    @Published
     var controller: SpineController
@@ -84,28 +95,31 @@ public class SkeletonGraphicScript: ObservableObject {
         self.skeletonDrawable = drawable
         
         configSkeletonData(drawable.skeletonData)
-        
-        if let bones = skeleton?.bones {
-            configBones(bones: bones)
-        }
-        
+                
         self.controller = SpineController(
-            onInitialized: { controller in
-                //                self.configSkeletonData(controller.drawable.skeletonData)
+            onInitialized: { [weak self ] controller in
+                guard let self else { return }
+//                LogInfo("EEE")
+                //配置骨骼坐标
+                if let bones = skeleton?.bones {
+                    configBones(bones: bones)
+                }
             }
         )
         
         await MainActor.run {
-
+            
             self.spineView = nil
             
             self.spineView = SpineView(from: .drawable(drawable),
                                        controller: self.controller)
             
+            
             self.spineUIView = SpineUIView(from: .drawable(drawable),
                                            controller: self.controller,
                                            backgroundColor: .white)
             self.spineUIView?.frame = rect
+            
         }
     }
     
@@ -146,6 +160,8 @@ extension SkeletonGraphicScript {
         }
         let drawable = try await SkeletonDrawableWrapper.fromBundle(atlasFileName: atlas, skeletonFileName: json)
         try await configSkeletonDrawableWrapper(drawable: drawable, rect: rect)
+        LogInfo("AAA")
+        getBoneRectBy(boneName: "root")
     }
     
     public func setSkeletonFromBundle(datum: Datum) async throws {
@@ -304,31 +320,34 @@ extension SkeletonGraphicScript {
         //            if let name = bone.data.name { print("bone.name: \(name)") }
         //        }
         
-        //        bonesRect = bones.map({ bone in
-        //            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
-        //            let position = controller.fromSkeletonCoordinates(
-        //                position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
-        //            )
-        //            let rect = CGRect(x: position.x,
-        //                              y: position.y,
-        //                              width: 5,
-        //                              height: 5)
-        //            print("position: \(position.x)、x.y: \(position.y)")
-        //            return rect
-        //        })
-        //
-        //        //骨骼的世界坐标转换屏幕需要等待controller中scaleY赋值完成才能获取
-        //        if let boneFirst = bonesRect.first {
-        //            LogInfo("bone.first:\(String(describing: bonesRect.first))")
-        //        } else {
-        //            LogInfo("bone.first is nil")
-        //        }
+        bonesRect = bones.map({ bone in
+//            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
+            let position = controller.fromSkeletonCoordinatesToScreen(
+                position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
+            )
+            let rect = BoneRect(
+                name:bone.data.name ?? "nil",
+                id: UUID(),
+                rect: CGRect(x: position.x,
+                             y: position.y, width: 1, height: 1)
+            )
+//            print("position: \(position.x)、x.y: \(position.y)")
+            return rect
+        })
+        
+        //骨骼的世界坐标转换屏幕需要等待controller中scaleY赋值完成才能获取
+//        if let boneFirst = bonesRect.first {
+//            LogInfo("bone.first:\(String(describing: bonesRect.first))")
+//        } else {
+//            LogInfo("bone.first is nil")
+//        }
     }
     
     func getBoneRectBy(boneName: String) -> CGRect? {
+        //
         if let bone = skeleton?.findBone(boneName: "root") {
             print("world: \(bone.worldX)、x.y: \(bone.worldY)")
-            let position = controller.fromSkeletonCoordinates(
+            let position = controller.fromSkeletonCoordinatesToScreen(
                 position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
             )
             let rect = CGRect(x: position.x,
@@ -358,6 +377,21 @@ extension SkeletonGraphicScript {
     }
 }
 
+//
+extension SpineController {
+    
+    //转换UIView屏幕，X的位置需要增加屏幕一半
+    public func fromSkeletonCoordinatesToScreen(position: CGPoint) -> CGPoint {
+        let orignPosition = self.fromSkeletonCoordinates(position: position)
+        let x = orignPosition.x;
+        let y = orignPosition.y;
+        return CGPoint(
+            x: x + viewSize.width/2,
+            y: y + viewSize.height/2
+        )
+    }
+    
+}
 //extension SpineUIView {
 //
 //    //转换某个坐标

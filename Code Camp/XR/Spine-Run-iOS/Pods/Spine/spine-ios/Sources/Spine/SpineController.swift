@@ -179,6 +179,7 @@ extension SpineController: SpineRendererDelegate {
     }
     
     func spineRendererDidUpdate(_ spineRenderer: SpineRenderer, scaleX: CGFloat, scaleY: CGFloat, offsetX: CGFloat, offsetY: CGFloat, size: CGSize) {
+        print("spineRendererDidUpdate")
         self.scaleX = scaleX
         self.scaleY = scaleY
         self.offsetX = offsetX

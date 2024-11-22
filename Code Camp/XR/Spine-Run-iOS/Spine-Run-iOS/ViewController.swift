@@ -80,22 +80,26 @@ class ViewController: BehaviorViewController {
         //  self.view.addSubview(spineSuperView)
         let datumboy = Datum.spineBoy()
         
-//        Task {
-//            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datumboy)
-//            initSpineView()
-//        }
-        
+//      spine-boy
         Task {
-            await source.loadCharaterJSON()
-            if let datum = source.npcDatum {
-                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
-                skeletonScript.playAnimationName(
-                    animationName: CharaterBodyState.animation.rawValue,
-                    loop: true)
-                skeletonScript.scaleX(faceLeft: -1)
-                initSpineView()
-            }
+//            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datumboy)
+            //竖屏，不缩放
+            try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datumboy)
+            initSpineView()
         }
+        
+//      NPC-spine
+//        Task {
+//            await source.loadCharaterJSON()
+//            if let datum = source.npcDatum {
+//                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
+//                skeletonScript.playAnimationName(
+//                    animationName: CharaterBodyState.animation.rawValue,
+//                    loop: true)
+//                skeletonScript.scaleX(faceLeft: -1)
+//                initSpineView()
+//            }
+//        }
     }
     
     func initSpineView() {
@@ -103,14 +107,26 @@ class ViewController: BehaviorViewController {
             print("spineUIView is nil")
             return
         }
-        if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
-            let view = UIView()
-            view.frame = rect
-            view.backgroundColor = .red
-            spineView.addSubview(view)
-        } else {
-            print("get bone rect is nil")
+        
+        print("skeletonScript.bonerect: \(skeletonScript.bonesRect)")
+        
+        for boneRect in skeletonScript.bonesRect {
+            let rView = UILabel()
+            rView.text = boneRect.name
+            rView.frame = CGRect(x: boneRect.rect.minX,
+                                 y: boneRect.rect.midY,
+                                 width: 100, height: 40)// boneRect.rect
+            rView.backgroundColor = .blue
+            spineView.addSubview(rView)
         }
+//        if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
+//            let rView = UIView()
+//            rView.frame = rect
+//            rView.backgroundColor = .blue
+//            spineView.addSubview(rView)
+//        } else {
+//            print("get bone rect is nil")
+//        }
         
         indicatorOffX = spineView.center
         self.view.addSubview(spineView)
@@ -129,6 +145,11 @@ class ViewController: BehaviorViewController {
         if let touch = touches.first {
             let point = touch.location(in: view)
             
+            if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
+                
+            } else {
+                print("get bone rect is nil")
+            }
             // print("\(point.x)")
             // targeDistance = Float(point.x - spineUIView.x)
             moveDistance = .zero
