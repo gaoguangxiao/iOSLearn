@@ -10,6 +10,13 @@ import Spine
 import GGXSwiftExtension
 import SnapKit
 
+extension Datum {
+    static func spineBoy() -> Datum {
+        Datum(json: "spineboy-pro.json",
+              atlas: "spineboy-pma.atlas")
+    }
+}
+
 class ViewController: BehaviorViewController {
     
     let skeletonScript = SkeletonGraphicScript()
@@ -26,7 +33,7 @@ class ViewController: BehaviorViewController {
         let imageView = UIImageView(image: .bgHuban)
         imageView.backgroundColor = .yellow
         imageView.isUserInteractionEnabled = true
-//        imageView.contentMode = .scaleToFill
+        //        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -39,13 +46,13 @@ class ViewController: BehaviorViewController {
     lazy var updateBtn: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setTitle("升级", for: .normal)
-//        btn.backgroundColor = .red
+        //        btn.backgroundColor = .red
         btn.addTarget(self, action: #selector(didUpdateSpine), for: .touchUpInside)
         return btn
     }()
     
     //距离左边20停止
-    private var lE: CGPoint = CGPoint(x: 20, y: 0)
+    private var lE: CGPoint = CGPoint(x: 200, y: 0)
     //距离右边20停止
     private var rE: CGPoint = CGPoint(x: 20, y: 0)
     //统计角色距离距离左边整个的偏移
@@ -63,7 +70,7 @@ class ViewController: BehaviorViewController {
     
     //障碍物 绘制任务触发
     
-//    public
+    //    public
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -71,34 +78,42 @@ class ViewController: BehaviorViewController {
         initBgV2()
         // spineSuperView.frame = CGRectMake(20, 120, 200, 200)
         //  self.view.addSubview(spineSuperView)
+        let datumboy = Datum.spineBoy()
+        
+//        Task {
+//            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datumboy)
+//            initSpineView()
+//        }
         
         Task {
             await source.loadCharaterJSON()
-            
-            if let datas = source.datas,
-               let datum = datas.first {
-                try? await skeletonScript.setSkeletonFromFile(datum: datum)
-                //
+            if let datum = source.npcDatum {
+                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
                 skeletonScript.playAnimationName(
                     animationName: CharaterBodyState.animation.rawValue,
                     loop: true)
                 skeletonScript.scaleX(faceLeft: -1)
-                
-                await MainActor.run {
-                    if let spineView = skeletonScript.spineUIView {
-                        //spineView.frame = self.spineSuperView.bounds
-                        initCharePosition(spineView: spineView)
-//                        initCharePositionMiddle(spineView: spineView)
-                        indicatorOffX = spineView.center
-                        self.view.addSubview(spineView)
-                    }
-                }
+                initSpineView()
             }
         }
     }
     
-    func initCharePosition(spineView: UIView) {
-        spineView.frame = CGRectMake(lE.x, 120, 200, 200)
+    func initSpineView() {
+        guard let spineView = skeletonScript.spineUIView  else {
+            print("spineUIView is nil")
+            return
+        }
+        if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
+            let view = UIView()
+            view.frame = rect
+            view.backgroundColor = .red
+            spineView.addSubview(view)
+        } else {
+            print("get bone rect is nil")
+        }
+        
+        indicatorOffX = spineView.center
+        self.view.addSubview(spineView)
     }
     
     func initCharePositionMiddle(spineView: UIView) {
@@ -108,26 +123,17 @@ class ViewController: BehaviorViewController {
     
     //获取点击事件
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("touchesBegan")
+        //        print("touchesBegan")
         //获取spine点击点
         guard let spineUIView = skeletonScript.spineUIView  else { return  }
         if let touch = touches.first {
             let point = touch.location(in: view)
             
-            if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
-                let view = UIView()
-                view.frame = rect
-                view.backgroundColor = .red
-                spineUIView.addSubview(view)
-            }
-            //添加视图
-            
-            
             // print("\(point.x)")
             // targeDistance = Float(point.x - spineUIView.x)
             moveDistance = .zero
             targeDistance = point - spineUIView.center
-//            print("targeDistance：\(targeDistance)")
+            //            print("targeDistance：\(targeDistance)")
             //朝向
             if targeDistance.x > 0 {
                 skeletonScript.scaleX(faceLeft: -1)
@@ -197,11 +203,11 @@ extension ViewController {
         spineUIView.translate(distance)
         moveDistance.x += distance.x
         indicatorOffX += distance
-//        print("moveDistance: \(moveDistance)")
+        //        print("moveDistance: \(moveDistance)")
     }
     
     func moveBgObj(_ distance: CGPoint) {
-//        print("distance: \(distance)")
+        //        print("distance: \(distance)")
         //move right
         if distance.x > 0 && moveDistance.x <= targeDistance.x {
             stopMove()

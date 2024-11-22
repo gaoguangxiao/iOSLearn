@@ -21,9 +21,9 @@ enum SkeletonGraphicError: Error {
 
 public class SkeletonGraphicScript: ObservableObject {
     
-//    var atlasFileName: String?
+    //    var atlasFileName: String?
     
-//    var skeletonFileName: String?
+    //    var skeletonFileName: String?
     
     @Published
     var spineView: SpineView?
@@ -38,20 +38,20 @@ public class SkeletonGraphicScript: ObservableObject {
     @Published
     var bonesRect: [CGRect] = []
     
-//    @Published
+    //    @Published
     var controller: SpineController
     
-//    @Published
+    //    @Published
     var drawable: SkeletonDrawableWrapper?
     
     @State
     var isRendering: Bool?
     
     //动作方向
-//    public var reverse: Bool = true
+    //    public var reverse: Bool = true
     
     // 速度
-//    public var timeScale: Float = 1.0;
+    //    public var timeScale: Float = 1.0;
     
     var scaleX: Float?
     
@@ -70,46 +70,42 @@ public class SkeletonGraphicScript: ObservableObject {
     init() {
         controller = SpineController(
             onInitialized: { controller in
-//                controller.animationState.setAnimationByName(
-//                    trackIndex: 0,
-//                    animationName: "animation",
-//                    loop: true
-//                )
+                //                controller.animationState.setAnimationByName(
+                //                    trackIndex: 0,
+                //                    animationName: "animation",
+                //                    loop: true
+                //                )
             }
         )
     }
     
-    func configSkeletonDrawableWrapper(drawable: SkeletonDrawableWrapper) async throws {
+    func configSkeletonDrawableWrapper(drawable: SkeletonDrawableWrapper, rect: CGRect) async throws {
         
         self.skeletonDrawable = drawable
         
         configSkeletonData(drawable.skeletonData)
-
+        
         if let bones = skeleton?.bones {
             configBones(bones: bones)
         }
         
         self.controller = SpineController(
             onInitialized: { controller in
-//                self.configSkeletonData(controller.drawable.skeletonData)
+                //                self.configSkeletonData(controller.drawable.skeletonData)
             }
         )
         
         await MainActor.run {
-//            self.isRendering = true
-//            self.drawable = drawable
+
             self.spineView = nil
             
-            Task.detached {
-                await MainActor.run {
-                    self.spineView = SpineView(from: .drawable(drawable),
-                                                         controller: self.controller)
-                    
-                    self.spineUIView = SpineUIView(from: .drawable(drawable),
-                                                   controller: self.controller)
-                }
-            }
+            self.spineView = SpineView(from: .drawable(drawable),
+                                       controller: self.controller)
             
+            self.spineUIView = SpineUIView(from: .drawable(drawable),
+                                           controller: self.controller,
+                                           backgroundColor: .white)
+            self.spineUIView?.frame = rect
         }
     }
     
@@ -119,21 +115,21 @@ public class SkeletonGraphicScript: ObservableObject {
         //config skin data
         configSkins(skins: skeletonData.skins)
         
-//        skeletonData.animations.forEach {
-//            if let name = $0.name { print("skin.animation: \(name)") }
-//        }
+        //        skeletonData.animations.forEach {
+        //            if let name = $0.name { print("skin.animation: \(name)") }
+        //        }
         
-//        skeletonData.bones.forEach { bone in
-////            if let name = bone.name { print("bone.animation: \(name)") }
-//            let color = bone.color  print("bone.color: \(color)")
-//        }
+        //        skeletonData.bones.forEach { bone in
+        ////            if let name = bone.name { print("bone.animation: \(name)") }
+        //            let color = bone.color  print("bone.color: \(color)")
+        //        }
         
-//        skeletonData.events.forEach { event in
-//            print("event.description: \(event.description)")
-//        }
+        //        skeletonData.events.forEach { event in
+        //            print("event.description: \(event.description)")
+        //        }
         //一个带有定点的附件
-//        BoundingBoxAttachment
-//        SkeletonBounds
+        //        BoundingBoxAttachment
+        //        SkeletonBounds
     }
     
     
@@ -144,12 +140,20 @@ public class SkeletonGraphicScript: ObservableObject {
 //MARK: - init SkeletonDrawableWrapper
 extension SkeletonGraphicScript {
     
+    public func setSkeletonFromBundle(rect: CGRect, datum: Datum) async throws {
+        guard let atlas = datum.atlas ,let json = datum.json else {
+            throw SkeletonGraphicError.DataError
+        }
+        let drawable = try await SkeletonDrawableWrapper.fromBundle(atlasFileName: atlas, skeletonFileName: json)
+        try await configSkeletonDrawableWrapper(drawable: drawable, rect: rect)
+    }
+    
     public func setSkeletonFromBundle(datum: Datum) async throws {
         guard let atlas = datum.atlas ,let json = datum.json else {
             throw SkeletonGraphicError.DataError
         }
         let drawable = try await SkeletonDrawableWrapper.fromBundle(atlasFileName: atlas, skeletonFileName: json)
-        try await configSkeletonDrawableWrapper(drawable: drawable)
+        try await configSkeletonDrawableWrapper(drawable: drawable,rect: .zero)
     }
     
     public func setSkeletonFromFile(datum: Datum) async throws {
@@ -158,7 +162,7 @@ extension SkeletonGraphicScript {
             throw SkeletonGraphicError.DataError
         }
         let drawable = try await SkeletonDrawableWrapper.fromFile(atlasFile: atlas, skeletonFile: json)
-        try await configSkeletonDrawableWrapper(drawable: drawable)
+        try await configSkeletonDrawableWrapper(drawable: drawable,rect: .zero)
     }
 }
 
@@ -166,6 +170,10 @@ extension SkeletonGraphicScript {
 extension SkeletonGraphicScript {
     
     public func playAnimationName(animationName: String, loop: Bool = false, reverse: Bool = false, timeScale: Float = 1.0) {
+        guard let _ = skeletonData?.findAnimation(name: animationName) else {
+            print("animation is nil")
+            return
+        }
         let trackEntry = animationState?.setAnimationByName(trackIndex: 0, animationName: animationName, loop: loop)
         trackEntry?.reverse = reverse
         trackEntry?.timeScale = timeScale
@@ -198,7 +206,7 @@ extension SkeletonGraphicScript {
         let resultCombinedSkin = Skin.create(name: "character-combined")
         //Adds a new skin to the previous skin
         resultCombinedSkin.addSkin(other: resultCombinedSkin);
-
+        
         if let skin = skeletonData?.findSkin(name: skinName) {
             customSkin?.addSkin(other: skin)
         }
@@ -229,7 +237,7 @@ extension SkeletonGraphicScript {
         //        skeletonData.skins.forEach {
         //            if let name = $0.name { print("skin.name: \(name)") }
         //        }
-                
+        
         //抛出皮肤数据
         Task {
             await MainActor.run {
@@ -290,31 +298,31 @@ extension SkeletonGraphicScript {
 
 //MARK: - 骨骼
 extension SkeletonGraphicScript {
-
+    
     private func configBones(bones: [Bone]) {
-//        bones.forEach { bone in
-//            if let name = bone.data.name { print("bone.name: \(name)") }
-//        }
-
-//        bonesRect = bones.map({ bone in
-//            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
-//            let position = controller.fromSkeletonCoordinates(
-//                position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
-//            )
-//            let rect = CGRect(x: position.x,
-//                              y: position.y,
-//                              width: 5,
-//                              height: 5)
-//            print("position: \(position.x)、x.y: \(position.y)")
-//            return rect
-//        })
-//
-//        //骨骼的世界坐标转换屏幕需要等待controller中scaleY赋值完成才能获取
-//        if let boneFirst = bonesRect.first {
-//            LogInfo("bone.first:\(String(describing: bonesRect.first))")
-//        } else {
-//            LogInfo("bone.first is nil")
-//        }
+        //        bones.forEach { bone in
+        //            if let name = bone.data.name { print("bone.name: \(name)") }
+        //        }
+        
+        //        bonesRect = bones.map({ bone in
+        //            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
+        //            let position = controller.fromSkeletonCoordinates(
+        //                position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
+        //            )
+        //            let rect = CGRect(x: position.x,
+        //                              y: position.y,
+        //                              width: 5,
+        //                              height: 5)
+        //            print("position: \(position.x)、x.y: \(position.y)")
+        //            return rect
+        //        })
+        //
+        //        //骨骼的世界坐标转换屏幕需要等待controller中scaleY赋值完成才能获取
+        //        if let boneFirst = bonesRect.first {
+        //            LogInfo("bone.first:\(String(describing: bonesRect.first))")
+        //        } else {
+        //            LogInfo("bone.first is nil")
+        //        }
     }
     
     func getBoneRectBy(boneName: String) -> CGRect? {
@@ -342,7 +350,7 @@ extension SkeletonGraphicScript {
     
     var skeletonData: SkeletonData? {
         self.skeletonDrawable?.skeletonData
-//        self.controller.drawable.skeletonData
+        //        self.controller.drawable.skeletonData
     }
     
     var animationState: SIAnimationState? {
@@ -351,7 +359,7 @@ extension SkeletonGraphicScript {
 }
 
 //extension SpineUIView {
-//    
+//
 //    //转换某个坐标
 //    public func translate(_ translation: CGPoint) {
 //        //朝向移动
@@ -366,7 +374,15 @@ public struct Datum: Identifiable, SmartCodable {
     public var json, atlas: String?
     public var atlasURL, jsonURL: String?
     
-    public init() {}
+    public init() {
+        
+    }
+    
+    public init(json: String,
+                atlas: String) {
+        self.json = json
+        self.atlas = atlas
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "Id"
