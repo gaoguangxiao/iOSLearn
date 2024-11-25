@@ -30,6 +30,15 @@ struct BoneRect: Hashable {
 //    let height: CGFloat
 }
 
+struct SlotRect: Hashable {
+    let slot: Slot
+    let rect: CGRect
+//    let x: CGFloat
+//    let y: CGFloat
+//    let width: CGFloat
+//    let height: CGFloat
+}
+
 public class SkeletonGraphicScript: ObservableObject {
     
     //    var atlasFileName: String?
@@ -48,6 +57,13 @@ public class SkeletonGraphicScript: ObservableObject {
     
     @Published
     var bonesRect: [BoneRect] = []
+    
+        @Published
+        var slotsRect: [SlotRect] = []
+
+    //spine插槽，绑定到骨骼
+    @Published
+    var slots: [Slot] = []
     
     //    @Published
     var controller: SpineController
@@ -101,9 +117,13 @@ public class SkeletonGraphicScript: ObservableObject {
                 guard let self else { return }
 //                LogInfo("EEE")
                 //配置骨骼坐标
-                if let bones = skeleton?.bones {
-                    configBones(bones: bones)
-                }
+//                if let bones = skeleton?.bones {
+                    configBones(bones: controller.skeleton.bones)
+//                }
+                
+                //配置插槽
+                configSlots(slots: controller.skeleton.slots)
+                
             }
         )
         
@@ -377,7 +397,7 @@ extension SkeletonGraphicScript {
     }
 }
 
-//
+//MARK:
 extension SpineController {
     
     //转换UIView屏幕，X的位置需要增加屏幕一半
@@ -391,6 +411,96 @@ extension SpineController {
         )
     }
     
+}
+
+
+
+//MARK: - 插槽
+extension SkeletonGraphicScript {
+    private func configSlots(slots: [Slot]) {
+        
+        //一个带有定点的附件
+        //     BoundingBoxAttachment：用于检测与骨骼动画的碰撞和交互，
+        //     从Skeleton获取包含`BoundingBoxAttachment`的插槽Slot、
+        //     获取顶点数据，
+        
+        self.slots = slots
+        
+        slots.forEach { slot in
+            if let name = slot.data.name {
+//                print("slot.name: \(name)")
+            }
+            //插槽的附件
+            if let attachment = slot.attachment {
+                if let name = attachment.name {
+                    print("attachment.name: \(name)")
+                }
+                print("attachment.type: \(attachment.type)")
+                if attachment.aType == 3 {
+                    //边框
+//                    attachment.
+//                    print(attachment.)
+                }
+//                attachment.type
+            }
+            //查看此插槽位置
+            //worldX是世界坐标下的位置，这些坐标相对于Sine Skeleton的原点，而非屏幕和视图坐标
+            let position = controller.fromSkeletonCoordinatesToScreen(position: CGPointMake(CGFloat(slot.bone.worldX), CGFloat(slot.bone.worldY)))
+            let rect = SlotRect(
+                slot: slot,
+                rect: CGRect(x: position.x,
+                             y: position.y, width: 1, height: 1)
+            )
+            slotsRect.append(rect)
+            //在对应的插槽生成红点
+            
+            //            slot.attachmentName
+//            print("slot.position.worldX: \(slot.bone.worldX)、slot.position.worldY: \(slot.bone.worldY)")
+//            print("slot.rect: \(rect)")
+//            let view = UIView()
+//            view.backgroundColor = .red
+//            view.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+//            spineUIView?.addSubview(view)
+            //            }
+        }
+    }
+}
+
+//MARK: - Attachment
+extension Attachment {
+    
+    public var aType: UInt32 {
+        return type.rawValue
+    }
+    
+    enum SpineAttachment_type {
+    case REGION
+        case MESH
+        case CLIPPING
+        case BOUNDING_BOX
+    }
+//    具体标号按照`type`对应
+//    typedef enum spine_attachment_type {
+//        SPINE_ATTACHMENT_REGION = 0,// 区域附件（图片区域）
+//        SPINE_ATTACHMENT_MESH, // 网格附件（变形图片）
+//        SPINE_ATTACHMENT_CLIPPING, // 裁剪附件（限制显示区域）
+//        SPINE_ATTACHMENT_BOUNDING_BOX,// 边界框附件（碰撞检测或区域表示）
+//        SPINE_ATTACHMENT_PATH, // 路径附件（用于路径动画）
+//        SPINE_ATTACHMENT_POINT,// 点附件（位置标记）
+//    } spine_attachment_type;
+    
+    public var aTypeStr: String {
+        switch type.rawValue {
+        case 0: "REGION"
+        case 1: "MESH"
+        case 2: "CLIPPING"
+        case 3: "BOUNDING_BOX"
+        case 4: "PATH"
+        case 5: "POINT"
+        default:
+            "nil"
+        }
+    }
 }
 //extension SpineUIView {
 //

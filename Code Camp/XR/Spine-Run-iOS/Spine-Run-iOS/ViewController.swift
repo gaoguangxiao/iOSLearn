@@ -15,6 +15,11 @@ extension Datum {
         Datum(json: "spineboy-pro.json",
               atlas: "spineboy-pma.atlas")
     }
+    
+    static func babuV13() -> Datum {
+        Datum(json: "babu_v1.3.json",
+              atlas: "babu_v1.3.atlas")
+    }
 }
 
 class ViewController: BehaviorViewController {
@@ -78,12 +83,12 @@ class ViewController: BehaviorViewController {
         initBgV2()
         // spineSuperView.frame = CGRectMake(20, 120, 200, 200)
         //  self.view.addSubview(spineSuperView)
-        let datumboy = Datum.spineBoy()
+        let datumboy = Datum.babuV13()
         
 //      spine-boy
         Task {
 //            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datumboy)
-            //竖屏，不缩放
+//            竖屏，不缩放
             try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datumboy)
             initSpineView()
         }
@@ -92,7 +97,8 @@ class ViewController: BehaviorViewController {
 //        Task {
 //            await source.loadCharaterJSON()
 //            if let datum = source.npcDatum {
-//                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
+////                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
+//                try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datum)
 //                skeletonScript.playAnimationName(
 //                    animationName: CharaterBodyState.animation.rawValue,
 //                    loop: true)
@@ -107,18 +113,53 @@ class ViewController: BehaviorViewController {
             print("spineUIView is nil")
             return
         }
+                
+//        for boneRect in skeletonScript.bonesRect {
+//            let rView = UILabel()
+//            rView.text = boneRect.name
+//            rView.frame = CGRect(x: boneRect.rect.minX,
+//                                 y: boneRect.rect.midY,
+//                                 width: 100, height: 40)// boneRect.rect
+//            rView.backgroundColor = .blue
+//            spineView.addSubview(rView)
+//        }
         
-        print("skeletonScript.bonerect: \(skeletonScript.bonesRect)")
-        
-        for boneRect in skeletonScript.bonesRect {
-            let rView = UILabel()
-            rView.text = boneRect.name
-            rView.frame = CGRect(x: boneRect.rect.minX,
-                                 y: boneRect.rect.midY,
-                                 width: 100, height: 40)// boneRect.rect
-            rView.backgroundColor = .blue
-            spineView.addSubview(rView)
+        for slotRect in skeletonScript.slotsRect {
+            
+            if let att = slotRect.slot.attachment {
+                
+//                if att.aType == 4 {
+                    let rView = UILabel()
+                if att.aType == 3 {
+                    rView.backgroundColor = .red
+                    spineView.addSubview(rView)
+                    rView.snp.makeConstraints { make in
+                        make.left.equalTo(slotRect.rect.minX)
+                        make.top.equalTo(slotRect.rect.midY)
+                        make.size.equalTo(CGSize(width: 10, height: 10))
+                    }
+                } else {
+                    rView.backgroundColor = .blue
+                    spineView.addSubview(rView)
+                    rView.snp.makeConstraints { make in
+                        make.left.equalTo(slotRect.rect.minX)
+                        make.top.equalTo(slotRect.rect.midY)
+                        make.size.equalTo(CGSize(width: 10, height: 10))
+                    }
+                    
+                }
+                
+//                    rView.text = (att.name ?? "") + "_\(att.aTypeStr)"
+
+//                }
+            }
+ 
+//            rView.frame = CGRect(x: slotRect.rect.minX,
+//                                 y: slotRect.rect.midY,
+//                                 width: 100, height: 40)// boneRect.rect
+
         }
+        
 //        if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
 //            let rView = UIView()
 //            rView.frame = rect
