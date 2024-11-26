@@ -29,13 +29,17 @@ class SkeletonSource: ObservableObject {
         }
     }
     
+    @Published
+    var medals: [UIImage]?
+    
     func loadStonesImages() async {
-        let data = Bundle.jsonfileTojson("charaterJSON") as? [String: Any]
-        if let response = RSResponse.deserialize(from: data) {
-            await MainActor.run {
-                datas = response.data
+        var images: [UIImage] = []
+        for i in 0..<36 {
+            if let image = UIImage(named: "medal_\(i)") {
+                images.append(image)
             }
         }
+        medals = images
     }
 }
 

@@ -12,6 +12,8 @@ class TriggerViewController: BehaviorViewController {
     
     let skeletonScript = SkeletonGraphicScript()
     
+    let source = SkeletonSource()
+    
     lazy var imageBgView: UIImageView = {
         let imageView = UIImageView(image: .bgPhone)
 //        imageView.contentMode = .scaleAspectF
@@ -22,7 +24,6 @@ class TriggerViewController: BehaviorViewController {
     lazy var stoneImage: UIImageView = {
         let imageView = UIImageView(image: .fish)
         imageView.contentMode = .scaleAspectFill
-//        imageView.backgroundColor = .red
         return imageView
     }()
     
@@ -44,7 +45,10 @@ class TriggerViewController: BehaviorViewController {
         skeletonScript.delegate = self
         
         Task {
-            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 250, 150, 100),datum: datumboy)
+            await source.loadStonesImages()
+//            print(source.medals)
+            
+            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 250, 200, 120),datum: datumboy)
             guard let spineView = skeletonScript.spineUIView  else {
                 print("spineUIView is nil")
                 return
@@ -59,20 +63,11 @@ class TriggerViewController: BehaviorViewController {
         //        print("touchesBegan")
         //获取spine点击点
         guard let spineUIView = skeletonScript.spineUIView  else { return  }
+        guard isRuning else {
+            return
+        }
+        
         if let touch = touches.first {
-            //点击`spineUIView`添加黑点
-            //            let point = touch.location(in: spineUIView)
-            //                        //将点击点转化为spine的坐标
-            //            skeletonScript.containsPoint(point: point)
-            //            let rView = UILabel()
-            //            rView.center = point
-            //            rView.backgroundColor = .black
-            //            rView.frame = CGRect(x: point.x, y: point.y, width: 10, height: 10)
-            //            spineUIView.addSubview(rView)
-            //            return
-            
-            // print("\(point.x)")
-            // targeDistance = Float(point.x - spineUIView.x)
             let point = touch.location(in: view)
             moveDistance = .zero
             targeDistance = point - spineUIView.center
@@ -129,9 +124,8 @@ class TriggerViewController: BehaviorViewController {
     //重置坐标
     func resetStone() {
         stoneImage.y = 0
-        stoneImage.x = CGFloat(arc4random_uniform(UInt32(UIDevice.widthf - 50)))
-//        stoneImage.image =
-//        print(<#T##items: Any...##Any#>)
+        stoneImage.x = CGFloat(Float.random(in: 50..<Float(UIDevice.widthf) - 100))
+        stoneImage.image = source.medals?.randomElement()
     }
     
     /// 角色
@@ -195,15 +189,15 @@ extension TriggerViewController {
         view.addSubview(stoneImage)
         stoneImage.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: 80, height: 80))
+            make.size.equalTo(CGSize(width: 40, height: 40))
         }
         
-//        view.addSubview(pausebtn)
-//        pausebtn.snp.makeConstraints { make in
-//            make.right.equalToSuperview().offset(-50)
-//            make.top.equalTo(20)
-//            make.size.equalTo(CGSize(width: 80, height: 40))
-//        }
+        view.addSubview(pausebtn)
+        pausebtn.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-50)
+            make.top.equalTo(20)
+            make.size.equalTo(CGSize(width: 80, height: 40))
+        }
         
         // 添加拖动手势识别器
         //        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -260,6 +254,7 @@ extension TriggerViewController {
     
     @objc func pauseGame(){
         isRuning.toggle()
+        pausebtn.setTitle(!isRuning ? "继续" : "暂停", for: .normal)
     }
 }
 
