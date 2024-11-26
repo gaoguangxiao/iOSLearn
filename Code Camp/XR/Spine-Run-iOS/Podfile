@@ -11,8 +11,7 @@ target 'Spine-Run-iOS' do
   pod 'SpineShadersStructs', :podspec => 'https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineShadersStructs.podspec'
   
   pod 'ZKBaseSwiftProject'
-#  pod 'GGXSwiftExtension'
-#  , :path => '~/Documents/GitHub/ggxswiftexten'
+  pod 'GGXSwiftExtension', :path => '~/Documents/GitHub/ggxswiftexten'
 #  pod 'SnapKit'
   pod 'SmartCodable'
   

@@ -11,6 +11,7 @@ import Spine
 import SwiftUICore
 import SmartCodable
 import GGXSwiftExtension
+import SpineCppLite
 
 //前缀Spine-iOS缩写
 typealias SIAnimationState = Spine.AnimationState
@@ -24,19 +25,24 @@ struct BoneRect: Hashable {
     let name: String
     let id: UUID
     let rect: CGRect
-//    let x: CGFloat
-//    let y: CGFloat
-//    let width: CGFloat
-//    let height: CGFloat
 }
 
 struct SlotRect: Hashable {
     let slot: Slot
     let rect: CGRect
-//    let x: CGFloat
-//    let y: CGFloat
-//    let width: CGFloat
-//    let height: CGFloat
+}
+
+public protocol SkeletonGraphicDelegate {
+    
+    ///spine控制器初始化完成
+    func onInitialized(skeletonGraphicScript: SkeletonGraphicScript)
+    
+    //世界坐标更新之后
+    func onAfterUpdateWorldTransforms(skeletonGraphicScript: SkeletonGraphicScript)
+    
+    //其他对象进入spine内部，spineSuperView必须有值，同一图层
+    func onTriggerEnter(other: UIView)
+    
 }
 
 public class SkeletonGraphicScript: ObservableObject {
@@ -58,9 +64,12 @@ public class SkeletonGraphicScript: ObservableObject {
     @Published
     var bonesRect: [BoneRect] = []
     
-        @Published
-        var slotsRect: [SlotRect] = []
-
+    @Published
+    var slotsRect: [SlotRect] = []
+    
+    @Published
+    var boxRect: [CGPoint] = []
+    
     //spine插槽，绑定到骨骼
     @Published
     var slots: [Slot] = []
@@ -94,6 +103,10 @@ public class SkeletonGraphicScript: ObservableObject {
     @Published
     var partAfterSkins: [SkinViewModel]?
     
+    public var delegate: SkeletonGraphicDelegate?
+    
+    public var bounds: SkeletonBounds?
+    
     init() {
         controller = SpineController(
             onInitialized: { controller in
@@ -111,19 +124,29 @@ public class SkeletonGraphicScript: ObservableObject {
         self.skeletonDrawable = drawable
         
         configSkeletonData(drawable.skeletonData)
-                
+        
         self.controller = SpineController(
             onInitialized: { [weak self ] controller in
                 guard let self else { return }
-//                LogInfo("EEE")
+                //                LogInfo("EEE")
                 //配置骨骼坐标
-//                if let bones = skeleton?.bones {
-                    configBones(bones: controller.skeleton.bones)
-//                }
+                //                if let bones = skeleton?.bones {
+                configBones(bones: controller.skeleton.bones)
+                //                }
                 
                 //配置插槽
                 configSlots(slots: controller.skeleton.slots)
                 
+                delegate?.onInitialized(skeletonGraphicScript: self)
+            },
+            onAfterUpdateWorldTransforms: { [weak self ] controller in
+                guard let self else { return }
+                
+                Task.detached {
+                    await self.onTriggerCheck()
+                }
+                
+                delegate?.onAfterUpdateWorldTransforms(skeletonGraphicScript: self)
             }
         )
         
@@ -137,7 +160,7 @@ public class SkeletonGraphicScript: ObservableObject {
             
             self.spineUIView = SpineUIView(from: .drawable(drawable),
                                            controller: self.controller,
-                                           backgroundColor: .white)
+                                           backgroundColor: .clear)
             self.spineUIView?.frame = rect
             
         }
@@ -180,8 +203,6 @@ extension SkeletonGraphicScript {
         }
         let drawable = try await SkeletonDrawableWrapper.fromBundle(atlasFileName: atlas, skeletonFileName: json)
         try await configSkeletonDrawableWrapper(drawable: drawable, rect: rect)
-        LogInfo("AAA")
-        getBoneRectBy(boneName: "root")
     }
     
     public func setSkeletonFromBundle(datum: Datum) async throws {
@@ -218,6 +239,8 @@ extension SkeletonGraphicScript {
     /// 控制朝向 默认
     public func scaleX(faceLeft: Float) {
         skeleton?.scaleX = faceLeft
+        
+        updateSlotPath()
     }
 }
 
@@ -341,7 +364,7 @@ extension SkeletonGraphicScript {
         //        }
         
         bonesRect = bones.map({ bone in
-//            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
+            //            print("bone.worldX: \(bone.worldX)、bone.worldY: \(bone.worldY)")
             let position = controller.fromSkeletonCoordinatesToScreen(
                 position: CGPointMake(CGFloat(bone.worldX), CGFloat(bone.worldY))
             )
@@ -351,16 +374,16 @@ extension SkeletonGraphicScript {
                 rect: CGRect(x: position.x,
                              y: position.y, width: 1, height: 1)
             )
-//            print("position: \(position.x)、x.y: \(position.y)")
+            //            print("position: \(position.x)、x.y: \(position.y)")
             return rect
         })
         
         //骨骼的世界坐标转换屏幕需要等待controller中scaleY赋值完成才能获取
-//        if let boneFirst = bonesRect.first {
-//            LogInfo("bone.first:\(String(describing: bonesRect.first))")
-//        } else {
-//            LogInfo("bone.first is nil")
-//        }
+        //        if let boneFirst = bonesRect.first {
+        //            LogInfo("bone.first:\(String(describing: bonesRect.first))")
+        //        } else {
+        //            LogInfo("bone.first is nil")
+        //        }
     }
     
     func getBoneRectBy(boneName: String) -> CGRect? {
@@ -413,11 +436,18 @@ extension SpineController {
     
 }
 
-
-
 //MARK: - 插槽
 extension SkeletonGraphicScript {
     private func configSlots(slots: [Slot]) {
+        
+        bounds = SkeletonBounds.create()
+        if let skeleton, let bounds {
+            bounds.update(skeleton: skeleton, updateAabb: true)
+        }
+        
+        if let polygons = bounds?.polygons {
+            updateSlotPath(polygons: polygons)
+        }
         
         //一个带有定点的附件
         //     BoundingBoxAttachment：用于检测与骨骼动画的碰撞和交互，
@@ -426,22 +456,30 @@ extension SkeletonGraphicScript {
         
         self.slots = slots
         
+        //获取边框附件
+        
+        //        skeleton?.findSlot(slotName: "bianjie")
+        
         slots.forEach { slot in
-            if let name = slot.data.name {
-//                print("slot.name: \(name)")
-            }
+            //            if let name = slot.data.name {
+            //                print("slot.name: \(name)")
+            //            }
             //插槽的附件
             if let attachment = slot.attachment {
-                if let name = attachment.name {
-                    print("attachment.name: \(name)")
-                }
-                print("attachment.type: \(attachment.type)")
-                if attachment.aType == 3 {
+                if attachment.rType == .BOUNDING_BOX {
+                    if let name = attachment.name {
+                        print("attachment.name: \(name)")
+                    }
+                    //                    print("attachment.type: \(attachment.type)")
                     //边框
-//                    attachment.
-//                    print(attachment.)
+                    //                    if let box = attachment as? BoundingBoxAttachment {
+                    //                        print("attachment transform to BoundingBoxAttachment: \(box)")
+                    //                    }
+                    //                    if let name = slot.data.attachmentName {
+                    //                        print("slot.data.attachmentName: \(name)")
+                    //                    }
                 }
-//                attachment.type
+                //                attachment.type
             }
             //查看此插槽位置
             //worldX是世界坐标下的位置，这些坐标相对于Sine Skeleton的原点，而非屏幕和视图坐标
@@ -452,53 +490,189 @@ extension SkeletonGraphicScript {
                              y: position.y, width: 1, height: 1)
             )
             slotsRect.append(rect)
-            //在对应的插槽生成红点
             
-            //            slot.attachmentName
-//            print("slot.position.worldX: \(slot.bone.worldX)、slot.position.worldY: \(slot.bone.worldY)")
-//            print("slot.rect: \(rect)")
-//            let view = UIView()
-//            view.backgroundColor = .red
-//            view.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
-//            spineUIView?.addSubview(view)
-            //            }
+            //            print("slot.position.worldX: \(slot.bone.worldX)、slot.position.worldY: \(slot.bone.worldY)")
+            //            print("slot.rect: \(position)")
         }
+    }
+    
+    func getAttachment(slotName: String) {
+        
+        
+    }
+    
+    
+}
+
+
+//MARK: - 碰撞检测
+extension SkeletonGraphicScript {
+    
+    func onTriggerCheck() async {
+        //        print("onTriggerCheck:\(Thread.current)")
+        // spine对象以及父图层
+        // 遍历父图层对象，对内部子对象
+        if let spineUIView, let spineSupperview = await spineUIView.superview {
+            for v in await spineSupperview.subviews {
+                // 排除自身
+                if v != spineUIView {
+                    let point = await spineSupperview.convert(v.center, to: spineUIView)
+                    
+                    let rect = await spineSupperview.convert(v.bounds, to: spineUIView)
+                    //检测
+                    await MainActor.run {
+                        //                        if containsPoint(point: point) {
+                        //                            self.delegate?.onTriggerEnter(other: v)
+                        //                        }
+                        
+                        if let polygon = bounds?.polygons.first {
+                            if containsPoint(polygon: polygon, point: point) {
+                                self.delegate?.onTriggerEnter(other: v)
+                            }
+                            
+                            if containSegment(polygon: polygon,
+                                              point1: CGPoint(x: rect.minX, y: rect.minY),
+                                              point2: CGPoint(x: rect.maxX, y: rect.maxY)) {
+                                self.delegate?.onTriggerEnter(other: v)
+                            }
+                        }
+                    }
+                    
+                    //plo
+                }
+            }
+        }
+    }
+    
+    func updateSlotPath() {
+        if let skeleton {
+            //更新边界
+            bounds?.update(skeleton: skeleton, updateAabb: true)
+        }
+        if let polygons = bounds?.polygons {
+            updateSlotPath(polygons: polygons)
+        }
+    }
+    
+    func updateSlotPath(polygons: [Polygon]) {
+        
+        boxRect.removeAll()
+        //顶点列表
+        //顶点的X和Y依次存储为一维数组
+        if let polygon = polygons.first {
+            let vertices = polygon.vertices
+            let vertexCount = polygon.vertices.count
+            for i in stride(from: 0, to: vertexCount, by: 2) {
+                let x = CGFloat(vertices[i] ?? 0)
+                let y = CGFloat(vertices[i + 1] ?? 0)
+                let point = CGPointMake(x, y)
+                let position = controller.fromSkeletonCoordinatesToScreen(position: point)
+                boxRect.append(position)
+            }
+        }
+        //        LogInfo("updateSlotPath finish")
+    }
+    
+    
+    
+    func containsBox(size: CGSize) -> Bool {
+//        bounds.con
+        return false
+    }
+    
+    func containsPoint(polygon: Polygon, point: CGPoint) -> Bool {
+        //转化坐标
+        let position = controller.toSkeletonCoordinates(position: point)
+        if let b = bounds?.containsPoint(polygon:
+                                            polygon, x: Float(position.x), y: Float(position.y)) {
+            return b
+        }
+        return false
+    }
+    
+    //线段
+    func containSegment(polygon: Polygon, point1: CGPoint,point2: CGPoint) -> Bool {
+//        print("point1:（point1）")
+        //转化坐标
+        let position1 = controller.toSkeletonCoordinates(position: point1)
+        let position2 = controller.toSkeletonCoordinates(position: point2)
+        if let b = bounds?.intersectsSegment(polygon: polygon,
+                                             x1: Float(position1.x),
+                                             y1: Float(position1.y),
+                                             x2: Float(position2.x),
+                                             y2: Float(position2.y)) {
+            return b
+        }
+        return false
+    }
+    
+    //包含某个点
+    func containsPoint(point: CGPoint) -> Bool {
+        //转化坐标
+        let position = controller.toSkeletonCoordinates(position: point)
+        if let b = bounds?.aabbContainsPoint(x: Float(position.x), y: Float(position.y)) {
+            return b
+        }
+        return false
+    }
+    
+}
+
+extension Slot {
+    //    public var boxAttachment: BoundingBoxAttachment? {
+    //        get {
+    //            return spine_slot_get_attachment(wrappee).flatMap { .init($0) }
+    //        }
+    //        set {
+    //            spine_slot_set_attachment(wrappee, newValue?.wrappee)
+    //        }
+    //    }
+}
+
+extension SkeletonBounds {
+    
+    @discardableResult
+    public static func create() -> SkeletonBounds {
+        return .init(spine_skeleton_bounds_create())
     }
 }
 
 //MARK: - Attachment
 extension Attachment {
     
-    public var aType: UInt32 {
-        return type.rawValue
-    }
+    //    public var aType: UInt32 {
+    //        return type.rawValue
+    //    }
     
-    enum SpineAttachment_type {
-    case REGION
+    
+    public enum SpineAttachmentType {
+        case REGION
         case MESH
         case CLIPPING
         case BOUNDING_BOX
+        case PATH
+        case POINT
     }
-//    具体标号按照`type`对应
-//    typedef enum spine_attachment_type {
-//        SPINE_ATTACHMENT_REGION = 0,// 区域附件（图片区域）
-//        SPINE_ATTACHMENT_MESH, // 网格附件（变形图片）
-//        SPINE_ATTACHMENT_CLIPPING, // 裁剪附件（限制显示区域）
-//        SPINE_ATTACHMENT_BOUNDING_BOX,// 边界框附件（碰撞检测或区域表示）
-//        SPINE_ATTACHMENT_PATH, // 路径附件（用于路径动画）
-//        SPINE_ATTACHMENT_POINT,// 点附件（位置标记）
-//    } spine_attachment_type;
     
-    public var aTypeStr: String {
+    //    具体标号按照`type`对应
+    //    typedef enum spine_attachment_type {
+    //        SPINE_ATTACHMENT_REGION = 0,// 区域附件（图片区域）
+    //        SPINE_ATTACHMENT_MESH, // 网格附件（变形图片）
+    //        SPINE_ATTACHMENT_CLIPPING, // 裁剪附件（限制显示区域）
+    //        SPINE_ATTACHMENT_BOUNDING_BOX,// 边界框附件（碰撞检测或区域表示）
+    //        SPINE_ATTACHMENT_PATH, // 路径附件（用于路径动画）
+    //        SPINE_ATTACHMENT_POINT,// 点附件（位置标记）
+    //    } spine_attachment_type;
+    
+    public var rType: SpineAttachmentType {
         switch type.rawValue {
-        case 0: "REGION"
-        case 1: "MESH"
-        case 2: "CLIPPING"
-        case 3: "BOUNDING_BOX"
-        case 4: "PATH"
-        case 5: "POINT"
-        default:
-            "nil"
+        case 0: .REGION
+        case 1: .MESH
+        case 2: .CLIPPING
+        case 3: .BOUNDING_BOX
+        case 4: .PATH
+        case 5: .POINT
+        default: .REGION
         }
     }
 }

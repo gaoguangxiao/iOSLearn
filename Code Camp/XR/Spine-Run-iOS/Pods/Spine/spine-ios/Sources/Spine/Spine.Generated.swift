@@ -1728,7 +1728,7 @@ public final class SkeletonBounds: NSObject {
     internal let wrappee: spine_skeleton_bounds
     internal var disposed = false
 
-    internal init(_ wrappee: spine_skeleton_bounds) {
+    public init(_ wrappee: spine_skeleton_bounds) {
         self.wrappee = wrappee
         super.init()
     }

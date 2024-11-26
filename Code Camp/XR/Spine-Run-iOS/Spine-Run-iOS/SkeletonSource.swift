@@ -28,6 +28,15 @@ class SkeletonSource: ObservableObject {
             }
         }
     }
+    
+    func loadStonesImages() async {
+        let data = Bundle.jsonfileTojson("charaterJSON") as? [String: Any]
+        if let response = RSResponse.deserialize(from: data) {
+            await MainActor.run {
+                datas = response.data
+            }
+        }
+    }
 }
 
 extension SkeletonSource {

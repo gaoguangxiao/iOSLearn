@@ -29,6 +29,7 @@ PODS:
     - SnapKit
 
 DEPENDENCIES:
+  - GGXSwiftExtension (from `~/Documents/GitHub/ggxswiftexten`)
   - SmartCodable
   - Spine (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec`)
   - SpineCppLite (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineCppLite.podspec`)
@@ -37,7 +38,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - GGXSwiftExtension
     - KeychainAccess
     - PKHUD
     - PTDebugView
@@ -50,6 +50,8 @@ SPEC REPOS:
     - ZKBaseSwiftProject
 
 EXTERNAL SOURCES:
+  GGXSwiftExtension:
+    :path: "~/Documents/GitHub/ggxswiftexten"
   Spine:
     :podspec: https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec
   SpineCppLite:
@@ -84,6 +86,6 @@ SPEC CHECKSUMS:
   SpineShadersStructs: 51ae786df4f4ea9ca52d7d5ff365d2018b561346
   ZKBaseSwiftProject: 04cb3fb43a971c6bf0eb4ae718210b114c03daf9
 
-PODFILE CHECKSUM: 0bccafc913c4cc2fa2b8e49623e4f5c16d1113af
+PODFILE CHECKSUM: fe55c8bd2f66da4ac89cc09d92c0054070b73d2c
 
 COCOAPODS: 1.16.1

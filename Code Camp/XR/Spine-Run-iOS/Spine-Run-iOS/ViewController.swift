@@ -42,12 +42,8 @@ class ViewController: BehaviorViewController {
         return imageView
     }()
     
-    //放置窗户
-    lazy var demoBtn: UIButton = {
-        let btn = UIButton(type: .custom)
-        return btn
-    }()
-    
+    var stones: [UIButton] = []
+
     lazy var updateBtn: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setTitle("升级", for: .normal)
@@ -68,12 +64,13 @@ class ViewController: BehaviorViewController {
     private var moveDistance: CGPoint = .zero
     // 基础速度
     private var baseSpeed: CGFloat = 4.0
-    //点击屏幕保存方向距离
-    private var targetspeed: CGPoint = .zero
+//    //点击屏幕保存方向距离
+//    private var targetspeed: CGPoint = .zero
     // 目标状态
     public var state: CharaterBodyState = .animation;
     
-    //障碍物 绘制任务触发
+    //障碍物移动速度
+//    public var stoneSpeed: Float = 2.0
     
     //    public
     override func viewDidLoad() {
@@ -85,27 +82,27 @@ class ViewController: BehaviorViewController {
         //  self.view.addSubview(spineSuperView)
         let datumboy = Datum.babuV13()
         
-//      spine-boy
+        //      spine-boy
         Task {
-//            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datumboy)
-//            竖屏，不缩放
-            try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datumboy)
+            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 250, 150, 100),datum: datumboy)
+            //            竖屏，不缩放
+            //try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datumboy)
             initSpineView()
         }
         
-//      NPC-spine
-//        Task {
-//            await source.loadCharaterJSON()
-//            if let datum = source.npcDatum {
-////                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
-//                try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datum)
-//                skeletonScript.playAnimationName(
-//                    animationName: CharaterBodyState.animation.rawValue,
-//                    loop: true)
-//                skeletonScript.scaleX(faceLeft: -1)
-//                initSpineView()
-//            }
-//        }
+        //      NPC-spine
+        //        Task {
+        //            await source.loadCharaterJSON()
+        //            if let datum = source.npcDatum {
+        ////                try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(lE.x, 120, 200, 200),datum: datum)
+        //                try? await skeletonScript.setSkeletonFromBundle(rect:view.bounds,datum: datum)
+        //                skeletonScript.playAnimationName(
+        //                    animationName: CharaterBodyState.animation.rawValue,
+        //                    loop: true)
+        //                skeletonScript.scaleX(faceLeft: -1)
+        //                initSpineView()
+        //            }
+        //        }
     }
     
     func initSpineView() {
@@ -113,24 +110,67 @@ class ViewController: BehaviorViewController {
             print("spineUIView is nil")
             return
         }
-                
-//        for boneRect in skeletonScript.bonesRect {
+        
+        //        for boneRect in skeletonScript.bonesRect {
+        //            let rView = UILabel()
+        //            rView.text = boneRect.name
+        //            rView.frame = CGRect(x: boneRect.rect.minX,
+        //                                 y: boneRect.rect.midY,
+        //                                 width: 100, height: 40)// boneRect.rect
+        //            rView.backgroundColor = .blue
+        //            spineView.addSubview(rView)
+        //        }
+        //
+        //渲染spine动画路径
+        //        debugSlotViewPoint(spineView: spineView)
+        
+        //spine路径多边形点
+//        debugSlotPathPoint()
+        
+        //        if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
+        //            let rView = UIView()
+        //            rView.frame = rect
+        //            rView.backgroundColor = .blue
+        //            spineView.addSubview(rView)
+        //        } else {
+        //            print("get bone rect is nil")
+        //        }
+        
+        indicatorOffX = spineView.center
+        view.addSubview(spineView)
+    }
+    
+//    func debugSlotPathPoint() {
+//        guard let spineView = skeletonScript.spineUIView  else {
+//            print("spineUIView is nil")
+//            return
+//        }
+//        
+//        //先移除
+//        for view in spineView.subviews {
+//            view.removeFromSuperview()
+//        }
+//        
+//        //渲染路径
+//        for boxRect in skeletonScript.boxRect {
 //            let rView = UILabel()
-//            rView.text = boneRect.name
-//            rView.frame = CGRect(x: boneRect.rect.minX,
-//                                 y: boneRect.rect.midY,
-//                                 width: 100, height: 40)// boneRect.rect
-//            rView.backgroundColor = .blue
+//            rView.frame = CGRect(x: boxRect.x,
+//                                 y: boxRect.y,
+//                                 width: 5, height: 5)// boneRect.rect
+//            rView.backgroundColor = .yellow
 //            spineView.addSubview(rView)
 //        }
-        
+//    }
+    
+    func debugSlotViewPoint() {
+        guard let spineView = skeletonScript.spineUIView  else {
+            print("spineUIView is nil")
+            return
+        }
         for slotRect in skeletonScript.slotsRect {
-            
             if let att = slotRect.slot.attachment {
-                
-//                if att.aType == 4 {
-                    let rView = UILabel()
-                if att.aType == 3 {
+                let rView = UILabel()
+                if att.rType == .BOUNDING_BOX {
                     rView.backgroundColor = .red
                     spineView.addSubview(rView)
                     rView.snp.makeConstraints { make in
@@ -148,30 +188,24 @@ class ViewController: BehaviorViewController {
                     }
                     
                 }
-                
-//                    rView.text = (att.name ?? "") + "_\(att.aTypeStr)"
-
-//                }
             }
- 
-//            rView.frame = CGRect(x: slotRect.rect.minX,
-//                                 y: slotRect.rect.midY,
-//                                 width: 100, height: 40)// boneRect.rect
-
         }
-        
-//        if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
-//            let rView = UIView()
-//            rView.frame = rect
-//            rView.backgroundColor = .blue
-//            spineView.addSubview(rView)
-//        } else {
-//            print("get bone rect is nil")
-//        }
-        
-        indicatorOffX = spineView.center
-        self.view.addSubview(spineView)
     }
+    
+//    func debugPointView() {
+//        //100 * 40个石头
+//        for i in 0 ..< 50 {
+//            for j in 0 ..< 15 {
+//                let rView = UIButton()
+//                rView.frame = CGRect(x: i * 10 + 200,
+//                                     y: j * 10 + 200,
+//                                     width: 5, height: 5)// boneRect.rect
+//                rView.backgroundColor = .green
+//                view.addSubview(rView)
+//                stones.append(rView)
+//            }
+//        }
+//    }
     
     func initCharePositionMiddle(spineView: UIView) {
         spineView.frame = CGRectMake(rE.x - UIDevice.widthf, 120, 200, 200)
@@ -184,15 +218,22 @@ class ViewController: BehaviorViewController {
         //获取spine点击点
         guard let spineUIView = skeletonScript.spineUIView  else { return  }
         if let touch = touches.first {
-            let point = touch.location(in: view)
             
-            if let rect = skeletonScript.getBoneRectBy(boneName: "root") {
-                
-            } else {
-                print("get bone rect is nil")
-            }
+            
+            //点击`spineUIView`添加黑点
+//            let point = touch.location(in: spineUIView)
+//                        //将点击点转化为spine的坐标
+//            skeletonScript.containsPoint(point: point)
+//            let rView = UILabel()
+//            rView.center = point
+//            rView.backgroundColor = .black
+//            rView.frame = CGRect(x: point.x, y: point.y, width: 10, height: 10)
+//            spineUIView.addSubview(rView)
+//            return
+            
             // print("\(point.x)")
             // targeDistance = Float(point.x - spineUIView.x)
+            let point = touch.location(in: view)
             moveDistance = .zero
             targeDistance = point - spineUIView.center
             //            print("targeDistance：\(targeDistance)")
@@ -202,6 +243,14 @@ class ViewController: BehaviorViewController {
             } else {
                 skeletonScript.scaleX(faceLeft: 1)
             }
+            
+//            if targeDistance.x > 0 && skeletonScript.skeleton?.scaleX != -1 {
+                //更新spine世界点
+//                self.skeletonScript.updateSlotPath()
+                //重新渲染
+//                self.debugSlotPathPoint()
+//            }
+//            
             
             //走路状态改变一次
             guard state != .zoulu else {
@@ -313,11 +362,42 @@ extension ViewController {
     }
 }
 
+
+
 //MARK: 点击事件
 extension ViewController {
     @objc func didUpdateSpine() {
         let nv = UpdateSpinViewController()
         push(nv)
+        
+        //更新spine网格
+        //        skeletonScript.updateSlotPath()
+        
+        //渲染debug视图
+        //        debugSlotPathPoint()
+        
+        //将按钮的点转移至spine点
+//        skeletonScript.containsPoint(point: demoBtn.center)
+        
+    }
+    
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        guard let draggableView = gesture.view else { return }
+        
+        // 获取手势的偏移量
+        let translation = gesture.translation(in: view)
+        
+        // 更新视图的位置
+        draggableView.center = CGPoint(x: draggableView.center.x + translation.x,
+                                       y: draggableView.center.y + translation.y)
+        
+        // 重置手势的偏移量（防止累积）
+        gesture.setTranslation(.zero, in: view)
+        
+        // 可选：根据手势状态执行额外操作
+        if gesture.state == .ended {
+            print("拖动结束")
+        }
     }
 }
 
