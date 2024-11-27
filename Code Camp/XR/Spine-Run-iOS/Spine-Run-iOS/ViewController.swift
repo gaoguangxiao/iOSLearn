@@ -20,6 +20,11 @@ extension Datum {
         Datum(json: "babu_v1.3.json",
               atlas: "babu_v1.3.atlas")
     }
+    
+    static func npc() -> Datum {
+        Datum(json: "character_v1.6.json",
+              atlas: "character_v1.6.atlas")
+    }
 }
 
 class ViewController: BehaviorViewController {

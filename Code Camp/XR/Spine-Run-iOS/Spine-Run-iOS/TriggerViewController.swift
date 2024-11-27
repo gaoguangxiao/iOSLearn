@@ -10,20 +10,26 @@ import GGXSwiftExtension
 
 class TriggerViewController: BehaviorViewController {
     
-    let skeletonScript = SkeletonGraphicScript()
+    let skeletonScript = SkeletonAnimationScript()
     
     let source = SkeletonSource()
     
     lazy var imageBgView: UIImageView = {
-        let imageView = UIImageView(image: .bgPhone)
+        let imageView = UIImageView(image: .pickAllBg)
 //        imageView.contentMode = .scaleAspectF
+        return imageView
+    }()
+    
+    lazy var stonebgImage: UIImageView = {
+        let imageView = UIImageView(image: .item)
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     //放置石头
     lazy var stoneImage: UIImageView = {
         let imageView = UIImageView(image: .fish)
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -43,12 +49,11 @@ class TriggerViewController: BehaviorViewController {
         
         let datumboy = Datum.babuV13()
         skeletonScript.delegate = self
-        
+                
         Task {
             await source.loadStonesImages()
 //            print(source.medals)
-            
-            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 250, 200, 120),datum: datumboy)
+            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 270, 200, 120),datum: datumboy)
             guard let spineView = skeletonScript.spineUIView  else {
                 print("spineUIView is nil")
                 return
@@ -60,47 +65,22 @@ class TriggerViewController: BehaviorViewController {
     
     //获取点击事件
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //        print("touchesBegan")
         //获取spine点击点
         guard let spineUIView = skeletonScript.spineUIView  else { return  }
         guard isRuning else {
             return
         }
-        
         if let touch = touches.first {
-            let point = touch.location(in: view)
-            moveDistance = .zero
-            targeDistance = point - spineUIView.center
-            //            print("targeDistance：\(targeDistance)")
-            //朝向
-            if targeDistance.x > 0 {
-                skeletonScript.scaleX(faceLeft: -1)
-            } else {
-                skeletonScript.scaleX(faceLeft: 1)
-            }
+            let distance = touch.location(in: view) - spineUIView.center
+            skeletonScript.runToDistance(distance: distance)
             
-            //            if targeDistance.x > 0 && skeletonScript.skeleton?.scaleX != -1 {
-            //更新spine世界点
-//            self.skeletonScript.updateSlotPath()
-            //重新渲染
-//            self.debugSlotPathPoint()
-            
-            //}
-            
-            //走路状态改变一次
-            guard state != .zoulu else {
-                return
-            }
-            state = .zoulu
-            skeletonScript.playAnimationName(
-                animationName: CharaterBodyState.zoulu.rawValue,
-                loop: true)
+//            debugSlotPathPoint()
         }
     }
     
     //障碍物移动速度
-    public var stoneSpeed: Float = 2.0
-    
+    var stoneSpeed: Float = 2.0
+    // 游戏状态
     var isRuning = true
     
     override func update() {
@@ -108,72 +88,17 @@ class TriggerViewController: BehaviorViewController {
         guard isRuning else {
             return
         }
-        
-        if (targeDistance.x != 0) {
-            let distance = (targeDistance.x > 0 ? CGPoint.right : CGPoint.left) * baseSpeed
-            moveSkeObj(distance)
-        }
-        
-        stoneImage.translate(CGPoint(x: 0, y: Int(1.0 * stoneSpeed)))
-
-        if stoneImage.y >= UIDevice.heightf {
+        stonebgImage.translate(CGPoint(x: 0, y: Int(1.0 * stoneSpeed)))
+        if stonebgImage.bottom >= UIDevice.heightf - 20 {
             resetStone()
         }
     }
     
     //重置坐标
     func resetStone() {
-        stoneImage.y = 0
-        stoneImage.x = CGFloat(Float.random(in: 50..<Float(UIDevice.widthf) - 100))
+        stonebgImage.y = 0
+        stonebgImage.x = CGFloat(Float.random(in: 50..<Float(UIDevice.widthf) - 100))
         stoneImage.image = source.medals?.randomElement()
-    }
-    
-    /// 角色
-    public enum CharaterBodyState: String
-    {
-        case animation
-        case Idle
-        case zoulu
-        case zoulu_xianzhi
-        case Running
-        case Death
-        case Jumping
-    }
-    
-    // 目标距离
-    private var targeDistance: CGPoint = .zero
-    // 定义移动距离
-    private var moveDistance: CGPoint = .zero
-    // 基础速度
-    private var baseSpeed: CGFloat = 4.0
-    // 目标状态
-    private var state: CharaterBodyState = .animation;
-    
-    //单位时间移动距离
-    func moveSkeObj(_ distance: CGPoint) {
-        guard let spineUIView = skeletonScript.spineUIView  else { return }
-        //角色移动屏幕边缘
-        //move right
-        if distance.x > 0 && moveDistance.x >= targeDistance.x {
-            stopMove()
-            return
-        }
-        //move left
-        if distance.x < 0 && moveDistance.x <= targeDistance.x {
-            stopMove()
-            return
-        }
-        //移动视图
-        spineUIView.translate(distance)
-        moveDistance.x += distance.x
-    }
-    
-    func stopMove()  {
-        state = .animation
-        targeDistance = .zero
-        skeletonScript.playAnimationName(
-            animationName: CharaterBodyState.animation.rawValue,
-            loop: false)
     }
     
 }
@@ -182,26 +107,29 @@ class TriggerViewController: BehaviorViewController {
 extension TriggerViewController {
     func initBgV2() {
         view.addSubview(imageBgView)
-        if let image = imageBgView.image {
-            imageBgView.frame = CGRect(x: 0, y: 0, width: image.width, height: SCREEN_HEIGHT)
+        imageBgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        
+        view.addSubview(stonebgImage)
+        stonebgImage.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(CGSize(width: 50, height: 50))
         }
         
-        view.addSubview(stoneImage)
+        stonebgImage.addSubview(stoneImage)
         stoneImage.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: 40, height: 40))
+            make.size.equalTo(CGSize(width: 30, height: 30))
         }
         
-        view.addSubview(pausebtn)
-        pausebtn.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(20)
-            make.size.equalTo(CGSize(width: 80, height: 40))
-        }
-        
-        // 添加拖动手势识别器
-        //        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        //        demoBtn.addGestureRecognizer(panGesture)
+//        view.addSubview(pausebtn)
+//        pausebtn.snp.makeConstraints { make in
+//            make.right.equalToSuperview().offset(-50)
+//            make.top.equalTo(20)
+//            make.size.equalTo(CGSize(width: 80, height: 40))
+//        }
     }
     
     func debugSlotPathPoint() {
@@ -229,21 +157,28 @@ extension TriggerViewController {
     }
 }
 
+//对Ske扩展移动
+extension SkeletonGraphicScript {
+    
+    
+}
+
 //MARK: - SkeletonGraphicDelegate
 extension TriggerViewController: SkeletonGraphicDelegate {
 
     func onAfterUpdateWorldTransforms(skeletonGraphicScript: SkeletonGraphicScript) {
         
+//        debugSlotPathPoint()
     }
     
     func onInitialized(skeletonGraphicScript: SkeletonGraphicScript) {
         //spine初始化完毕，渲染触发点
-//        self.debugSlotPathPoint()
+//        debugSlotPathPoint()
     }
     
     //
     func onTriggerEnter(other: UIView) {
-        if other == stoneImage {
+        if other == stonebgImage {
             resetStone()
         }
     }

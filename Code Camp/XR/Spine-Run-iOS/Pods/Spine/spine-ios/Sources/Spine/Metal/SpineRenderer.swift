@@ -104,7 +104,6 @@ internal final class SpineRenderer: NSObject, MTKViewDelegate {
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         guard let spineView = view as? SpineUIView else { return }
-        print("mtkView(_ view")
         sizeInPoints = CGSize(width: size.width / UIScreen.main.scale, height: size.height / UIScreen.main.scale)
         viewPortSize = vector_uint2(UInt32(size.width), UInt32(size.height))
         setTransform(
@@ -175,7 +174,6 @@ internal final class SpineRenderer: NSObject, MTKViewDelegate {
             scale: vector_float2(Float(scaleX * UIScreen.main.scale), Float(scaleY * UIScreen.main.scale)),
             offset: vector_float2(Float(offsetX * UIScreen.main.scale), Float(offsetY * UIScreen.main.scale))
         )
-        print("setTransform")
         delegate?.spineRendererDidUpdate(
             self,
             scaleX: scaleX,

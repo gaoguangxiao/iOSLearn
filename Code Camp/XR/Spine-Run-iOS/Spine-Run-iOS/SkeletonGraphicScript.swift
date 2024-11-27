@@ -146,7 +146,12 @@ public class SkeletonGraphicScript: ObservableObject {
                     await self.onTriggerCheck()
                 }
                 
+                onAfterUpdateWorldTransforms()
+                
                 delegate?.onAfterUpdateWorldTransforms(skeletonGraphicScript: self)
+            },
+            onAfterPaint: { controller in
+                self.onAfterPaint()
             }
         )
         
@@ -172,9 +177,9 @@ public class SkeletonGraphicScript: ObservableObject {
         //config skin data
         configSkins(skins: skeletonData.skins)
         
-        //        skeletonData.animations.forEach {
-        //            if let name = $0.name { print("skin.animation: \(name)") }
-        //        }
+//        skeletonData.animations.forEach {
+//            if let name = $0.name { print("animation: \(name)") }
+//        }
         
         //        skeletonData.bones.forEach { bone in
         ////            if let name = bone.name { print("bone.animation: \(name)") }
@@ -189,6 +194,14 @@ public class SkeletonGraphicScript: ObservableObject {
         //        SkeletonBounds
     }
     
+    func onAfterUpdateWorldTransforms() {
+        
+    }
+    
+    
+    func onAfterPaint() {
+        
+    }
     
     @Published
     var selectedItem: String = ""
@@ -467,9 +480,9 @@ extension SkeletonGraphicScript {
             //插槽的附件
             if let attachment = slot.attachment {
                 if attachment.rType == .BOUNDING_BOX {
-                    if let name = attachment.name {
-                        print("attachment.name: \(name)")
-                    }
+//                    if let name = attachment.name {
+//                        print("attachment.name: \(name)")
+//                    }
                     //                    print("attachment.type: \(attachment.type)")
                     //边框
                     //                    if let box = attachment as? BoundingBoxAttachment {
@@ -500,8 +513,6 @@ extension SkeletonGraphicScript {
         
         
     }
-    
-    
 }
 
 
@@ -509,7 +520,11 @@ extension SkeletonGraphicScript {
 extension SkeletonGraphicScript {
     
     func onTriggerCheck() async {
-        //        print("onTriggerCheck:\(Thread.current)")
+        
+        //更新边界信息
+        updateSlotPath()
+        
+//        print("onTriggerCheck:\(Thread.current)")
         // spine对象以及父图层
         // 遍历父图层对象，对内部子对象
         if let spineUIView, let spineSupperview = await spineUIView.superview {
@@ -570,7 +585,7 @@ extension SkeletonGraphicScript {
                 boxRect.append(position)
             }
         }
-        //        LogInfo("updateSlotPath finish")
+//        LogInfo("boxRect :\(boxRect)")
     }
     
     
