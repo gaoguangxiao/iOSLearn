@@ -608,36 +608,46 @@ extension SkeletonGraphicScript {
         //更新边界信息
         updateSlotPath()
         
-//        print("onTriggerCheck:\(Thread.current)")
+//        print("onTriggerCheck:\(triggerView?.frame):tag:\(triggerView?.tag) count:\(triggerView)")
         // spine对象以及父图层
         // 遍历父图层对象，对内部子对象
         if let spineUIView, let spineSupperview = await spineUIView.superview {
             for v in await spineSupperview.subviews {
                 // 排除自身
                 if v != spineUIView {
-                    let point = await spineSupperview.convert(v.center, to: spineUIView)
-                    
-                    let rect = await spineSupperview.convert(v.bounds, to: spineUIView)
-                    //检测
-                    await MainActor.run {
-                        //                        if containsPoint(point: point) {
-                        //                            self.delegate?.onTriggerEnter(other: v)
-                        //                        }
-                        
-                        if let polygon = bounds?.polygons.first {
-                            if containsPoint(polygon: polygon, point: point) {
-                                self.delegate?.onTriggerEnter(other: v)
-                            }
-                            
-                            if containSegment(polygon: polygon,
-                                              point1: CGPoint(x: rect.minX, y: rect.minY),
-                                              point2: CGPoint(x: rect.maxX, y: rect.maxY)) {
-                                self.delegate?.onTriggerEnter(other: v)
-                            }
+                    await T(v: v, supperview: spineSupperview)
+//                    print("v: \(v.subviews.count)")
+                    //子视图
+                    for v1 in await v.subviews {
+                        if v1 != spineUIView {
+                            await T(v: v1, supperview: v)
                         }
                     }
-                    
-                    //plo
+//                    print("v: \(v.center)")
+                }
+            }
+        }
+    }
+    
+    func T (v: UIView, supperview: UIView) async {
+        let point = await supperview.convert(v.center, to: spineUIView)
+//        print("convert: \(point)")
+        let rect = await supperview.convert(v.bounds, to: spineUIView)
+        //检测
+        await MainActor.run {
+            //                        if containsPoint(point: point) {
+            //                            self.delegate?.onTriggerEnter(other: v)
+            //                        }
+            
+            if let polygon = bounds?.polygons.first {
+                if containsPoint(polygon: polygon, point: point) {
+                    self.delegate?.onTriggerEnter(other: v)
+                }
+                
+                if containSegment(polygon: polygon,
+                                  point1: CGPoint(x: rect.minX, y: rect.minY),
+                                  point2: CGPoint(x: rect.maxX, y: rect.maxY)) {
+                    self.delegate?.onTriggerEnter(other: v)
                 }
             }
         }
@@ -775,14 +785,6 @@ extension Attachment {
         }
     }
 }
-//extension SpineUIView {
-//
-//    //转换某个坐标
-//    public func translate(_ translation: CGPoint) {
-//        //朝向移动
-//        self.center += translation
-//    }
-//}
 
 //#MARK: - 模型数据
 public struct Datum: Identifiable, SmartCodable {

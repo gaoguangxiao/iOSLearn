@@ -16,7 +16,8 @@ public enum CharaterBodyState: String
     case zoulu_xianzhi
     case pao
     case Death
-    case Jumping
+    case Jumping = "datiao"
+    case Jumping2 = "datiao2"
     case naotou
 }
 
