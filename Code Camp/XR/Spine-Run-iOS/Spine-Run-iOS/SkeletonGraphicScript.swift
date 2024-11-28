@@ -15,6 +15,7 @@ import SpineCppLite
 
 //前缀Spine-iOS缩写
 typealias SIAnimationState = Spine.AnimationState
+typealias SIAnimation = Spine.Animation
 
 enum SkeletonGraphicError: Error {
     case DataError
@@ -177,9 +178,9 @@ public class SkeletonGraphicScript: ObservableObject {
         //config skin data
         configSkins(skins: skeletonData.skins)
         
-//        skeletonData.animations.forEach {
-//            if let name = $0.name { print("animation: \(name)") }
-//        }
+        
+        configAnimations(animations: skeletonData.animations)
+        
         
         //        skeletonData.bones.forEach { bone in
         ////            if let name = bone.name { print("bone.animation: \(name)") }
@@ -236,17 +237,96 @@ extension SkeletonGraphicScript {
     }
 }
 
-//MARK: 动作
+//MARK: - 动作
+extension EventType {
+    
+    //    typedef enum spine_event_type {
+    //        SPINE_EVENT_TYPE_START = 0,//动画开始事件
+    //        SPINE_EVENT_TYPE_INTERRUPT,//动画中断事件。
+    //        SPINE_EVENT_TYPE_END,//动画播放到最后一帧时触发，通常用于清理或标记动画的完成。
+    //        SPINE_EVENT_TYPE_COMPLETE,//当动画完整地播放了一次循环后触发。若动画是无限循环的，这个事件会在每次循环结束时触发
+    //        SPINE_EVENT_TYPE_DISPOSE,//触发时机: 当动画资源被释放或被销毁时触发，适合用来清理资源或引用
+    //        SPINE_EVENT_TYPE_EVENT//在动画中插入的关键帧事件触发时调用。可用于实现音效、特效等行为
+    //    } spine_event_type;
+    var SIEventType: SpineEventType {
+        switch self {
+        case SPINE_EVENT_TYPE_START: .START
+        case SPINE_EVENT_TYPE_INTERRUPT: .INTERRUPT
+        case SPINE_EVENT_TYPE_END: .END
+        case SPINE_EVENT_TYPE_COMPLETE: .COMPLETE
+        case SPINE_EVENT_TYPE_DISPOSE: .DISPOSE
+        case SPINE_EVENT_TYPE_EVENT: .EVENT
+        default: .END
+        }
+    }
+}
+
+public enum SpineEventType: String {
+    case START
+    case INTERRUPT
+    case END
+    case COMPLETE
+    case DISPOSE
+    case EVENT
+}
+
 extension SkeletonGraphicScript {
     
-    public func playAnimationName(animationName: String, loop: Bool = false, reverse: Bool = false, timeScale: Float = 1.0) {
+
+    
+    private func configAnimations(animations: [SIAnimation]) {
+//        animations.forEach {
+//            if let name = $0.name { print("animation: \(name)") }
+//        }
+    }
+    
+    public func setAnimationName(trackIndex: Int = 0,
+                                  animationName: String,
+                                  loop: Bool = false,
+                                  reverse: Bool = false,
+                                  timeScale: Float = 1.0,
+                                  isClearEnd: Bool = true,
+                                  listener: AnimationStateListener? = nil) {
         guard let _ = skeletonData?.findAnimation(name: animationName) else {
             print("animation is nil")
             return
         }
-        let trackEntry = animationState?.setAnimationByName(trackIndex: 0, animationName: animationName, loop: loop)
-        trackEntry?.reverse = reverse
-        trackEntry?.timeScale = timeScale
+        let trackEntry = animationState.setAnimationByName(trackIndex: Int32(trackIndex), animationName: animationName, loop: loop)
+        setTrackEntry(trackEntry: trackEntry, reverse: reverse,timeScale: timeScale,isClearEnd: isClearEnd,listener: listener)
+    }
+    
+    //一个轨道一个动画，如果要实现同一轨道多个动画需要叠加
+    public func addAnimationName(trackIndex: Int = 0,
+                                 animationName: String,
+                                 loop: Bool = false,
+                                 reverse: Bool = false,
+                                 timeScale: Float = 1.0,
+                                 isClearEnd: Bool = true,
+                                 listener: AnimationStateListener? = nil) {
+        guard let _ = skeletonData?.findAnimation(name: animationName) else {
+            print("animation is nil")
+            return
+        }
+        let trackEntry = animationState.addAnimationByName(trackIndex: Int32(trackIndex), animationName: animationName, loop: loop, delay: 0.0)
+
+        setTrackEntry(trackEntry: trackEntry,reverse: reverse,timeScale: timeScale,isClearEnd: isClearEnd,listener: listener)
+    }
+    
+    func setTrackEntry(trackEntry: TrackEntry,
+                       reverse: Bool = false,
+                       timeScale: Float = 1.0,
+                       isClearEnd: Bool = true,
+                       listener: AnimationStateListener? = nil) {
+        trackEntry.reverse = reverse
+        trackEntry.timeScale = timeScale
+//        animationStateWrapper.setTrackEntryListener(entry: trackEntry, listener: listener)
+        animationStateWrapper.setTrackEntryListener(entry: trackEntry) { type, entry, event in
+//            print("\(type.SIEventType.rawValue)")
+            listener?(type,entry,event)
+            if isClearEnd, type.SIEventType == .COMPLETE {
+                self.animationStateWrapper.setTrackEntryListener(entry: trackEntry, listener: nil)
+            }
+        }
     }
     
     /// 控制朝向 默认
@@ -257,7 +337,7 @@ extension SkeletonGraphicScript {
     }
 }
 
-//MARK: 皮肤
+//MARK: - 皮肤
 extension SkeletonGraphicScript {
     
     // Initialize skin
@@ -428,8 +508,12 @@ extension SkeletonGraphicScript {
         //        self.controller.drawable.skeletonData
     }
     
-    var animationState: SIAnimationState? {
-        self.skeletonDrawable?.animationState
+    var animationState: SIAnimationState {
+        controller.animationState
+    }
+    
+    var animationStateWrapper: AnimationStateWrapper {
+        controller.animationStateWrapper
     }
 }
 

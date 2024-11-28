@@ -17,6 +17,7 @@ public enum CharaterBodyState: String
     case pao
     case Death
     case Jumping
+    case naotou
 }
 
 public class SkeletonAnimationScript: SkeletonGraphicScript {
@@ -57,7 +58,7 @@ public class SkeletonAnimationScript: SkeletonGraphicScript {
             return
         }
         state = .pao
-        playAnimationName(
+        setAnimationName(
                 animationName: state.rawValue,
                 loop: true)
             
@@ -83,9 +84,13 @@ public class SkeletonAnimationScript: SkeletonGraphicScript {
     }
     
     private func stopMove()  {
+        if targeDistance.x == 0 {
+            return
+        }
+        print("stopMove")
         state = .animation
         targeDistance = .zero
-        playAnimationName(
+        setAnimationName(
             animationName: state.rawValue,
             loop: false)
     }

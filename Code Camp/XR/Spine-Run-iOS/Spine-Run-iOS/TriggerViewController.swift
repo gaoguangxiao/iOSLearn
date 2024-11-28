@@ -96,11 +96,10 @@ class TriggerViewController: BehaviorViewController {
     
     //重置坐标
     func resetStone() {
-        stonebgImage.y = 0
+        stonebgImage.y = -50
         stonebgImage.x = CGFloat(Float.random(in: 50..<Float(UIDevice.widthf) - 100))
         stoneImage.image = source.medals?.randomElement()
     }
-    
 }
 
 //MARK: - 视图
@@ -124,12 +123,12 @@ extension TriggerViewController {
             make.size.equalTo(CGSize(width: 30, height: 30))
         }
         
-//        view.addSubview(pausebtn)
-//        pausebtn.snp.makeConstraints { make in
-//            make.right.equalToSuperview().offset(-50)
-//            make.top.equalTo(20)
-//            make.size.equalTo(CGSize(width: 80, height: 40))
-//        }
+        view.addSubview(pausebtn)
+        pausebtn.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-50)
+            make.top.equalTo(20)
+            make.size.equalTo(CGSize(width: 80, height: 40))
+        }
     }
     
     func debugSlotPathPoint() {
@@ -180,6 +179,35 @@ extension TriggerViewController: SkeletonGraphicDelegate {
     func onTriggerEnter(other: UIView) {
         if other == stonebgImage {
             resetStone()
+            
+            //1.5秒之后
+            isRuning = false
+            
+            skeletonScript.setAnimationName(animationName: CharaterBodyState.naotou.rawValue) { type, entry, event in
+                print("naotou animation event：\(String(describing: event)) type：\(type.SIEventType.rawValue)");
+                if type.SIEventType == .END ||
+                    type.SIEventType == .COMPLETE{
+                    self.isRuning = true
+                    //之前新轨道1 应该清理掉
+                    self.skeletonScript.setAnimationName(animationName: CharaterBodyState.animation.rawValue)
+                }
+            }
+            //
+//            skeletonScript.addAnimationName(trackIndex: 1,animationName: CharaterBodyState.naotou.rawValue) { type, entry, event in
+//                print("naotou animation event：\(String(describing: event)) type：\(type.SIEventType.rawValue)");
+//                if type.SIEventType == .COMPLETE {
+//                    self.isRuning = true
+//                    //之前新轨道1 应该清理掉
+//                    self.skeletonScript.playAnimationName(animationName: CharaterBodyState.animation.rawValue)
+//                }
+//            }
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+//                self.isRuning = true
+//                
+//                self.skeletonScript.playAnimationName(trackIndex: 0,animationName: CharaterBodyState.animation.rawValue)
+            }
         }
     }
 }

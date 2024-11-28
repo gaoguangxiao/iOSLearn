@@ -140,6 +140,46 @@ public class SQLiteManager: NSObject {
         }
     }
     
+    
+    //更新
+    func updateUser(id: Int64 = 1, phone: String) {
+        guard let db else {
+            print("please init connection db")
+            return
+        }
+        do {
+            //条件
+            let update = users.filter(UserTable.userId == id)
+            //语句
+            let query = update.update(
+                UserTable.userPhone <- phone
+            )
+            //运行
+            try db.run(query)
+            print("update user success")
+        } catch {
+            print("update user fail: \(error)")
+        }
+    }
+    
+    func deleteUser(id: Int64 = 1) {
+        guard let db else {
+            print("please init connection db")
+            return
+        }
+        do {
+            //条件
+            let delete = users.filter(UserTable.userId == id)
+//            //语句
+            let query = delete.delete()
+            //运行
+            try db.run(query)
+            print("delete user success")
+        } catch {
+            print("delete user fail: \(error)")
+        }
+    }
+    
     //查指定用户
     public func queryUser(_ Id: Int64 = 1) {
         guard let db else {
@@ -153,7 +193,7 @@ public class SQLiteManager: NSObject {
         }
         
         for user in datas {
-            print("queryData user success：\(user[UserTable.userName])")
+            print("queryData user success：\(user[UserTable.userPhone])")
         }
     }
 }

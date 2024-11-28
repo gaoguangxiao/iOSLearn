@@ -12,8 +12,8 @@ struct ContentView: View {
     let sqm = SQLiteManager()
     
     var body: some View {
-        VStack {
-            
+        
+        Form {
             Button {
                 sqm.inserData(username: "小明", userphone: "110", pswd: "000")
             } label: {
@@ -21,18 +21,32 @@ struct ContentView: View {
             }
             
             Button {
-                sqm.queryData()
+                sqm.deleteUser(id: 1)
             } label: {
-                Text("查询所有用户")
+                Text("删除用户ID为1的数据")
+            }
+            
+            
+            Button {
+                sqm.updateUser(id: 1, phone: "114")
+            } label: {
+                Text("更新Id为0的用户 电话为114")
             }
             
             Button {
                 sqm.queryUser()
             } label: {
-                Text("查询Id为0的用户")
+                Text("查询Id为1的用户")
+            }
+            
+            Button {
+                sqm.queryData()
+            } label: {
+                Text("查询所有用户")
             }
         }
         .padding()
+ 
     }
 }
 

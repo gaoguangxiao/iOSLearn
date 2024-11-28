@@ -262,7 +262,7 @@ class ViewController: BehaviorViewController {
                 return
             }
             state = .zoulu
-            skeletonScript.playAnimationName(
+            skeletonScript.setAnimationName(
                 animationName: CharaterBodyState.zoulu.rawValue,
                 loop: true)
         }
@@ -342,7 +342,7 @@ extension ViewController {
     func stopMove()  {
         state = .animation
         targeDistance = .zero
-        skeletonScript.playAnimationName(
+        skeletonScript.setAnimationName(
             animationName: CharaterBodyState.animation.rawValue,
             loop: false)
     }
