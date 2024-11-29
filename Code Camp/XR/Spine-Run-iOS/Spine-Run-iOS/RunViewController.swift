@@ -12,16 +12,27 @@ class RunViewController: BehaviorViewController {
         let imageView = UIImageView(image: .a5922Dbfe3F7B5F4Cca6B3Cd83497106)
         imageView.isUserInteractionEnabled = true
         imageView.tag = 1
+        imageView.backgroundColor = .white
         return imageView
     }()
     
     lazy var imageBgView2: UIImageView = {
         let imageView = UIImageView(image: .a5922Dbfe3F7B5F4Cca6B3Cd83497106)
         imageView.isUserInteractionEnabled = true
-//        imageView.backgroundColor = .black
-        imageView.tag = 2
+        imageView.backgroundColor = .white
+        imageView.tag = 1
         return imageView
     }()
+    
+    lazy var imageBgView3: UIImageView = {
+        let imageView = UIImageView(image: .a5922Dbfe3F7B5F4Cca6B3Cd83497106)
+        imageView.isUserInteractionEnabled = true
+        imageView.backgroundColor = .white
+        imageView.tag = 1
+        return imageView
+    }()
+    //背景图片 至少三张，否则第一张切换时，容易漏出背景
+    var imageBgViews: [UIImageView] = []
     
     lazy var pausebtn: UIButton = {
         let btn = UIButton(type: .custom)
@@ -34,11 +45,13 @@ class RunViewController: BehaviorViewController {
     let skeletonScript = SkeletonAnimationScript()
     let source = SkeletonSource()
     //移动速度
-    var moveSpeed: Float = 4
-    //移动页
-    var pages: [Int: Int] = [:]
+    var moveSpeed: CGFloat = 4
+    //移动页统计
+    var pages: [Int: Bool] = [:]
+    // 背景总距离
+    var allDistance: CGFloat = 0
     //总计距离
-    var moveDistance = 0
+    var moveDistance : CGFloat = 0
     // 游戏状态
     var isRuning = true
     
@@ -50,6 +63,7 @@ class RunViewController: BehaviorViewController {
     }()
     
     override func viewDidLoad() {
+        isRuning = false
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
@@ -62,19 +76,35 @@ class RunViewController: BehaviorViewController {
         Task {
             await source.loadStonesImages()
             //            print(source.medals)
-            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(80, 200, 120, 150),datum: datumboy)
+            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(80, 240, 180, 100),datum: datumboy)
             skeletonScript.scaleX(faceLeft: -1)
-            skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: moveSpeed/4)
+            skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: Float(moveSpeed)/4)
             guard let spineView = skeletonScript.spineUIView  else {
                 print("spineUIView is nil")
                 return
             }
             view.addSubview(spineView)
-                
-            createStone(view: imageBgView, count: 50)
-            createStone(view: imageBgView2, count: 50)
+            
+            //配置参数
+            createStone(view: imageBgView, count: 10)
+            createStone(view: imageBgView2, count: 10)
+            createStone(view: imageBgView3, count: 10)
+            
+            imageBgViews.append(imageBgView)
+            imageBgViews.append(imageBgView2)
+            imageBgViews.append(imageBgView3)
+            
+            imageBgViews.forEach { imageView in
+                allDistance += imageView.width
+            }
+            print("allDistance: \(allDistance)")
+            pages[0] = true
+            
+            isRuning = true
+//            pages[1] = true
         }
     }
+    
     
     private var state: CharaterBodyState = .animation;
     
@@ -85,75 +115,82 @@ class RunViewController: BehaviorViewController {
             return
         }
         
-        
         if state == CharaterBodyState.Jumping {
             return
         }
-
-//        Task {
-//            UIView.animate(withDuration: 0.55) {
-//                spineUIView.y = 130
-//            }
-//        }
-//        
-//        state = .Jumping
-//        skeletonScript.setAnimationName(animationName: CharaterBodyState.Jumping2.rawValue,timeScale: 1.0) { [self] type, entry, event in
-//            if type.SIEventType == .END ||
-//                type.SIEventType == .COMPLETE{
-//                Task {
-//                    UIView.animate(withDuration: 0.15) {
-//                        spineUIView.y = 200
-//                    }
-//                }
-//                state = .pao
-//                self.skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: moveSpeed/4)
-//            }
-//        }
-   
+        
+        //        Task {
+        //            UIView.animate(withDuration: 0.55) {
+        //                spineUIView.y = 130
+        //            }
+        //        }
+        //
+        //        state = .Jumping
+        //        skeletonScript.setAnimationName(animationName: CharaterBodyState.Jumping2.rawValue,timeScale: 1.0) { [self] type, entry, event in
+        //            if type.SIEventType == .END ||
+        //                type.SIEventType == .COMPLETE{
+        //                Task {
+        //                    UIView.animate(withDuration: 0.15) {
+        //                        spineUIView.y = 200
+        //                    }
+        //                }
+        //                state = .pao
+        //                self.skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: moveSpeed/4)
+        //            }
+        //        }
+        
     }
     override func update() {
         guard isRuning else {
             return
         }
-        let pageIndex = moveDistance/UIDevice.width
-        
-        guard moveDistance >= UIDevice.width, pages[pageIndex] == nil else {
-            let distance = 1 * moveSpeed
-            moveDistance += Int(distance)
-            imageBgView.translate(CGPoint(x: Int(-distance), y: 0))
-            imageBgView2.translate(CGPoint(x: Int(-distance), y: 0))
+        //这张page的即将出现
+        let currentIndex = Int(moveDistance)/UIDevice.width
+//        print("pageIndex:\(pageIndex)")
+        //中间一张移动一半时
+//        allDistance - moveDistance < UIDevice.widthf
+        guard pages[currentIndex] == nil else {
+            moveDistance += moveSpeed
+            //移动背景
+            imageBgViews.forEach { $0.translateToLeft(moveSpeed) }
             return
         }
-        //        print("pageIndex: \(pageIndex) - page:\(page)")
-        if pageIndex%2 == 0 {
-            print("调整：imageBgView2")
-            imageBgView2.x = imageBgView.frame.maxX
-//            print("resetStone:\(imageBgView2.subviews.count)")
-            for subview in imageBgView2.subviews {
-                if let image = subview as? UIImageView {
-                    resetStone(stoneImage: image)
-                }
-            }
-            
-            //控制检测视图
-//            skeletonScript.triggerView = imageBgView2
-        } else {
-            print("调整：imageBgView")
-            imageBgView.x = imageBgView2.frame.maxX
-            for subview in imageBgView.subviews {
-                if let image = subview as? UIImageView {
-                    resetStone(stoneImage: image)
-                }
-            }
-//            skeletonScript.triggerView = imageBgView
+       
+        pages[currentIndex] = true
+        print("currentIndex:\(currentIndex)")
+//        print("moveDistance:\(moveDistance)")
+//        //调整位置
+        
+//        //即将消失的索引，示例值：0,1,2
+        let disAppearImageIndex = (currentIndex - 1).remainderReportingOverflow(dividingBy: imageBgViews.count).partialValue
+        print("disAppearImageIndex:\(disAppearImageIndex)")
+//        // 上个图片索引
+        var afterImageIndex = disAppearImageIndex - 1
+//        // 第一张放置最后
+        if afterImageIndex < 0 {
+            afterImageIndex = imageBgViews.count - 1
         }
-        pages[pageIndex] = pageIndex
+        print("afterImageIndex:\(afterImageIndex)")
+        //第三张出现的时候
+        jusetIndex(disAppearImageIndex: disAppearImageIndex, beforeImageIndex: afterImageIndex)
+    }
+    
+    //
+    func jusetIndex(disAppearImageIndex: Int,beforeImageIndex: Int) {
+        imageBgViews[disAppearImageIndex].x = imageBgViews[beforeImageIndex].frame.maxX
+        
+        //重置消失的视图元素
+        imageBgViews[disAppearImageIndex].subviews.forEach {
+            if let image = $0 as? UIImageView {
+                resetStone(stoneImage: image)
+            }
+        }
     }
     
     func resetStone(stoneImage: UIImageView) {
-//        stoneImage.y = -50
-        let x = CGFloat(Float.random(in: 0..<Float(UIDevice.widthf) - 40))
-        let y = CGFloat(Float.random(in: 100..<Float(UIDevice.height) - 80))
+        //        stoneImage.y = -50
+        let x = CGFloat.random(in: 0..<UIDevice.widthf - 40)
+        let y = CGFloat.random(in: 100..<UIDevice.heightf - 80)
         stoneImage.snp.updateConstraints { make in
             make.top.equalTo(y)
             make.left.equalTo(x)
@@ -171,9 +208,7 @@ extension RunViewController {
             make.left.top.bottom.equalToSuperview()
             make.width.equalTo(UIDevice.width)
         }
-        
-//        imageBgView.addSubview(createStone())
-        
+
         view.addSubview(imageBgView2)
         imageBgView2.snp.makeConstraints { make in
             make.left.equalTo(imageBgView.snp.right)
@@ -181,13 +216,21 @@ extension RunViewController {
             make.width.equalTo(UIDevice.width)
         }
         
+        view.addSubview(imageBgView3)
+        imageBgView3.snp.makeConstraints { make in
+            make.left.equalTo(imageBgView2.snp.right)
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(UIDevice.width)
+        }
+        
+
         view.addSubview(pausebtn)
         pausebtn.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(20)
             make.size.equalTo(CGSize(width: 80, height: 40))
         }
-
+        
     }
     
     //在此视图创建
@@ -202,9 +245,9 @@ extension RunViewController {
                 make.size.equalTo(CGSize(width: 50, height: 50))
             }
             resetStone(stoneImage: stoneImage)
-            print(view.subviews.count)
+//            print(view.subviews.count)
         }
-       
+        
     }
     
     func debugSlotPathPoint() {
@@ -228,14 +271,14 @@ extension RunViewController {
             spineView.addSubview(rView)
         }
         
-//        LogInfo("debugSlotPathPoint finish")
+        //        LogInfo("debugSlotPathPoint finish")
     }
     
 }
 
 extension RunViewController: SkeletonGraphicDelegate {
     func onInitialized(skeletonGraphicScript: SkeletonGraphicScript) {
-//        debugSlotPathPoint()
+        //        debugSlotPathPoint()
     }
     
     func onAfterUpdateWorldTransforms(skeletonGraphicScript: SkeletonGraphicScript) {
@@ -243,13 +286,13 @@ extension RunViewController: SkeletonGraphicDelegate {
     }
     
     func onTriggerEnter(other: UIView) {
-//        print("onTriggerEnter")
+        //        print("onTriggerEnter")
         if other.tag != 1, other.tag != 2 {
-//            print("onTriggerEnter")
+            //            print("onTriggerEnter")
             other.backgroundColor = .red
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
-//                other.removeFromSuperview()
-//            }
+            //            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            //                other.removeFromSuperview()
+            //            }
         }
     }
     
