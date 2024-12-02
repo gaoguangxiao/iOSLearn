@@ -19,6 +19,7 @@ public enum CharaterBodyState: String
     case Jumping = "datiao"
     case Jumping2 = "datiao2"
     case naotou
+    case feixing
 }
 
 public class SkeletonAnimationScript: SkeletonGraphicScript {

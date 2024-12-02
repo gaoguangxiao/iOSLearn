@@ -1,5 +1,5 @@
 PODS:
-  - GGXSwiftExtension (0.7.2)
+  - GGXSwiftExtension (0.7.3)
   - KeychainAccess (4.2.2)
   - PKHUD (5.3.0)
   - PTDebugView (0.1.9):
@@ -11,14 +11,14 @@ PODS:
   - RxRelay (6.8.0):
     - RxSwift (= 6.8.0)
   - RxSwift (6.8.0)
-  - SmartCodable (4.2.6)
+  - SmartCodable (4.3.0)
   - SnapKit (5.7.1)
   - Spine (4.2.0):
     - SpineCppLite
     - SpineShadersStructs
   - SpineCppLite (4.2.0)
   - SpineShadersStructs (4.2.0)
-  - ZKBaseSwiftProject (1.0.9):
+  - ZKBaseSwiftProject (1.1.0):
     - GGXSwiftExtension
     - KeychainAccess
     - PKHUD
@@ -29,7 +29,7 @@ PODS:
     - SnapKit
 
 DEPENDENCIES:
-  - GGXSwiftExtension (from `~/Documents/GitHub/ggxswiftexten`)
+  - GGXSwiftExtension
   - SmartCodable
   - Spine (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec`)
   - SpineCppLite (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineCppLite.podspec`)
@@ -38,6 +38,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - GGXSwiftExtension
     - KeychainAccess
     - PKHUD
     - PTDebugView
@@ -50,8 +51,6 @@ SPEC REPOS:
     - ZKBaseSwiftProject
 
 EXTERNAL SOURCES:
-  GGXSwiftExtension:
-    :path: "~/Documents/GitHub/ggxswiftexten"
   Spine:
     :podspec: https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec
   SpineCppLite:
@@ -71,7 +70,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/esotericsoftware/spine-runtimes.git
 
 SPEC CHECKSUMS:
-  GGXSwiftExtension: ef35cfe3275df105db6d0f320ee413423833ff4c
+  GGXSwiftExtension: 40c6af94e5c5e1acb7216bf152814d8311ff59fb
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PTDebugView: c719fbcf92bbcad675a9fba8a6206e863d8d021c
@@ -79,13 +78,13 @@ SPEC CHECKSUMS:
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
-  SmartCodable: 09bc8e160ecb5fd0a7500cca792eb03e75a06477
+  SmartCodable: e1ad00634eb72d34e76e8a96cd5382bf4127cee9
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Spine: fab8ea7427af5f7c4ffa42259989b404759389b0
   SpineCppLite: 0c05549dc08fff40da8853e079606e559f6036ce
   SpineShadersStructs: 51ae786df4f4ea9ca52d7d5ff365d2018b561346
-  ZKBaseSwiftProject: 04cb3fb43a971c6bf0eb4ae718210b114c03daf9
+  ZKBaseSwiftProject: 6814626a4d780a68c3128a2926432c38ad01fb55
 
-PODFILE CHECKSUM: fe55c8bd2f66da4ac89cc09d92c0054070b73d2c
+PODFILE CHECKSUM: 9a486dfb87f248f64e563e0bf015e001b5bf8b40
 
 COCOAPODS: 1.16.1

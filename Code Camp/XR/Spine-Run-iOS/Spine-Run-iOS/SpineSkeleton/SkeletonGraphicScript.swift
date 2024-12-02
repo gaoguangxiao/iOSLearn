@@ -44,6 +44,8 @@ public protocol SkeletonGraphicDelegate {
     //其他对象进入spine内部，spineSuperView必须有值，同一图层
     func onTriggerEnter(other: UIView)
     
+    //spine对象多边形变化
+    func onUpdatePolygonsTransforms(skeletonGraphicScript: SkeletonGraphicScript)
 }
 
 public class SkeletonGraphicScript: ObservableObject {
@@ -68,8 +70,9 @@ public class SkeletonGraphicScript: ObservableObject {
     @Published
     var slotsRect: [SlotRect] = []
     
-    @Published
-    var boxRect: [CGPoint] = []
+    public var isDebugPolygons = false
+//    @Published
+    var boxRects: [CGPoint] = []
     
     //spine插槽，绑定到骨骼
     @Published
@@ -129,7 +132,6 @@ public class SkeletonGraphicScript: ObservableObject {
         self.controller = SpineController(
             onInitialized: { [weak self ] controller in
                 guard let self else { return }
-                //                LogInfo("EEE")
                 //配置骨骼坐标
                 //                if let bones = skeleton?.bones {
                 configBones(bones: controller.skeleton.bones)
@@ -312,6 +314,17 @@ extension SkeletonGraphicScript {
         setTrackEntry(trackEntry: trackEntry,reverse: reverse,timeScale: timeScale,isClearEnd: isClearEnd,listener: listener)
     }
     
+    //删除轨道
+    public func clearTrack(trackIndex: Int32 = 0) {
+        animationState.clearTrack(trackIndex: Int32(trackIndex))
+        
+        //可选：恢复到初始状态（如果需要）通常用于中断当前动画并防止动画混合
+//        animationState.setEmptyAnimation(trackIndex: trackIndex, mixDuration: 0)
+        
+        // 可选：恢复到初始状态
+        skeleton?.setToSetupPose()
+    }
+    
     func setTrackEntry(trackEntry: TrackEntry,
                        reverse: Bool = false,
                        timeScale: Float = 1.0,
@@ -332,8 +345,6 @@ extension SkeletonGraphicScript {
     /// 控制朝向 默认
     public func scaleX(faceLeft: Float) {
         skeleton?.scaleX = faceLeft
-        
-        updateSlotPath()
     }
 }
 
@@ -538,14 +549,10 @@ extension SkeletonGraphicScript {
     private func configSlots(slots: [Slot]) {
         
         bounds = SkeletonBounds.create()
-        if let skeleton, let bounds {
-            bounds.update(skeleton: skeleton, updateAabb: true)
-        }
         
-        if let polygons = bounds?.polygons {
-            updateSlotPath(polygons: polygons)
-        }
+        updateSlotPath()
         
+        LogInfo("EEEE")
         //一个带有定点的附件
         //     BoundingBoxAttachment：用于检测与骨骼动画的碰撞和交互，
         //     从Skeleton获取包含`BoundingBoxAttachment`的插槽Slot、
@@ -659,29 +666,41 @@ extension SkeletonGraphicScript {
             bounds?.update(skeleton: skeleton, updateAabb: true)
         }
         if let polygons = bounds?.polygons {
-            updateSlotPath(polygons: polygons)
+            onUpdateSlotPath(polygons: polygons)
         }
     }
     
-    func updateSlotPath(polygons: [Polygon]) {
-        
-        boxRect.removeAll()
-        //顶点列表
-        //顶点的X和Y依次存储为一维数组
-        if let polygon = polygons.first {
-            let vertices = polygon.vertices
-            let vertexCount = polygon.vertices.count
-            for i in stride(from: 0, to: vertexCount, by: 2) {
-                let x = CGFloat(vertices[i] ?? 0)
-                let y = CGFloat(vertices[i + 1] ?? 0)
-                let point = CGPointMake(x, y)
-                let position = controller.fromSkeletonCoordinatesToScreen(position: point)
-                boxRect.append(position)
+    func onUpdateSlotPath(polygons: [Polygon]) {
+        //本次点
+        var newboxRect: [CGPoint] = []
+        // 确保多边形顶点列表非空
+        if let polygon = polygons.first, polygon.vertices.count % 2 == 0 {
+            // 将顶点的 x 和 y 值按对组合成一对一对的元组
+            let vertices = stride(from: 0, to: polygon.vertices.count, by: 2)
+                .compactMap { i -> CGPoint? in
+                    // 获取 x 和 y 值，确保安全地获取
+                    guard let x = polygon.vertices[i], let y = polygon.vertices[i + 1] else { return nil }
+                    let point = CGPoint(x: CGFloat(x), y: CGFloat(y))
+                    return controller.fromSkeletonCoordinatesToScreen(position: point)
+                }
+            // 将所有计算后的位置添加到 boxRect
+            newboxRect.append(contentsOf: vertices)
+        }
+
+        //记录旧点和新点的变化
+        if newboxRect != boxRects {
+            boxRects = newboxRect
+//            LogInfo("坐标改变了:\(boxRects)")
+            delegate?.onUpdatePolygonsTransforms(skeletonGraphicScript: self)
+            
+            if isDebugPolygons {
+                DispatchQueue.main.async {
+                    self.debugBoxPoint()
+                }
             }
         }
 //        LogInfo("boxRect :\(boxRect)")
     }
-    
     
     
     func containsBox(size: CGSize) -> Bool {
@@ -724,7 +743,29 @@ extension SkeletonGraphicScript {
         }
         return false
     }
-    
+ 
+    //渲染debug边界区域
+    @MainActor public func debugBoxPoint() {
+        guard let spineUIView  else {
+            print("spineUIView is nil")
+            return
+        }
+        //先移除
+        for view in spineUIView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        print("debugBoxPoint:\(boxRects)")
+        //渲染路径
+        for box in boxRects {
+            let rView = UILabel()
+            rView.frame = CGRect(x: box.x,
+                                 y: box.y,
+                                 width: 5, height: 5)// boneRect.rect
+            rView.backgroundColor = .purple
+            spineUIView.addSubview(rView)
+        }
+    }
 }
 
 extension Slot {

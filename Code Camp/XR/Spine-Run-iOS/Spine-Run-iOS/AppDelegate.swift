@@ -6,11 +6,21 @@
 //
 
 import UIKit
+import SwiftUI
+
+//@main
+//@available(iOS 14.0, *)
+//struct LaunchMainApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            DemoListUIView()
+//        }
+//    }
+//}
+//DemoListUIView
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

@@ -32,14 +32,8 @@ class SkeletonSource: ObservableObject {
     @Published
     var medals: [UIImage]?
     
-    func loadStonesImages() async {
-        var images: [UIImage] = []
-        for i in 0..<36 {
-            if let image = UIImage(named: "medal_\(i)") {
-                images.append(image)
-            }
-        }
-        medals = images
+    func loadStonesImages() {
+        medals = (0...36).compactMap { UIImage(named: "medal_\($0)") }
     }
 }
 
@@ -51,4 +45,22 @@ extension SkeletonSource {
 
 struct RSResponse: SmartCodable {
     var data: [Datum]?
+}
+
+// 数据源
+extension Datum {
+    static func spineBoy() -> Datum {
+        Datum(json: "spineboy-pro.json",
+              atlas: "spineboy-pma.atlas")
+    }
+    
+    static func babuV13() -> Datum {
+        Datum(json: "babu_v1.3.json",
+              atlas: "babu_v1.3.atlas")
+    }
+    
+    static func npc() -> Datum {
+        Datum(json: "character_v1.6.json",
+              atlas: "character_v1.6.atlas")
+    }
 }

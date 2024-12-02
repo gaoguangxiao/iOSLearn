@@ -7,10 +7,17 @@
 
 import UIKit
 import GGXSwiftExtension
+import ZKBaseSwiftProject
 
 class TriggerViewController: BehaviorViewController {
     
-    let skeletonScript = SkeletonAnimationScript()
+    lazy var skeletonScript: SkeletonAnimationScript = {
+        let script = SkeletonAnimationScript()
+//        script.isDebugPolygons = true
+        script.delegate = self
+        return script
+    }()
+    
     
     let source = SkeletonSource()
     
@@ -48,12 +55,11 @@ class TriggerViewController: BehaviorViewController {
         initBgV2()
         
         let datumboy = Datum.babuV13()
-        skeletonScript.delegate = self
-                
+        
+        source.loadStonesImages()
+        
         Task {
-            await source.loadStonesImages()
-//            print(source.medals)
-            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 270, 200, 120),datum: datumboy)
+            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 290 * ZKAdapt.factor, 200, 120),datum: datumboy)
             guard let spineView = skeletonScript.spineUIView  else {
                 print("spineUIView is nil")
                 return
@@ -73,8 +79,6 @@ class TriggerViewController: BehaviorViewController {
         if let touch = touches.first {
             let distance = touch.location(in: view) - spineUIView.center
             skeletonScript.runToDistance(distance: distance)
-            
-//            debugSlotPathPoint()
         }
     }
     
@@ -112,11 +116,8 @@ extension TriggerViewController {
 
         
         view.addSubview(stonebgImage)
-        stonebgImage.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: 50, height: 50))
-        }
-        
+        stonebgImage.frame = CGRect(x: view.centerX, y: 0, width: 50, height: 50)
+
         stonebgImage.addSubview(stoneImage)
         stoneImage.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -130,44 +131,16 @@ extension TriggerViewController {
             make.size.equalTo(CGSize(width: 80, height: 40))
         }
     }
-    
-    func debugSlotPathPoint() {
-        guard let spineView = skeletonScript.spineUIView  else {
-            print("spineUIView is nil")
-            return
-        }
-        
-        //先移除
-        for view in spineView.subviews {
-            view.removeFromSuperview()
-        }
-        
-        //渲染路径
-        for boxRect in skeletonScript.boxRect {
-            let rView = UILabel()
-            rView.frame = CGRect(x: boxRect.x,
-                                 y: boxRect.y,
-                                 width: 5, height: 5)// boneRect.rect
-            rView.backgroundColor = .purple
-            spineView.addSubview(rView)
-        }
-        
-//        LogInfo("debugSlotPathPoint finish")
-    }
-}
-
-//对Ske扩展移动
-extension SkeletonGraphicScript {
-    
-    
 }
 
 //MARK: - SkeletonGraphicDelegate
 extension TriggerViewController: SkeletonGraphicDelegate {
-
+    func onUpdatePolygonsTransforms(skeletonGraphicScript: SkeletonGraphicScript) {
+        
+    }
+    
     func onAfterUpdateWorldTransforms(skeletonGraphicScript: SkeletonGraphicScript) {
         
-//        debugSlotPathPoint()
     }
     
     func onInitialized(skeletonGraphicScript: SkeletonGraphicScript) {
@@ -183,24 +156,28 @@ extension TriggerViewController: SkeletonGraphicDelegate {
             //1.5秒之后
             isRuning = false
             
-            skeletonScript.setAnimationName(animationName: CharaterBodyState.naotou.rawValue) { type, entry, event in
+//            skeletonScript.setAnimationName(animationName: CharaterBodyState.naotou.rawValue) { type, entry, event in
+//                print("naotou animation event：\(String(describing: event)) type：\(type.SIEventType.rawValue)");
+//                if type.SIEventType == .END ||
+//                    type.SIEventType == .COMPLETE{
+//                    self.isRuning = true
+//                    //之前新轨道1 应该清理掉
+//                    self.skeletonScript.setAnimationName(animationName: CharaterBodyState.animation.rawValue)
+//                }
+//            }
+            //
+            skeletonScript.addAnimationName(trackIndex: 1,animationName: CharaterBodyState.naotou.rawValue) { [self] type, entry, event in
                 print("naotou animation event：\(String(describing: event)) type：\(type.SIEventType.rawValue)");
-                if type.SIEventType == .END ||
-                    type.SIEventType == .COMPLETE{
+                if type.SIEventType == .COMPLETE {
                     self.isRuning = true
+                    
+                    //清理挠头的动画
+                    skeletonScript.clearTrack(trackIndex: 1)
+                    
                     //之前新轨道1 应该清理掉
                     self.skeletonScript.setAnimationName(animationName: CharaterBodyState.animation.rawValue)
                 }
             }
-            //
-//            skeletonScript.addAnimationName(trackIndex: 1,animationName: CharaterBodyState.naotou.rawValue) { type, entry, event in
-//                print("naotou animation event：\(String(describing: event)) type：\(type.SIEventType.rawValue)");
-//                if type.SIEventType == .COMPLETE {
-//                    self.isRuning = true
-//                    //之前新轨道1 应该清理掉
-//                    self.skeletonScript.playAnimationName(animationName: CharaterBodyState.animation.rawValue)
-//                }
-//            }
             
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {

@@ -58,6 +58,4 @@ extension DisplayTimerProtocal {
         
         
     }
-    
-    
 }

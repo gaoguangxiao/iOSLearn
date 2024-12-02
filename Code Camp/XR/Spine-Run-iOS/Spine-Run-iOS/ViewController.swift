@@ -10,22 +10,7 @@ import Spine
 import GGXSwiftExtension
 import SnapKit
 
-extension Datum {
-    static func spineBoy() -> Datum {
-        Datum(json: "spineboy-pro.json",
-              atlas: "spineboy-pma.atlas")
-    }
-    
-    static func babuV13() -> Datum {
-        Datum(json: "babu_v1.3.json",
-              atlas: "babu_v1.3.atlas")
-    }
-    
-    static func npc() -> Datum {
-        Datum(json: "character_v1.6.json",
-              atlas: "character_v1.6.atlas")
-    }
-}
+
 
 class ViewController: BehaviorViewController {
     
@@ -249,14 +234,6 @@ class ViewController: BehaviorViewController {
                 skeletonScript.scaleX(faceLeft: 1)
             }
             
-//            if targeDistance.x > 0 && skeletonScript.skeleton?.scaleX != -1 {
-                //更新spine世界点
-//                self.skeletonScript.updateSlotPath()
-                //重新渲染
-//                self.debugSlotPathPoint()
-//            }
-//            
-            
             //走路状态改变一次
             guard state != .zoulu else {
                 return
@@ -374,12 +351,6 @@ extension ViewController {
     @objc func didUpdateSpine() {
         let nv = UpdateSpinViewController()
         push(nv)
-        
-        //更新spine网格
-        //        skeletonScript.updateSlotPath()
-        
-        //渲染debug视图
-        //        debugSlotPathPoint()
         
         //将按钮的点转移至spine点
 //        skeletonScript.containsPoint(point: demoBtn.center)

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import ZKBaseSwiftProject
+import GGXSwiftExtension
 
 class RunViewController: BehaviorViewController {
     lazy var imageBgView: UIImageView = {
@@ -49,7 +51,7 @@ class RunViewController: BehaviorViewController {
     //移动页统计
     var pages: [Int: Bool] = [:]
     // 背景总距离
-    var allDistance: CGFloat = 0
+//    var allDistance: CGFloat = 0
     //总计距离
     var moveDistance : CGFloat = 0
     // 游戏状态
@@ -71,12 +73,14 @@ class RunViewController: BehaviorViewController {
         initBgV2()
         
         let datumboy = Datum.babuV13()
+//        skeletonScript.isDebugPolygons = true
         skeletonScript.delegate = self
         
+        source.loadStonesImages()
+        
         Task {
-            await source.loadStonesImages()
             //            print(source.medals)
-            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(80, 240, 180, 100),datum: datumboy)
+            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(80, 300 * ZKAdapt.factor, 180, 100),datum: datumboy)
             skeletonScript.scaleX(faceLeft: -1)
             skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: Float(moveSpeed)/4)
             guard let spineView = skeletonScript.spineUIView  else {
@@ -85,19 +89,13 @@ class RunViewController: BehaviorViewController {
             }
             view.addSubview(spineView)
             
-            //配置参数
-            createStone(view: imageBgView, count: 10)
-            createStone(view: imageBgView2, count: 10)
-            createStone(view: imageBgView3, count: 10)
+            let bgviews = [imageBgView,imageBgView2, imageBgView3]
+            imageBgViews.append(contentsOf: bgviews)
             
-            imageBgViews.append(imageBgView)
-            imageBgViews.append(imageBgView2)
-            imageBgViews.append(imageBgView3)
+            bgviews.forEach { createStone(view: $0, count: 10) }
             
-            imageBgViews.forEach { imageView in
-                allDistance += imageView.width
-            }
-            print("allDistance: \(allDistance)")
+//            let allDistance = imageBgViews.reduce(0, { $0 + $1.width })
+//            print("allDistance: \(allDistance)")
             pages[0] = true
             
             isRuning = true
@@ -115,40 +113,44 @@ class RunViewController: BehaviorViewController {
             return
         }
         
-        if state == CharaterBodyState.Jumping {
+        if state == CharaterBodyState.feixing {
             return
         }
         
-        //        Task {
-        //            UIView.animate(withDuration: 0.55) {
-        //                spineUIView.y = 130
-        //            }
-        //        }
-        //
-        //        state = .Jumping
-        //        skeletonScript.setAnimationName(animationName: CharaterBodyState.Jumping2.rawValue,timeScale: 1.0) { [self] type, entry, event in
-        //            if type.SIEventType == .END ||
-        //                type.SIEventType == .COMPLETE{
-        //                Task {
-        //                    UIView.animate(withDuration: 0.15) {
-        //                        spineUIView.y = 200
-        //                    }
-        //                }
-        //                state = .pao
-        //                self.skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: moveSpeed/4)
-        //            }
-        //        }
+                state = .feixing
+                skeletonScript.setAnimationName(animationName: state.rawValue,
+                                                timeScale: 1.0) { [self] type, entry, event in
+                    if type.SIEventType == .END ||
+                        type.SIEventType == .COMPLETE{
+//                        Task {
+//                            UIView.animate(withDuration: 0.45) {
+//                                spineUIView.y = 300 * ZKAdapt.factor
+//                            }
+//                        }
+                        state = .pao
+                        self.skeletonScript.setAnimationName(animationName: CharaterBodyState.pao.rawValue,loop: true,timeScale: Float(moveSpeed)/4)
+                    }
+                }
         
     }
     override func update() {
         guard isRuning else {
             return
         }
+        
+        guard let spineUIView = skeletonScript.spineUIView  else { return  }
+        if state == .feixing {
+            spineUIView.translate(CGPoint(x: 0, y: -4))
+        } else if state == .pao {
+            if spineUIView.y < 300 * ZKAdapt.factor {
+                spineUIView.translate(CGPoint(x: 0, y: 4))
+            }
+        }
+        
         //这张page的即将出现
         let currentIndex = Int(moveDistance)/UIDevice.width
 //        print("pageIndex:\(pageIndex)")
         //中间一张移动一半时
-//        allDistance - moveDistance < UIDevice.widthf
         guard pages[currentIndex] == nil else {
             moveDistance += moveSpeed
             //移动背景
@@ -189,8 +191,8 @@ class RunViewController: BehaviorViewController {
     
     func resetStone(stoneImage: UIImageView) {
         //        stoneImage.y = -50
-        let x = CGFloat.random(in: 0..<UIDevice.widthf - 40)
-        let y = CGFloat.random(in: 100..<UIDevice.heightf - 80)
+        let x = CGFloat.random(in: 0..<UIDevice.widthf - 50)
+        let y = CGFloat.random(in: 20..<UIDevice.heightf - 80)
         stoneImage.snp.updateConstraints { make in
             make.top.equalTo(y)
             make.left.equalTo(x)
@@ -249,36 +251,16 @@ extension RunViewController {
         }
         
     }
-    
-    func debugSlotPathPoint() {
-        guard let spineView = skeletonScript.spineUIView  else {
-            print("spineUIView is nil")
-            return
-        }
-        
-        //先移除
-        for view in spineView.subviews {
-            view.removeFromSuperview()
-        }
-        
-        //渲染路径
-        for boxRect in skeletonScript.boxRect {
-            let rView = UILabel()
-            rView.frame = CGRect(x: boxRect.x,
-                                 y: boxRect.y,
-                                 width: 5, height: 5)// boneRect.rect
-            rView.backgroundColor = .purple
-            spineView.addSubview(rView)
-        }
-        
-        //        LogInfo("debugSlotPathPoint finish")
-    }
-    
 }
 
 extension RunViewController: SkeletonGraphicDelegate {
+    func onUpdatePolygonsTransforms(skeletonGraphicScript: SkeletonGraphicScript) {
+        
+    }
+    
     func onInitialized(skeletonGraphicScript: SkeletonGraphicScript) {
-        //        debugSlotPathPoint()
+        
+//        skeletonGraphicScript.debugBoxPoint()
     }
     
     func onAfterUpdateWorldTransforms(skeletonGraphicScript: SkeletonGraphicScript) {
