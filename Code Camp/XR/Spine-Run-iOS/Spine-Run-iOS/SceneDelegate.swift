@@ -16,14 +16,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
-//        let mainVc = ViewController()
-//        let nav = UINavigationController(rootViewController: mainVc)
-//        nav.setNavigationBarHidden(true, animated: false)
-//        self.window?.backgroundColor = .white
-//        self.window?.rootViewController = nav
-//        self.window?.makeKeyAndVisible()
+        
+        initRootViewController()
     }
 
+    func initRootViewController() {
+        //初始化 配置
+        if let application = UIApplication.shared.delegate as? AppDelegate {
+            application.initConfig()
+        }
+        
+        let homepageVc = DemoListViewController()
+        let nav = UINavigationController(rootViewController: homepageVc)
+        nav.setNavigationBarHidden(true, animated: true)
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
+        
+        //判断离线包加载情况
+        let coverVC = GXSplashView(frame: window?.bounds ?? .zero, vc: homepageVc)
+        coverVC.frame = window?.bounds ?? .zero
+        coverVC.superVc = homepageVc
+        coverVC.configFinishCompleted = { webUrl in
+//            if let value = CustomUtil.getToken() ,!value.isEmpty {
+//                MSBApiConfig.shared.appendHeader(["token":value])
+//            }
+            //进入App
+//            homepageVc.enterWebUrl()
+        }
+        self.window?.addSubview(coverVC)
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

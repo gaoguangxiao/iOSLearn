@@ -7,17 +7,8 @@
 
 import UIKit
 import SwiftUI
-
-//@main
-//@available(iOS 14.0, *)
-//struct LaunchMainApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            DemoListUIView()
-//        }
-//    }
-//}
-//DemoListUIView
+import GXSwiftNetwork
+import GGXSwiftExtension
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
+    }
+    
+    func initConfig() {
+        var header: [String: String] = [:]
+        header["device"] = "app"
+        header["os-type"] = "ios"
+        header["version"] = "\(kAppVersion ?? "1.0")"//1.6.3
+        header["device-model"] = UIDevice.modelName
+        if (UIDevice.isIPad) {
+            header["device-type"] = "iPad"
+        }else {
+            header["device-type"] = "iPhone"
+        }
+//    https://gateway-test.risekid.cn
+//    https://gw.risekid.cn
+        MSBApiConfig.shared.setApiConfig(apiHost: "https://gw.risekid.cn",
+                                         commonHeaders: header,
+                                         isAddDefaultHeaders: true)
+        
     }
 
     // MARK: UISceneSession Lifecycle

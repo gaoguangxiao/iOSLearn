@@ -8,6 +8,7 @@
 import UIKit
 import GGXSwiftExtension
 import ZKBaseSwiftProject
+import GGXOfflineWebCache
 
 class TriggerViewController: BehaviorViewController {
     
@@ -54,12 +55,21 @@ class TriggerViewController: BehaviorViewController {
         // Do any additional setup after loading the view.
         initBgV2()
         
-        let datumboy = Datum.babuV13()
+        let datumboy = Datum.babuV13Offline()
         
         source.loadStonesImages()
         
         Task {
-            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 290 * ZKAdapt.factor, 200, 120),datum: datumboy)
+//            try? await skeletonScript.setSkeletonFromBundle(rect:CGRectMake(20, 290 * ZKAdapt.factor, 200, 120),datum: datumboy)
+            
+            if let atlas = datumboy.atlas, let json = datumboy.json {
+                if let atlasURL = GXHybridCacheManager.share.loadOfflinePath(atlas),
+                   let jsonURL = GXHybridCacheManager.share.loadOfflinePath(json)
+                {
+                    try? await skeletonScript.setSkeletonFromFile(atlasPath: atlasURL, jsonPath: jsonURL)
+                }
+            }
+            
             guard let spineView = skeletonScript.spineUIView  else {
                 print("spineUIView is nil")
                 return

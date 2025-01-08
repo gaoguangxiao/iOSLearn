@@ -237,6 +237,15 @@ extension SkeletonGraphicScript {
         let drawable = try await SkeletonDrawableWrapper.fromFile(atlasFile: atlas, skeletonFile: json)
         try await configSkeletonDrawableWrapper(drawable: drawable,rect: .zero)
     }
+    
+    public func setSkeletonFromFile(atlasPath: String, jsonPath: String) async throws {
+        guard let atlas = atlasPath.fileUrl,
+              let json = jsonPath.fileUrl else {
+            throw SkeletonGraphicError.DataError
+        }
+        let drawable = try await SkeletonDrawableWrapper.fromFile(atlasFile: atlas, skeletonFile: json)
+        try await configSkeletonDrawableWrapper(drawable: drawable,rect: .zero)
+    }
 }
 
 //MARK: - 动作

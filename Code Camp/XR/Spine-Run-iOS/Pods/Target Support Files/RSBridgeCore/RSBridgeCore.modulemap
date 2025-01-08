@@ -1,0 +1,6 @@
+framework module RSBridgeCore {
+  umbrella header "RSBridgeCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

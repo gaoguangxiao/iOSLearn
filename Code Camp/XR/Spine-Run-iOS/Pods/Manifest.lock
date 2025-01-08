@@ -1,10 +1,36 @@
 PODS:
+  - Alamofire (5.10.2)
+  - GGXOfflineWebCache (0.4.7):
+    - GGXSwiftExtension
+    - GXSwiftNetwork
+    - GXTaskDownload
+    - PTDebugView
+    - SSZipArchive
   - GGXSwiftExtension (0.7.3)
+  - GXSwiftNetwork (0.3.4):
+    - Moya
+    - PKHUD
+    - SmartCodable
+  - GXTaskDownload (0.4.1):
+    - GGXSwiftExtension
+    - SmartCodable
   - KeychainAccess (4.2.2)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
   - PKHUD (5.3.0)
   - PTDebugView (0.1.9):
     - GGXSwiftExtension
   - ReachabilitySwift (5.2.4)
+  - RSBridgeCore (1.1.5):
+    - KeychainAccess
+    - RxCocoa
+    - SmartCodable
+    - ZKBaseSwiftProject
+  - RSBridgeOfflineWeb (1.0.2):
+    - GGXOfflineWebCache
+    - RSBridgeCore
   - RxCocoa (6.8.0):
     - RxRelay (= 6.8.0)
     - RxSwift (= 6.8.0)
@@ -18,6 +44,7 @@ PODS:
     - SpineShadersStructs
   - SpineCppLite (4.2.0)
   - SpineShadersStructs (4.2.0)
+  - SSZipArchive (2.4.3)
   - ZKBaseSwiftProject (1.1.0):
     - GGXSwiftExtension
     - KeychainAccess
@@ -30,6 +57,7 @@ PODS:
 
 DEPENDENCIES:
   - GGXSwiftExtension
+  - RSBridgeOfflineWeb
   - SmartCodable
   - Spine (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/Spine.podspec`)
   - SpineCppLite (from `https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/4.2/SpineCppLite.podspec`)
@@ -37,9 +65,17 @@ DEPENDENCIES:
   - ZKBaseSwiftProject
 
 SPEC REPOS:
-  trunk:
+  http://gitlab.risekid.cn/ce/ios-bridge/rs-trunk.git:
+    - RSBridgeCore
+    - RSBridgeOfflineWeb
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - GGXOfflineWebCache
     - GGXSwiftExtension
+    - GXSwiftNetwork
+    - GXTaskDownload
     - KeychainAccess
+    - Moya
     - PKHUD
     - PTDebugView
     - ReachabilitySwift
@@ -48,6 +84,7 @@ SPEC REPOS:
     - RxSwift
     - SmartCodable
     - SnapKit
+    - SSZipArchive
     - ZKBaseSwiftProject
 
 EXTERNAL SOURCES:
@@ -70,11 +107,18 @@ CHECKOUT OPTIONS:
     :git: https://github.com/esotericsoftware/spine-runtimes.git
 
 SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  GGXOfflineWebCache: 52e09cf6bdc1c100137c439b39a360c2bc4679a2
   GGXSwiftExtension: 40c6af94e5c5e1acb7216bf152814d8311ff59fb
+  GXSwiftNetwork: c02c7817b5cd8fbcac3c4816f14b2c4e0f764a05
+  GXTaskDownload: 2ef5fba0d9dea781a967620966ee68d7b95a099b
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PTDebugView: c719fbcf92bbcad675a9fba8a6206e863d8d021c
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
+  RSBridgeCore: 5f4890ab23d7ea3d41f598d5c61c07058347cd49
+  RSBridgeOfflineWeb: a10df70e3f412e64cd7df9f617628ee391ccd954
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
@@ -83,8 +127,9 @@ SPEC CHECKSUMS:
   Spine: fab8ea7427af5f7c4ffa42259989b404759389b0
   SpineCppLite: 0c05549dc08fff40da8853e079606e559f6036ce
   SpineShadersStructs: 51ae786df4f4ea9ca52d7d5ff365d2018b561346
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   ZKBaseSwiftProject: 6814626a4d780a68c3128a2926432c38ad01fb55
 
-PODFILE CHECKSUM: 9a486dfb87f248f64e563e0bf015e001b5bf8b40
+PODFILE CHECKSUM: 1a4d866e1a836721ec1dfe8201ac9f9becc9ad60
 
 COCOAPODS: 1.16.1
