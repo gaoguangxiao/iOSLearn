@@ -9,6 +9,7 @@ import UIKit
 import SwiftUI
 import GXSwiftNetwork
 import GGXSwiftExtension
+import PTDebugView
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initConfig() {
+        ZKWLog.init()
+        
         var header: [String: String] = [:]
         header["device"] = "app"
         header["os-type"] = "ios"

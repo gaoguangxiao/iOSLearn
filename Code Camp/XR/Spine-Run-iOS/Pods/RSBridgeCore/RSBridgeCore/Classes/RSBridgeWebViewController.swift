@@ -12,20 +12,38 @@ import ZKBaseSwiftProject
 import SmartCodable
 import RxCocoa
 import PTDebugView
+import AVFAudio
 
 @objcMembers
 open class RSBridgeWebViewController: ZKBaseWKWebViewController, ReportEventProtocol {
 
     /// 对data中key进行过滤
     public var dataFiltKeys: Array<String> = []
+    // 对data中包含的key-value值 匹配不打印
+    public var dataNoPrintKeysAndValue: Array<String> = []
+    // 对data中包含的key不打印日志
+    public var dataNoPrintKeys: Array<String> = []
+    // 对data中包含的value的值不打印日志
+    public var dataNoPrintValue: Array<String> = []
+    
+    //app是否退入后台
+    public var appForEnterBackground: Bool = false
     
     open override func viewDidAppear(_ animated: Bool) {
-        self.callJS(action: "webViewShow")
+//        self.callJS(action: "webViewShow")
+        self.callJS(body: CallWeb(action: "webViewShow"))
         super.viewDidAppear(animated)
     }
     
+    public var supportsBackgroundJS = true {
+        didSet {
+            iOSBridgeCore.instance.supportsBackgroundJS = supportsBackgroundJS
+        }
+    }
+    
     open override func viewDidDisappear(_ animated: Bool) {
-        self.callJS(action: "webViewHide")
+//        self.callJS(action: "webViewHide")
+        self.callJS(body: CallWeb(action: "webViewHide"))
         super.viewDidDisappear(animated)
     }
     
@@ -36,6 +54,8 @@ open class RSBridgeWebViewController: ZKBaseWKWebViewController, ReportEventProt
         backImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        iOSBridgeCore.instance.webViewVc = self
         
         self.addUserScript(forSource: jsCode)
         
@@ -71,6 +91,14 @@ open class RSBridgeWebViewController: ZKBaseWKWebViewController, ReportEventProt
     }()
     
     
+    public func resetAudioSession() throws {
+        if UserDefaults.record {
+            try AVAudioSession.configureAudioSessionForPlayAndRecord()
+        } else {
+            try AVAudioSession.configureAudioSessionForPlayback()
+        }
+    }
+    
     open func callJS(body: RSBridgeModel) {
         addLog(body)
         callJS(action: body.action ,callbackId: body.callbackId,data: body.data ,code: body.code,msg: body.msg)
@@ -101,6 +129,10 @@ open class RSBridgeWebViewController: ZKBaseWKWebViewController, ReportEventProt
     }
     
     open func event(eventId: String, attributes: Dictionary<String, Any>) {
+        
+    }
+    
+    open func event(eventId: String, attributes: Dictionary<String, Any>, isAddDevice: Bool) {
         
     }
 }
@@ -135,6 +167,17 @@ public extension RSBridgeWebViewController {
     func addLog(_ body: RSBridgeModel)  {
         //自定义log
         body.dataFiltKeys = dataFiltKeys
+        
+#if DEBUG
+        if !dataNoPrintKeysAndValue.isEmpty {
+            let hasMatchingString = dataNoPrintKeysAndValue.contains(where: { str in
+                body.description.contains(str)
+            })
+            if hasMatchingString {
+                return
+            }
+        }
+#endif
         PTDebugView.addLog("ios-call-web: \(body.description)")
         
     }
@@ -160,7 +203,9 @@ extension RSBridgeWebViewController {
         NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification)
             .subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else {return}
-                self.callJS(action: "appHide")
+//                self.callJS(action: "appHide")
+                appForEnterBackground = true
+                self.callJS(body: CallWeb(action: "appHide"))
                 //                self.puaseAllAudioPlayer()
                 //                cancel(task: homepageVc?.osWakeTask)
             }).disposed(by: disposeBag)
@@ -168,7 +213,19 @@ extension RSBridgeWebViewController {
         NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
             .subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else {return}
-                self.callJS(action: "appShow")
+//                self.callJS(action: "appShow")
+                appForEnterBackground = false
+                self.callJS(body: CallWeb(action: "appShow"))
+                
+                //重新设置音频会话
+                do {
+                    try resetAudioSession()
+                } catch  {
+                    event(eventId: "Dmx_Client_Error", attributes: ["Dmx_Key_Data":"foregroundNotification\(error.localizedDescription)"])
+                }
+                
+                //执行JS事件
+                iOSBridgeCore.instance.executeJsEvents()
                 //                self.resumeAllAudioPlayer()
                 //                delay(time: 5,task:  {
                 //                    PTIAPTool.share.resendReceipt()
@@ -177,12 +234,14 @@ extension RSBridgeWebViewController {
         
         NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
             .subscribe(onNext: { _ in
-                self.callJS(action: "keyboardShow")
+//                self.callJS(action: "keyboardShow")
+                self.callJS(body: CallWeb(action: "keyboardShow"))
             }).disposed(by: self.disposeBag)
         
         NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
             .subscribe(onNext: { _ in
-                self.callJS(action: "keyboardHide")
+//                self.callJS(action: "keyboardHide")
+                self.callJS(body: CallWeb(action: "keyboardHide"))
             }).disposed(by: self.disposeBag)
     }
 }

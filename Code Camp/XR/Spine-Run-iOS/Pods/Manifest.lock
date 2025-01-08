@@ -1,17 +1,18 @@
 PODS:
   - Alamofire (5.10.2)
-  - GGXOfflineWebCache (0.4.7):
+  - GGXOfflineWebCache (0.5.2):
     - GGXSwiftExtension
     - GXSwiftNetwork
     - GXTaskDownload
     - PTDebugView
     - SSZipArchive
-  - GGXSwiftExtension (0.7.3)
-  - GXSwiftNetwork (0.3.4):
+  - GGXSwiftExtension (0.7.4)
+  - GXPKHUD (1.0.0)
+  - GXSwiftNetwork (0.4.1):
+    - GXPKHUD
     - Moya
-    - PKHUD
     - SmartCodable
-  - GXTaskDownload (0.4.1):
+  - GXTaskDownload (0.5.0):
     - GGXSwiftExtension
     - SmartCodable
   - KeychainAccess (4.2.2)
@@ -19,16 +20,17 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - PKHUD (5.3.0)
-  - PTDebugView (0.1.9):
+  - PTDebugView (0.2.1):
     - GGXSwiftExtension
+    - SnapKit
   - ReachabilitySwift (5.2.4)
-  - RSBridgeCore (1.1.5):
+  - RSBridgeCore (1.2.8):
     - KeychainAccess
+    - PTDebugView
     - RxCocoa
     - SmartCodable
     - ZKBaseSwiftProject
-  - RSBridgeOfflineWeb (1.0.2):
+  - RSBridgeOfflineWeb (1.1.1):
     - GGXOfflineWebCache
     - RSBridgeCore
   - RxCocoa (6.8.0):
@@ -37,7 +39,7 @@ PODS:
   - RxRelay (6.8.0):
     - RxSwift (= 6.8.0)
   - RxSwift (6.8.0)
-  - SmartCodable (4.3.0)
+  - SmartCodable (4.3.2)
   - SnapKit (5.7.1)
   - Spine (4.2.0):
     - SpineCppLite
@@ -45,10 +47,9 @@ PODS:
   - SpineCppLite (4.2.0)
   - SpineShadersStructs (4.2.0)
   - SSZipArchive (2.4.3)
-  - ZKBaseSwiftProject (1.1.0):
+  - ZKBaseSwiftProject (1.1.8):
     - GGXSwiftExtension
     - KeychainAccess
-    - PKHUD
     - PTDebugView
     - ReachabilitySwift
     - RxCocoa
@@ -72,11 +73,11 @@ SPEC REPOS:
     - Alamofire
     - GGXOfflineWebCache
     - GGXSwiftExtension
+    - GXPKHUD
     - GXSwiftNetwork
     - GXTaskDownload
     - KeychainAccess
     - Moya
-    - PKHUD
     - PTDebugView
     - ReachabilitySwift
     - RxCocoa
@@ -108,28 +109,28 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
-  GGXOfflineWebCache: 52e09cf6bdc1c100137c439b39a360c2bc4679a2
-  GGXSwiftExtension: 40c6af94e5c5e1acb7216bf152814d8311ff59fb
-  GXSwiftNetwork: c02c7817b5cd8fbcac3c4816f14b2c4e0f764a05
-  GXTaskDownload: 2ef5fba0d9dea781a967620966ee68d7b95a099b
+  GGXOfflineWebCache: e5ba4e8c868e558e6ad08b7dc537f90fe59aa190
+  GGXSwiftExtension: 438330b80997b69e09968004588ce41d8ff36583
+  GXPKHUD: 3db210320877a88b0c9331e6b4045ba5c07ec2ea
+  GXSwiftNetwork: 200d699991a7bcb9c39076c0ad5aa1cf7b099cbe
+  GXTaskDownload: 6d924d06697bd07c0996329750c952a4dfe1b5e0
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
-  PTDebugView: c719fbcf92bbcad675a9fba8a6206e863d8d021c
+  PTDebugView: 07baae09ba9de990f964cb35a056fd1d3411bb6d
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
-  RSBridgeCore: 5f4890ab23d7ea3d41f598d5c61c07058347cd49
-  RSBridgeOfflineWeb: a10df70e3f412e64cd7df9f617628ee391ccd954
+  RSBridgeCore: 4fa750f336a7f9339f34d4cf6abe9fb50a3f95ff
+  RSBridgeOfflineWeb: b243ec3c3a0687d0845b82e1c38d9fa285b973c2
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
-  SmartCodable: e1ad00634eb72d34e76e8a96cd5382bf4127cee9
+  SmartCodable: 88fbf3d65207c2376fdbce4b080a3d578cb51be8
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Spine: fab8ea7427af5f7c4ffa42259989b404759389b0
   SpineCppLite: 0c05549dc08fff40da8853e079606e559f6036ce
   SpineShadersStructs: 51ae786df4f4ea9ca52d7d5ff365d2018b561346
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  ZKBaseSwiftProject: 6814626a4d780a68c3128a2926432c38ad01fb55
+  ZKBaseSwiftProject: e6970ff6b6f63e343466acdfe0e9557e36ab6c17
 
 PODFILE CHECKSUM: 1a4d866e1a836721ec1dfe8201ac9f9becc9ad60
 
-COCOAPODS: 1.16.1
+COCOAPODS: 1.16.2

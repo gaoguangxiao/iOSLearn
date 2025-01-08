@@ -1,0 +1,365 @@
+{
+    "version": "0.1.1",
+    "assets":
+    [
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.0.atlas",
+            "md5": "3f0469ad",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.0.json",
+            "md5": "02b03fcd",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.0.png",
+            "md5": "20419e0b",
+            "policy": 3
+        },{
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.3.atlas",
+            "md5": "3f0469ad",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.3.json",
+            "md5": "02b03fcd",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.3.png",
+            "md5": "20419e0b",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.1.atlas",
+            "md5": "9c1b2652",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.1.json",
+            "md5": "e408fe5e",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babu_v1.1.png",
+            "md5": "20419e0b",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babuchidongxi_v1.0.atlas",
+            "md5": "42a88eec",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babuchidongxi_v1.0.json",
+            "md5": "c4cb424c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babuchidongxi_v1.0.png",
+            "md5": "7b4ae801",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/babuchidongxi_v1.0_2.png",
+            "md5": "ca487012",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/lanlongbabu_v1.3.atlas",
+            "md5": "019bffa5",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/lanlongbabu_v1.3.json",
+            "md5": "c8ff05b7",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babu/lanlongbabu_v1.3.png",
+            "md5": "41327dd4",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babuchi/babu_v1.1.atlas",
+            "md5": "f7cf0c1a",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babuchi/babu_v1.1.json",
+            "md5": "e321e719",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/babuchi/babu_v1.1.png",
+            "md5": "e7bc1279",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/baojian.atlas",
+            "md5": "69f64431",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/baojian.json",
+            "md5": "e0839845",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/baojian.png",
+            "md5": "cc372321",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/bilu.atlas",
+            "md5": "7093f8b6",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/bilu.json",
+            "md5": "41a0f177",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/bilu.png",
+            "md5": "9737c759",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/chuanghu.atlas",
+            "md5": "5684efea",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/chuanghu.json",
+            "md5": "2bfcb6da",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/chuanghu.png",
+            "md5": "d563f29a",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/fazhang.atlas",
+            "md5": "deff2391",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/fazhang.json",
+            "md5": "a7c77bf3",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/fazhang.png",
+            "md5": "84860180",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/guanzi.atlas",
+            "md5": "768c1c3d",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/guanzi.json",
+            "md5": "1a9ee059",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/guanzi.png",
+            "md5": "bd8192a9",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mofaqiu.atlas",
+            "md5": "38d3fb6c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mofaqiu.json",
+            "md5": "df3b2629",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mofaqiu.png",
+            "md5": "3380c48a",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mofashu.atlas",
+            "md5": "7f02f3db",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mofashu.json",
+            "md5": "c8148a81",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mofashu.png",
+            "md5": "b5663b4d",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mojing.atlas",
+            "md5": "1dd4fc86",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mojing.json",
+            "md5": "e6228851",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/mojing.png",
+            "md5": "3939da80",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/quanjizhu.atlas",
+            "md5": "8332c34c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/quanjizhu.json",
+            "md5": "3f095979",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/quanjizhu.png",
+            "md5": "19e75d1c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/zhizhu.atlas",
+            "md5": "cc6ded1c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/zhizhu.json",
+            "md5": "26b8336c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/buddy/zhizhu.png",
+            "md5": "69825787",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/chahu/chahu.atlas",
+            "md5": "c7216019",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/chahu/chahu.json",
+            "md5": "944aa409",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/chahu/chahu.png",
+            "md5": "025eed3b",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/character/character_v1.6.atlas",
+            "md5": "79c468a2",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/character/character_v1.6.json",
+            "md5": "84dfa388",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/character/character_v1.6.png",
+            "md5": "8e41c804",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/character/character_v1.6_2.png",
+            "md5": "b24d0a98",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/character/character_v1.6_3.png",
+            "md5": "f691c67c",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/gebulin/gebulin_v1.1.atlas",
+            "md5": "9e6ba556",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/gebulin/gebulin_v1.1.json",
+            "md5": "c1ec3db7",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/gebulin/gebulin_v1.1.png",
+            "md5": "01073040",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/gebulin/gebulin_v1.1_2.png",
+            "md5": "26777399",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/gebulin/gebulin_v1.1_3.png",
+            "md5": "11e129c2",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/gebulin/trumpet-icon.png",
+            "md5": "72724547",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/nawei/nawei_v1.9.atlas",
+            "md5": "8b2235e8",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/nawei/nawei_v1.9.json",
+            "md5": "564d2c43",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/nawei/nawei_v1.9.png",
+            "md5": "2275865e",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/rolePlay/sahua.atlas",
+            "md5": "ff9be4fe",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/rolePlay/sahua.json",
+            "md5": "7f9decbb",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/rolePlay/sahua.png",
+            "md5": "535f52b6",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/shengqiji/shengqiji.atlas",
+            "md5": "217b3ad9",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/shengqiji/shengqiji.json",
+            "md5": "f7587cb5",
+            "policy": 3
+        },
+        {
+            "src": "https://file.risekid.cn/web/adventure/spine/shengqiji/shengqiji.png",
+            "md5": "c6e78d5c",
+            "policy": 3
+        }
+    ]
+}

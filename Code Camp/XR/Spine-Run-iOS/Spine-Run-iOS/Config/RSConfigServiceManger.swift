@@ -40,7 +40,7 @@ public class ConfigServiceManger {
             
             /// 审锁状态
             if let phVersion = dataModel.iosVersion?.phVersion {
-                PTDebugView.addLog("phVersion:\(phVersion)")
+//                PTDebugView.addLog("phVersion:\(phVersion)")
                 let appVersion = kAppVersion ?? ""
                 let pb = phVersion == appVersion
 //                CustomUtil.setCheckSwitch(isSwitch: pb)

@@ -9,7 +9,7 @@ import Moya
 import Alamofire
 //import SwiftyUserDefaults
 import UIKit
-import PKHUD
+import GXPKHUD
 import SmartCodable
 /* 使用方法：
  - 定义

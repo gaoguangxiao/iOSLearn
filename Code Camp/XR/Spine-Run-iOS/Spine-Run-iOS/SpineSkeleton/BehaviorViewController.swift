@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import ZKBaseSwiftProject
 
-class BehaviorViewController: UIViewController, DisplayTimerProtocal {
+class BehaviorViewController: ZKBaseViewController, DisplayTimerProtocal {
     
     var displayLink: CADisplayLink?
     

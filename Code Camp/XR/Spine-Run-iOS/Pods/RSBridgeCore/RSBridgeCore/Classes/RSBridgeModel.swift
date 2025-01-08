@@ -14,18 +14,18 @@ import GGXSwiftExtension
    属性`data`的数据类型并不固定，利用泛型，且遵守`SmartCodable`协议
 **/
 
-public struct RSParamsModel<T>: SmartCodable where T: SmartCodable {
-    public var action: String = ""
-    public var callbackId: Int = 0
-    public var data: T?
-    public init() {}
-}
+//public struct RSParamsModel<T>: SmartCodable where T: SmartCodable {
+//    public var action: String = ""
+//    public var callbackId: Int = 0
+//    public var data: T?
+//    public init() {}
+//}
 
-public struct JSBodyModel: SmartCodable {
+struct JSBodyModel: SmartCodable {
     
-    public var params: JSParamsModel?
+    var params: JSParamsModel?
  
-    public init() {}
+    init() {}
 }
 
 //手写解析库
@@ -92,12 +92,14 @@ public class RSBridgeModel: NSObject {
         var newLogData: Dictionary<AnyHashable, Any> = [:]
         
         newLogData = data.filter { (key,value) in
-            return !dataFiltKeys.contains(key)
+             !dataFiltKeys.contains(key)
         }
-        
-//        newLogData["data"] = newDa
-        
-        let dict :[String:Any] = ["action": action, "data":newLogData, "callbackId":callbackId , "code" : code , "msg":msg];
+                
+        let dict :[String:Any] = ["action": action,
+                                  "data":newLogData,
+                                  "callbackId":callbackId ,
+                                  "code" : code ,
+                                  "msg":msg];
         if let signedJSON = dict.toJsonString {
             return signedJSON
         }

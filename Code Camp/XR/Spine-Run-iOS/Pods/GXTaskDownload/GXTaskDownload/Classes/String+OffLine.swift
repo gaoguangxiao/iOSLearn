@@ -17,4 +17,24 @@ public extension String {
         }
         return newPath
     }
+    
+    //
+    func isDownloadSuccess() -> Bool {
+        let boxFileMd5 = self.toFileUrl?.toMD5()
+        if let urlPathMd5 = self.downloadUrlMD5 {
+            return self.has(urlPathMd5,option: .caseInsensitive)
+        }
+        return false
+    }
+    
+    //获取URL包含的md5值-
+    var downloadUrlMD5: String? {
+        let filepath = self
+        let components = filepath.components(separatedBy: ".")
+        if components.count >= 3 {
+            return components[components.count - 2]
+        }
+        return nil
+    }
+
 }

@@ -27,32 +27,40 @@ extension GXTaskDownloadDisk: GXDownloadingDelegate {
                 let totalBytesCount = Double(download.totalBytesCount)
                 //对比文件的MD5和模型是否一致
                 if let boxFileMd5 = boxPath.toFileUrl?.toMD5(),
-                   let urlMD5 = diskFile.remoteDownloadURLModel?.md5, urlMD5.length > 0 {
+                   let urlMD5 = diskFile.remoteDownloadURLModel?.md5, !urlMD5.isEmpty {
+                    //`boxPath`不携带md5，但模型数据具备
                     let r = boxFileMd5.has(urlMD5,option: .caseInsensitive)
                     if r == true {
                         self.saveUrlInfo()
                         downloadBlock?(download.progress, state)
                     } else {
-                        //下载之后的文件和文件URL的md5不一致，说明配置有问题
-//                        self.saveUrlInfo()
-                        //v2 删除下载失败的文件。
-                        LogInfo("下载之后的文件和文件URL的md5不一致:\(urlPath)的MD5:\(urlMD5)\n本地计算为:\(boxFileMd5)\n文件的沙盒路径: \(boxPath)")
-                        diskFile.clearFile(forUrl: urlPath)
-                        downloadBlock?(download.progress, GXDownloadingState.error)
+                        handleMD5Mismatch(urlPath: urlPath, boxFileMd5: boxFileMd5, expectedMD5: urlMD5, boxPath: boxPath)
                     }
-                } 
+                }
+                else if boxPath.isDownloadSuccess() { //`boxPath`携带md5的情况
+                    LogInfo("The \(urlPath) has md5 check is Success")
+                    self.saveUrlInfo()
+                    downloadBlock?(download.progress, state)
+                }
                 else {
-                    //                    print("文件大小:\(downloadCount)")
+                    LogInfo("可下载\(totalBytesCount)、已下载：\(downloadCount)、urlPath：\(urlPath), 本地存储路径: \(boxPath)")
                     if totalBytesCount == downloadCount {
                         self.saveUrlInfo()
                         downloadBlock?(download.progress, state)
                     } else {
-                        LogInfo("可下载\(totalBytesCount)、已下载：\(downloadCount)、urlPath：\(urlPath), 本地存储路径: \(boxPath)")
+                        LogInfo("no save \(urlPath) info")
                         downloadBlock?(download.progress, GXDownloadingState.error)
                     }
                 }
             }
         }
+    }
+    
+    // 处理 MD5 不一致的情况
+    private func handleMD5Mismatch(urlPath: String, boxFileMd5: String, expectedMD5: String, boxPath: String) {
+        LogInfo("File MD5 mismatch: \(urlPath)'s expected MD5: \(expectedMD5), local MD5: \(boxFileMd5), Local file path: \(boxPath)")
+        diskFile.clearFile(forUrl: urlPath)
+        downloadBlock?(0, GXDownloadingState.error) // 进度为 0，因为下载失败
     }
     
     //错误会触发

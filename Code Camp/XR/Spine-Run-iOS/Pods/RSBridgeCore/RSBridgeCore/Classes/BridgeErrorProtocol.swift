@@ -66,7 +66,7 @@ public enum CoreError: Int, BridgeErrorProtocol {
 }
 //MARK: 接口错误
 public enum BridgeApiError:Int, BridgeErrorProtocol {
-    case configError
+    case configError = 1
     case unknown
     public var errorString: String {
         switch self {

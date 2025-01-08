@@ -308,7 +308,7 @@ extension GXSplashView {
             mainFestUrls["Dmx_Key_OfflineStatic"] = staticManifestPath.lastPathComponent
         }
         mainFestUrls["uuid"] = ZKUtils.deviceIdentifier
-        PTDebugView.addLog("Dmx_OfflineWeb上报信息：\(mainFestUrls.toJsonString ?? "")")
+//        PTDebugView.addLog("Dmx_OfflineWeb上报信息：\(mainFestUrls.toJsonString ?? "")")
 //        UMAnalyticsSwift.event(eventId: "Dmx_OfflineWeb", attributes: mainFestUrls)
     }
 }

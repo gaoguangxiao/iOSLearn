@@ -33,9 +33,9 @@ open class RSBridgeInterface: NSObject, RSBridgeProtocol {
     }
     
     open func bridgeWebData(body: JSParamsModel, block: @escaping JSHandleModelCallBlock) {
-        //        ZKLog("\(self)执行\(body.actionE)")
-    }
 
+    }
+    
     @available(iOS 13.0.0, *)
     @discardableResult
     open func bridgeWebCallApp<T>(body: JSParamsModel, data: T) async throws -> RSBridgeModel {

@@ -19,6 +19,9 @@ public protocol ReportEventProtocol {
     ///   - eventId: <#eventId description#>
     ///   - attributes: <#attributes description#>
     func event(eventId: String, attributes: Dictionary<String, Any>)
+    
+    //
+    func event(eventId: String, attributes: Dictionary<String, Any>, isAddDevice: Bool)
 }
 
 extension ReportEventProtocol {
@@ -27,4 +30,7 @@ extension ReportEventProtocol {
         
     }
   
+    public func event(eventId: String, attributes: Dictionary<String, Any>, isAddDevice: Bool) {
+        
+    }
 }

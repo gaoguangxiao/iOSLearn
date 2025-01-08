@@ -28,6 +28,9 @@ public protocol RSBridgeRequestProtocol: RSBridgeInterfaceProtocol {
     
     func jsonWebData(body: RSBridgeModel, block: @escaping JSHandleModelCallBlock)
     
+    
+    func bridgeWebData(body: JSParamsModel, block: @escaping JSHandleModelCallBlock)
+    
     /// 解析web -> App的bridge请求
     @available(iOS 13.0.0, *)
     @discardableResult
