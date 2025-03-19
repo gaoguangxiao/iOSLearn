@@ -106,7 +106,7 @@ struct __AtAutoreleasePool {
 };
 
 #define __OFFSETOFIVAR__(TYPE, MEMBER) ((long long) &((TYPE *)0)->MEMBER)
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_jt_kvw7_bzj1_12zrsxg_mxz62m0000gn_T_main_c7d471_mi_0 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"Hello, World!",13};
+static __NSConstantStringImpl __NSConstantStringImpl__var_folders_jt_kvw7_bzj1_12zrsxg_mxz62m0000gn_T_main_204a07_mi_0 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"Hello, World!",13};
 typedef signed char __int8_t;
 typedef unsigned char __uint8_t;
 typedef short __int16_t;
@@ -63087,7 +63087,7 @@ static void _I_LRPerson_setName_(LRPerson * self, SEL _cmd, NSString *name) { (*
 // @end
 int main(int argc, const char * argv[]) {
     /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_jt_kvw7_bzj1_12zrsxg_mxz62m0000gn_T_main_c7d471_mi_0);
+        NSLog((NSString *)&__NSConstantStringImpl__var_folders_jt_kvw7_bzj1_12zrsxg_mxz62m0000gn_T_main_204a07_mi_0);
     }
     return 0;
 }
