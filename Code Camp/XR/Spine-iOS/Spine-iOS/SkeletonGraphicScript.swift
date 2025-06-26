@@ -101,9 +101,10 @@ public class SkeletonGraphicScript: ObservableObject {
         //config skin data
         configSkins(skins: skeletonData.skins)
         
-//        skeletonData.animations.forEach {
-//            if let name = $0.name { print("skin.animation: \(name)") }
-//        }
+        //查看动作
+        skeletonData.animations.forEach {
+            if let name = $0.name { print("animations.animation: \(name)") }
+        }
     }
     
     

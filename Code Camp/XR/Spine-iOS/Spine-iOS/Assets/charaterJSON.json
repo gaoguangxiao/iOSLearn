@@ -26,8 +26,8 @@
         },{
             "Id": 4,
             "Name": "纳威",
-            "JSON": "nawei_v1.8.json",
-            "Atlas":"nawei_v1.8.atlas"
+            "JSON": "nawei_v2.2.json",
+            "Atlas":"nawei_v2.2.atlas"
         },
         {
             "Id": 5,
