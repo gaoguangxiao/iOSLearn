@@ -29,5 +29,15 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(Vc, animated: true)
     }
     
+    @IBAction func 子线程Timer跨线程销毁(_ sender: Any) {
+        let Vc = DViewController()
+        self.navigationController?.pushViewController(Vc, animated: true)
+    }
+    
+    @IBAction func 子线程Timer正确销毁(_ sender: Any) {
+        let Vc = EViewController()
+        self.navigationController?.pushViewController(Vc, animated: true)
+    }
+    
 }
 

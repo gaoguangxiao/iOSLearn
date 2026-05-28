@@ -19,8 +19,8 @@ struct ImageBootcamp: View {
         //            .resizable(capInsets: /*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/,resizingMode: .stretch)
         //            .frame(width: 100,height: 100)
 //                    .aspectRatio(contentMode: .fill)
-        //            .clipShape(Capsule())
-                    .shadow(color: .red, radius: 10)
+//                    .clipShape(Capsule())
+                    .shadow(color: .red, radius: 56)
         //            if #available(iOS 15.0, *) {
         //                .overlay {
         //                    Text("Overlay")

@@ -31,7 +31,7 @@ struct TabViewBootcamp: View {
                            endRadius: 300)
         )
         .frame(height: 300)
-        .tabViewStyle(.page)
+        .tabViewStyle(.automatic)
         
 //        TabView(selection: $selectedTab){
 //            HomeView(selectedTab: $selectedTab)

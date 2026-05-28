@@ -20,7 +20,7 @@ class BViewController: UIViewController {
 //        initScheduleTimer()
 //        initProxyTimer()
 //        self.initBlockTimer()
-        initextensionTimer()
+//        initextensionTimer()
     }
     
     func initTimer() {
@@ -39,6 +39,7 @@ class BViewController: UIViewController {
     func initScheduleTimer() {
         //已经添加到runloop中，但仍旧有循环引用问题
         let lineTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateLineTime), userInfo: nil, repeats: true)
+        //runloop强持有timer，timer持有self，导致timer不释放，self也不会释放，deinit就不会执行
 
     }
     

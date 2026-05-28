@@ -9,4 +9,8 @@
 
 @implementation LGTeacher
 
+- (void)dealloc {
+    NSLog(@"LGTeacher dealloc ✅");
+}
+
 @end

@@ -50,6 +50,24 @@
                                     <action selector="定时器奇特特性:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n8p-nT-YUH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBx-4l-XoF">
+                                <rect key="frame" x="129" y="490" width="135" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="子线程Timer跨线程销毁"/>
+                                <connections>
+                                    <action selector="子线程Timer跨线程销毁:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pYF-Js-7s6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" transformsAutoresizingMaskIntoConstraints="NO" id="eW7-Jm-0O3">
+                                <rect key="frame" x="129" y="550" width="135" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="子线程Timer正确销毁"/>
+                                <connections>
+                                    <action selector="子线程Timer正确销毁:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qTb-bf-5n9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

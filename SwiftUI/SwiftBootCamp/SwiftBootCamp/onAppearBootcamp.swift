@@ -19,7 +19,7 @@ struct onAppearBootcamp: View {
                 Text(myText)
                 
                 LazyVStack {
-                    ForEach(0..<50) { (_) in
+                    ForEach(0..<100) { (_) in
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .padding()
                             .frame(height: 200)

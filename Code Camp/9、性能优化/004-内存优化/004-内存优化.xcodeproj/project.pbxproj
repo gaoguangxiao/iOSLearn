@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EBBDA372FC7EA7100B4F5CE /* BlockRetainCycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBDA362FC7EA7100B4F5CE /* BlockRetainCycleVC.m */; };
 		1EBC8EA0299CF6910024A156 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8E9F299CF6910024A156 /* AppDelegate.m */; };
 		1EBC8EA3299CF6910024A156 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8EA2299CF6910024A156 /* SceneDelegate.m */; };
 		1EBC8EA6299CF6910024A156 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8EA5299CF6910024A156 /* ViewController.m */; };
@@ -18,6 +19,7 @@
 		1EBC8EC5299CF6960024A156 /* _04_____UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8EC4299CF6960024A156 /* _04_____UITests.m */; };
 		1EBC8EC7299CF6960024A156 /* _04_____UITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8EC6299CF6960024A156 /* _04_____UITestsLaunchTests.m */; };
 		1EBC8ED5299CF6C40024A156 /* LGTeacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8ED4299CF6C40024A156 /* LGTeacher.m */; };
+		1EBC8ED8299CF6C40024A156 /* BlockRetainCycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC8ED7299CF6C40024A156 /* BlockRetainCycleVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EBBDA352FC7EA7100B4F5CE /* BlockRetainCycleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockRetainCycleVC.h; sourceTree = "<group>"; };
+		1EBBDA362FC7EA7100B4F5CE /* BlockRetainCycleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockRetainCycleVC.m; sourceTree = "<group>"; };
 		1EBC8E9B299CF6910024A156 /* 004-内存优化.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "004-内存优化.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EBC8E9E299CF6910024A156 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1EBC8E9F299CF6910024A156 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 		1EBC8EC6299CF6960024A156 /* _04_____UITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_04_____UITestsLaunchTests.m"; sourceTree = "<group>"; };
 		1EBC8ED3299CF6C40024A156 /* LGTeacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTeacher.h; sourceTree = "<group>"; };
 		1EBC8ED4299CF6C40024A156 /* LGTeacher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTeacher.m; sourceTree = "<group>"; };
+		1EBC8ED6299CF6C40024A156 /* BlockRetainCycleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockRetainCycleVC.h; sourceTree = "<group>"; };
+		1EBC8ED7299CF6C40024A156 /* BlockRetainCycleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockRetainCycleVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,8 @@
 		1EBC8E9D299CF6910024A156 /* 004-内存优化 */ = {
 			isa = PBXGroup;
 			children = (
+				1EBBDA352FC7EA7100B4F5CE /* BlockRetainCycleVC.h */,
+				1EBBDA362FC7EA7100B4F5CE /* BlockRetainCycleVC.m */,
 				1EBC8E9E299CF6910024A156 /* AppDelegate.h */,
 				1EBC8E9F299CF6910024A156 /* AppDelegate.m */,
 				1EBC8EA1299CF6910024A156 /* SceneDelegate.h */,
@@ -115,6 +123,8 @@
 				1EBC8EA5299CF6910024A156 /* ViewController.m */,
 				1EBC8ED3299CF6C40024A156 /* LGTeacher.h */,
 				1EBC8ED4299CF6C40024A156 /* LGTeacher.m */,
+				1EBC8ED6299CF6C40024A156 /* BlockRetainCycleVC.h */,
+				1EBC8ED7299CF6C40024A156 /* BlockRetainCycleVC.m */,
 				1EBC8EA7299CF6910024A156 /* Main.storyboard */,
 				1EBC8EAA299CF6950024A156 /* Assets.xcassets */,
 				1EBC8EAC299CF6950024A156 /* LaunchScreen.storyboard */,
@@ -272,9 +282,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EBC8ED5299CF6C40024A156 /* LGTeacher.m in Sources */,
+				1EBC8ED8299CF6C40024A156 /* BlockRetainCycleVC.m in Sources */,
 				1EBC8EA6299CF6910024A156 /* ViewController.m in Sources */,
 				1EBC8EA0299CF6910024A156 /* AppDelegate.m in Sources */,
 				1EBC8EB1299CF6950024A156 /* main.m in Sources */,
+				1EBBDA372FC7EA7100B4F5CE /* BlockRetainCycleVC.m in Sources */,
 				1EBC8EA3299CF6910024A156 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

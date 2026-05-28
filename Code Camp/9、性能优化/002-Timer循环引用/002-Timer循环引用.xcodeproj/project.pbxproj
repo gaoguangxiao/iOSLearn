@@ -17,6 +17,8 @@
 		1E75E64F2B33D2720044B19E /* SwiftWeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E75E64E2B33D2720044B19E /* SwiftWeakProxy.swift */; };
 		1E8DA3162B3418ED005F677F /* Extension+Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DA3152B3418ED005F677F /* Extension+Timer.swift */; };
 		1E8DA3182B34267D005F677F /* CViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DA3172B34267D005F677F /* CViewController.swift */; };
+		1EA3614D2FC0062D00944070 /* DViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3614C2FC0062D00944070 /* DViewController.swift */; };
+		1EA3614F2FC0070B00944070 /* EViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3614E2FC0070B00944070 /* EViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		1E75E64E2B33D2720044B19E /* SwiftWeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeakProxy.swift; sourceTree = "<group>"; };
 		1E8DA3152B3418ED005F677F /* Extension+Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Timer.swift"; sourceTree = "<group>"; };
 		1E8DA3172B34267D005F677F /* CViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CViewController.swift; sourceTree = "<group>"; };
+		1EA3614C2FC0062D00944070 /* DViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DViewController.swift; sourceTree = "<group>"; };
+		1EA3614E2FC0070B00944070 /* EViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 		1E75E6372B33CE550044B19E /* 002-Timer循环引用 */ = {
 			isa = PBXGroup;
 			children = (
+				1EA3614E2FC0070B00944070 /* EViewController.swift */,
+				1EA3614C2FC0062D00944070 /* DViewController.swift */,
 				1E75E6382B33CE550044B19E /* AppDelegate.swift */,
 				1E75E63A2B33CE550044B19E /* SceneDelegate.swift */,
 				1E75E63C2B33CE550044B19E /* ViewController.swift */,
@@ -151,8 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E75E64F2B33D2720044B19E /* SwiftWeakProxy.swift in Sources */,
+				1EA3614F2FC0070B00944070 /* EViewController.swift in Sources */,
 				1E8DA3162B3418ED005F677F /* Extension+Timer.swift in Sources */,
 				1E8DA3182B34267D005F677F /* CViewController.swift in Sources */,
+				1EA3614D2FC0062D00944070 /* DViewController.swift in Sources */,
 				1E75E63D2B33CE550044B19E /* ViewController.swift in Sources */,
 				1E75E64D2B33CE880044B19E /* BViewController.swift in Sources */,
 				1E75E6392B33CE550044B19E /* AppDelegate.swift in Sources */,
