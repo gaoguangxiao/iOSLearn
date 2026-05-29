@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QMPerson : NSObject
 
+@property (nonatomic,assign) NSInteger name;
+
 @end
 
 NS_ASSUME_NONNULL_END

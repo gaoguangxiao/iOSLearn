@@ -32,11 +32,11 @@
      */
     
     //2、类中没有 name 成员变量异常
-//    QMPerson *q = [[QMPerson alloc]init];
-//    [q setValue:@"ggx" forKey:@"name"];
-    
-        LGPerson *p = [[LGPerson alloc]init];
-        [p valueForKey:@"name"];
+    QMPerson *q = [[QMPerson alloc]init];
+    [q setValue:nil forKey:@"name"];
+    NSLog(@"AAA");
+//        LGPerson *p = [[LGPerson alloc]init];
+//        [p valueForKey:@"name"];
     
     //get值的先后顺序
 }
